@@ -22,7 +22,9 @@ class AlbumFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre'=>ucwords($this->faker->sentence($nbWords = 3, $variableNBWords = true)),
+            'descripcion'=>ucfirst($this->faker->text(35)),
+            'autor'=>ucfirst($this->faker->word())
         ];
     }
 }

@@ -17,6 +17,9 @@
                 <x-nav-link href="{{ route('albums.index') }}" :active="request()->routeIs('albums.index')">
                     {{ __('Album') }}
                 </x-nav-link>
+                <x-nav-link href="{{ route('musics.index') }}" :active="request()->routeIs('musics.index')">
+                    {{ __('Música') }}
+                </x-nav-link>
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -14,7 +14,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $album = Album::orderBy('nombre')->paginate();
+        $album = Album::orderBy('nombre')->paginate(10);
         return view('album.albumindex', compact('album'));
     }
 

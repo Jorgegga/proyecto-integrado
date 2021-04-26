@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -16,7 +18,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased bg-light">
+    <body class="font-sans antialiased" style="background-color: #192229">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -27,7 +29,7 @@
         </header>
 
         <!-- Page Content -->
-        <main class="container my-5">
+        <main class="container-fluid my-5">
             {{ $cuerpo }}
         </main>
     </body>
