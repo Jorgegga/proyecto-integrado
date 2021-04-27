@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Album;
+use App\Models\{Album, Music};
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -15,7 +15,9 @@ class AlbumController extends Controller
     public function index()
     {
         $album = Album::orderBy('nombre')->paginate(10);
-        return view('album.albumindex', compact('album'));
+        $music = Music::orderBy('album_id');
+
+        return view('album.albumindex', compact('album', 'music',));
     }
 
     /**
@@ -47,7 +49,7 @@ class AlbumController extends Controller
      */
     public function show(Album $album)
     {
-        //
+
     }
 
     /**
@@ -83,4 +85,11 @@ class AlbumController extends Controller
     {
         //
     }
+
+    public function mostrarAlbum(Album $album, $nombre)
+    {
+        $musica = Music::get()->where('album_id', '=', $album->id);
+        return view('album.albumdetalles', compact('musica','album'));
+    }
+
 }

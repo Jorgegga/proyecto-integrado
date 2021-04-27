@@ -25,7 +25,7 @@
                             <td>
                                 @foreach ($album as $item2)
                                     @if ($item->album_id == $item2->id)
-                                        {{ $item2->nombre }}
+                                        <a href="{{route('verAlbum', ['album' => $item2, 'nombre'=> $item2->nombre])}}">{{ $item2->nombre }}</a>
                                     @endif
                                 @endforeach
                             </td>

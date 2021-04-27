@@ -16,7 +16,7 @@ class AlbumSeeder extends Seeder
     {
         Album::create([
             'id'=>0,
-            'nombre'=>"Default"
+            'nombre'=>"Otros"
         ]);
         Album::create([
             'nombre'=>"Dolls in Pseudo Paradaise",

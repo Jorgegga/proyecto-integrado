@@ -13,4 +13,10 @@ class Album extends Model
     public function music(){
         return $this->hasMany(Music::class);
     }
+
+    public static function numTemas($id){
+        $contar = Music::where('album_id', '=', $id)->count();
+        return $contar;
+    }
+
 }

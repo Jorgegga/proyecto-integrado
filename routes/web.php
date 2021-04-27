@@ -26,4 +26,7 @@ Route::get('/dashboard', function () {
 Route::resource('albums', AlbumController::class);
 Route::resource('musics', MusicController::class);
 
+//Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
+Route::get('album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
+
 require __DIR__.'/auth.php';
