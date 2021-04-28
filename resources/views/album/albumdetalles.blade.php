@@ -3,6 +3,10 @@
         <h2 class="h4 font-weight-bold">
             {{$album->nombre}}
         </h2>
+        <div style="display: flex; align-items:center;">
+        <img src='{{ asset($album->portada) }}' class="img-thumbnail img-fluid" alt="Responsive image" style="height: 200px;">
+        <p class="ml-3">{{$album->descripcion}}</p>
+    </div>
     </x-slot>
 
     <x-slot name="cuerpo">
@@ -23,7 +27,7 @@
                             {{$album->nombre}}
                         </td>
                         <td>{{ $item->autor }}</td>
-                        <td>----</td>
+                        <td><audio controls preload="auto"><source src="{{ $item->ruta }}" type="audio/mpeg"></audio></td>
                     </tr>
                 @endforeach
             </tbody>

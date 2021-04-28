@@ -15,6 +15,10 @@ class Music extends Model
         return $this->belongsTo(Album::class);
     }
 
+    public function nomAlbum($id){
+        $alb = Album::where('id', '=', $id)->get();
+        return $alb;
+    }
 
 
 }

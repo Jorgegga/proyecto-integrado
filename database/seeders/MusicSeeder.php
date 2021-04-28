@@ -19,5 +19,10 @@ class MusicSeeder extends Seeder
             'descripcion'=>'La legenda nunca contada',
             'album_id'=>'1',
         ]);
+        Music::create([
+            'nombre'=>'Default',
+            'descripcion'=>'Musica por defecto',
+            'album_id'=>'0',
+        ]);
     }
 }

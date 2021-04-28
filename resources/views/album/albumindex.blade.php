@@ -1,3 +1,4 @@
+@inject('albumMet', 'App\Models\Album');
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -12,14 +13,14 @@
                 <div class="card col-md-3 col-sm-3 mr-sm-5 mr-md-5 pt-3 mt-4"
                     style="width: 18rem; background-color:#212E36; font-family: 'New Tegomin', serif; font-weight: bold;">
                     <img class="card-img-top" src='{{ asset($item->portada) }}' alt="Card image cap">
-                    <div class="card-body">
+                    <div class="card-body align-items-center">
                         <p class="card-title" style="font-size:1.2vw; text-align: center; color: #C8CDD0">
                             {{ $item->nombre }}</p>
-                        <a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}" class="btn btn-primary">Go somewhere</a>
                     </div>
-                    <div class="card-footer" style="background-color:#212E36;">
-                        <p class="text-muted">{{ $item->autor }}</p>
-                        <p><?php App\Models\Album::numTemas($item->id) ?></p>
+                    <div class="card-footer text-center" style="background-color:#212E36;">
+                        <p><a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}" class="btn btn-primary">Ver</a></p>
+                        <p class="text-muted text-left" style="float:left;">{{ $item->autor }}</p>
+                        <p class="text-muted text-right" style="float:right;">{{ $albumMet->numTemas($item->id)}} temas</p>
                     </div>
                 </div>
             @endforeach

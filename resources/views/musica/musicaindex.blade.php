@@ -1,3 +1,4 @@
+@inject('musicMet', 'App\Models\Music');
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -23,14 +24,14 @@
                         <tr>
                             <td>{{ $item->nombre }}</td>
                             <td>
-                                @foreach ($album as $item2)
-                                    @if ($item->album_id == $item2->id)
-                                        <a href="{{route('verAlbum', ['album' => $item2, 'nombre'=> $item2->nombre])}}">{{ $item2->nombre }}</a>
-                                    @endif
-                                @endforeach
+                                <a href="{{ route('verAlbum', ['album' => $musicMet->nomAlbum($item->album_id)[0],
+                                    'nombre' => $musicMet->nomAlbum($item->album_id)[0]->nombre]) }}">{{ $musicMet->nomAlbum($item->album_id)[0]->nombre }}</a>
                             </td>
                             <td>{{ $item->autor }}</td>
-                            <td>----</td>
+                            <td><audio controls preload="auto">
+                                    <source src="{{ $item->ruta }}" type="audio/mpeg">
+                                </audio>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

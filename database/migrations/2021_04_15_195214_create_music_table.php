@@ -23,7 +23,7 @@ class CreateMusicTable extends Migration
             ->references('id')->on('albums')
             ->onDelete('cascade')->onUpdate('cascade');
             $table->string('portada')->default('storage/img/musica/default.png');
-            $table->string('ruta')->default('storage/music/default.mp3');
+            $table->string('ruta')->default('/storage/music/default.mp3');
             $table->integer('numCancion')->default(0);
             $table->timestamps();
         });
