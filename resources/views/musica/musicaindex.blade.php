@@ -1,5 +1,4 @@
-@inject('musicMet', 'App\Models\Music');
-
+@inject('musicMet', 'App\Models\Music')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -28,8 +27,8 @@
                                     'nombre' => $musicMet->nomAlbum($item->album_id)[0]->nombre]) }}">{{ $musicMet->nomAlbum($item->album_id)[0]->nombre }}</a>
                             </td>
                             <td>{{ $item->autor }}</td>
-                            <!-- Chrome carga erroneamente los audios, utilizar otro navegador -->
-                            <td><audio controls preload="auto" id="audio">
+                            <!-- Los audios cargan correctamente en modo incognito -->
+                            <td><audio controls preload="auto">
                                     <source src="{{asset($item->ruta) }}" type="audio/ogg">
                                         No lo soporta
                                 </audio>
