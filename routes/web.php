@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AlbumController, MusicController};
+use App\Http\Controllers\{AlbumController, InicioController, MusicController};
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
 //----------------------------------------------
 Route::resource('albums', AlbumController::class);
 Route::resource('musics', MusicController::class);
+Route::resource('inicios', InicioController::class);
 
 //Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
 Route::get('album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');

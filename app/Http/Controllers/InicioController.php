@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{Album, Music};
 use Illuminate\Http\Request;
 
-class AlbumController extends Controller
+class InicioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $album = Album::orderBy('id', 'DESC')->paginate(10);
-        $music = Music::orderBy('album_id');
-        return view('album.albumindex', compact('album', 'music',));
+        $albumNew = Album::orderBy('created_at', 'DESC')->limit(7)->get();
+        return view('dashboard', compact('albumNew'));
     }
 
     /**
@@ -85,10 +84,5 @@ class AlbumController extends Controller
         //
     }
 
-    public function mostrarAlbum(Album $album, $nombre)
-    {
-        $musica = Music::get()->where('album_id', '=', $album->id);
-        return view('album.albumdetalles', compact('musica','album'));
-    }
-
 }
+

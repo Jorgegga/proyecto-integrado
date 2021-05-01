@@ -18,7 +18,7 @@ class CreateAlbumsTable extends Migration
             $table->string('nombre');
             $table->string('descripcion')->default('No se ha proporcionado ninguna descripcion');
             $table->string('autor')->default('desconocido');
-            $table->string('portada')->default('storage/img/album/default.png');
+            $table->string('portada')->default('/storage/img/album/default.png');
             $table->timestamps();
         });
     }

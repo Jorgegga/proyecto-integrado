@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="h4 font-weight-bold">
+        <h2 class="h4 font-semibold text-white">
             {{$album->nombre}}
         </h2>
         <div style="display: flex; align-items:center;">
         <img src='{{ asset($album->portada) }}' class="img-thumbnail img-fluid" alt="Responsive image" style="height: 200px;">
-        <p class="ml-3">{{$album->descripcion}}</p>
+        <p class="ml-3" style="color: #C8CDD0;">{{$album->descripcion}}</p>
     </div>
     </x-slot>
 

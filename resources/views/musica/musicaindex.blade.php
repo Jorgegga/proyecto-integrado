@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Album</th>
+                        <th scope="col">Álbum</th>
                         <th scope="col">Autor</th>
                         <th scope="col">Play</th>
                     </tr>
