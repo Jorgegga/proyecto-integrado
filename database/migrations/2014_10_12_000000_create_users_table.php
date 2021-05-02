@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('foto')->default('storage/img/usuario/default.png');
             $table->integer('bono')->default(5);
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

@@ -10,6 +10,7 @@
         <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4">
             <!--<div class="col-10 pr-3">-->
             @foreach ($album as $item)
+            <a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}">
                 <div class="card col-md-3 col-sm-3 mr-sm-5 mr-md-5 pt-3 mt-4"
                     style="width: 18rem; background-color:#212E36; font-family: 'New Tegomin', serif; font-weight: bold;">
                     <img class="card-img-top" src='{{ asset($item->portada) }}' alt="Card image cap" style="height:300px;">
@@ -23,6 +24,7 @@
                         <p class="text-muted text-right" style="float:right;">{{ $albumMet->numTemas($item->id)}} temas</p>
                     </div>
                 </div>
+            </a>
             @endforeach
             <!--</div>-->
         </section>

@@ -25,7 +25,8 @@ class CreateMusicTable extends Migration
             $table->string('portada')->default('/storage/img/musica/default.png');
             $table->string('ruta')->default('/storage/music/default.ogg');
             $table->integer('numCancion')->default(0);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

@@ -14,7 +14,7 @@ class InicioController extends Controller
      */
     public function index()
     {
-        $albumNew = Album::orderBy('created_at', 'DESC')->limit(7)->get();
+        $albumNew = Album::orderBy('created_at', 'desc')->limit(7)->get();
         return view('dashboard', compact('albumNew'));
     }
 

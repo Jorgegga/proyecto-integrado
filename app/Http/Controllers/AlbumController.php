@@ -87,7 +87,7 @@ class AlbumController extends Controller
 
     public function mostrarAlbum(Album $album, $nombre)
     {
-        $musica = Music::get()->where('album_id', '=', $album->id);
+        $musica = Music::where('album_id', '=', $album->id)->orderBy('numCancion', 'asc')->get();
         return view('album.albumdetalles', compact('musica','album'));
     }
 

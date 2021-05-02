@@ -16,6 +16,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Album</th>
                     <th scope="col">Autor</th>
+                    <th scope="col">Pista</th>
                     <th scope="col">Play</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                             {{$album->nombre}}
                         </td>
                         <td>{{ $item->autor }}</td>
+                        <td>{{ $item->numCancion }}</td>
                         <td><audio controls preload="auto"><source src="{{ $item->ruta }}" type="audio/mpeg"></audio></td>
                     </tr>
                 @endforeach
