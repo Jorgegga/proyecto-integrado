@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Album;
+use App\Models\Autor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AlbumFactory extends Factory
+class AutorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Album::class;
+    protected $model = Autor::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,8 @@ class AlbumFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'=>ucwords($this->faker->sentence($nbWords = 3, $variableNBWords = true)),
+            'nombre'=>ucwords($this->faker->sentence($nbWords = 1, $variableNBWords = true)),
             'descripcion'=>ucfirst($this->faker->text(35)),
-            'autor_id'=>$this->faker->numberBetween($min=0, $max= 50),
         ];
     }
 }

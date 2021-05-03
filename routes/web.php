@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AlbumController, InicioController, MusicController};
+use App\Http\Controllers\{AlbumController, AutorController, InicioController, MusicController};
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +26,10 @@ Route::get('/dashboard', function () {
 Route::resource('albums', AlbumController::class);
 Route::resource('musics', MusicController::class);
 Route::resource('inicios', InicioController::class);
+Route::resource('autores', AutorController::class);
 
 //Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
 Route::get('album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
+Route::get('autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');
 
 require __DIR__.'/auth.php';

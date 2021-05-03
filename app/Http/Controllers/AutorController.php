@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Album, Music};
+use App\Models\Autor;
 use Illuminate\Http\Request;
 
-class AlbumController extends Controller
+class AutorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $album = Album::orderBy('id', 'DESC')->paginate(9);
-        $music = Music::orderBy('album_id');
-        return view('album.albumindex', compact('album', 'music',));
+        $autor = Autor::orderBy('nombre')->paginate(5);
+        return(view('autor.autorindex', compact('autor')));
     }
 
     /**
@@ -43,21 +42,21 @@ class AlbumController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Album  $album
+     * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function show(Album $album)
+    public function show(Autor $autor)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Album  $album
+     * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Album $album)
+    public function edit(Autor $autor)
     {
         //
     }
@@ -66,10 +65,10 @@ class AlbumController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Album  $album
+     * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function update(Request $request, Autor $autor)
     {
         //
     }
@@ -77,18 +76,11 @@ class AlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Album  $album
+     * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Album $album)
+    public function destroy(Autor $autor)
     {
         //
     }
-
-    public function mostrarAlbum(Album $album, $nombre)
-    {
-        $musica = Music::where('album_id', '=', $album->id)->orderBy('numCancion', 'asc')->get();
-        return view('album.albumdetalles', compact('musica','album'));
-    }
-
 }

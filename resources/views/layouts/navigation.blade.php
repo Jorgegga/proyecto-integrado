@@ -20,6 +20,9 @@
                 <x-nav-link href="{{ route('musics.index') }}" :active="request()->routeIs('musics.index')" style="color: #C8CDD0;">
                     {{ __('Música') }}
                 </x-nav-link>
+                <x-nav-link href="{{ route('autores.index') }}" :active="request()->routeIs('autores.index')" style="color: #C8CDD0;">
+                    {{ __('Artistas') }}
+                </x-nav-link>
             </ul>
 
             <!-- Right Side Of Navbar -->

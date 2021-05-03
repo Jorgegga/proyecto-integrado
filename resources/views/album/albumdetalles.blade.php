@@ -1,4 +1,10 @@
 <x-app-layout>
+    <x-slot name="fonts">
+    </x-slot>
+    <x-slot name="styles">
+    </x-slot>
+    <x-slot name="scriptsCDN">
+    </x-slot>
     <x-slot name="header">
         <h2 class="h4 font-semibold text-white">
             {{$album->nombre}}
@@ -27,12 +33,14 @@
                         <td>
                             {{$album->nombre}}
                         </td>
-                        <td>{{ $item->autor }}</td>
+                        <td>{{ $item->autor_id }}</td>
                         <td>{{ $item->numCancion }}</td>
                         <td><audio controls preload="auto"><source src="{{ $item->ruta }}" type="audio/mpeg"></audio></td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+    </x-slot>
+    <x-slot name="script">
     </x-slot>
 </x-app-layout>

@@ -1,5 +1,12 @@
 @inject('musicMet', 'App\Models\Music')
+@inject('nomAutor', 'App\Models\Autor')
 <x-app-layout>
+    <x-slot name="fonts">
+    </x-slot>
+    <x-slot name="styles">
+    </x-slot>
+    <x-slot name="scriptsCDN">
+    </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Música') }}
@@ -26,7 +33,7 @@
                                 <a href="{{ route('verAlbum', ['album' => $musicMet->nomAlbum($item->album_id)[0],
                                     'nombre' => $musicMet->nomAlbum($item->album_id)[0]->nombre]) }}">{{ $musicMet->nomAlbum($item->album_id)[0]->nombre }}</a>
                             </td>
-                            <td>{{ $item->autor }}</td>
+                            <td>{{ $nomAutor->nomAutor($item->album_id) }}</td>
                             <!-- Los audios cargan correctamente en modo incognito -->
                             <td><audio controls preload="auto">
                                     <source src="{{asset($item->ruta) }}" type="audio/ogg">
@@ -41,5 +48,7 @@
             <!--</div>-->
         </section>
         {{ $musica->links() }}
+        </x-slot>
+    <x-slot name="script">
     </x-slot>
 </x-app-layout>

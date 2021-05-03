@@ -1,4 +1,14 @@
 <x-app-layout>
+    <x-slot name="fonts">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong:300,400,400i,500,600,700" />
+    </x-slot>
+    <x-slot name="styles">
+        <link href="{{asset('css/resCarousel.css')}}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    </x-slot>
+    <x-slot name="scriptsCDN">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Inicio') }}
@@ -19,7 +29,7 @@
                 @foreach ($albumNew as $item)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}"  title="{{$item->nombre}}">
                         <a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}">
-                        <img class="d-block w-50 m-auto"  src="{{ asset($item->portada) }}"
+                        <img class="d-block w-50 m-auto img-responsive"  src="{{ asset($item->portada) }}"
                             style="height:600px; width:600px">
                         </a>
                     </div>
@@ -44,16 +54,76 @@
                     @foreach ($albumNew as $item)
                     <div class="item">
                         <div class="tile">
-                            <img src="{{asset($item->portada)}}" style="height:300px; width:300px">
+                            <img src="{{asset($item->portada)}}" style="height:300px; width:300px" class="img-responsive">
                         </div>
                     </div>
                     @endforeach
 
                 </div>
-                <button class='btn btn-default leftRs'><</button>
-                <button class='btn btn-default rightRs'>></button>
+                <button class='btn btn-light leftRs' style="opacity: 0.4"><</button>
+                <button class='btn btn-light rightRs' style="opacity: 0.4">></button>
             </div>
         </div>
 
+    </x-slot>
+    <x-slot name="script">
+        <script>
+            //ResCarouselCustom();
+            var pageRefresh = true;
+
+            function ResCarouselCustom() {
+                var items = $("#dItems").val(),
+                    slide = $("#dSlide").val(),
+                    speed = $("#dSpeed").val(),
+                    interval = $("#dInterval").val()
+
+                var itemsD = "data-items=\"" + items + "\"",
+                    slideD = "data-slide=\"" + slide + "\"",
+                    speedD = "data-speed=\"" + speed + "\"",
+                    intervalD = "data-interval=\"" + interval + "\"";
+
+
+                var atts = "";
+                atts += items != "" ? itemsD + " " : "";
+                atts += slide != "" ? slideD + " " : "";
+                atts += speed != "" ? speedD + " " : "";
+                atts += interval != "" ? intervalD + " " : ""
+
+                //console.log(atts);
+
+                var dat = "";
+                dat += '<h4 >' + atts + '</h4>'
+                dat += '<div class=\"resCarousel\" ' + atts + '>'
+                dat += '<div class="resCarousel-inner">'
+                for (var i = 1; i <= 14; i++) {
+                    dat += '<div class=\"item\"><div><h1>' + i + '</h1></div></div>'
+                }
+                dat += '</div>'
+                dat += '<button class=\'btn btn-default leftRs\'><i class=\"fa fa-fw fa-angle-left\"></i></button>'
+                dat += '<button class=\'btn btn-default rightRs\'><i class=\"fa fa-fw fa-angle-right\"></i></button>    </div>'
+                console.log(dat);
+                $("#customRes").html(null).append(dat);
+
+                if (!pageRefresh) {
+                    ResCarouselSize();
+                } else {
+                    pageRefresh = false;
+                }
+                //ResCarouselSlide();
+            }
+
+            $("#eventLoad").on('ResCarouselLoad', function() {
+                //console.log("triggered");
+                var dat = "";
+                var lenghtI = $(this).find(".item").length;
+                if (lenghtI <= 30) {
+                    for (var i = lenghtI; i <= lenghtI + 10; i++) {
+                        dat += '<div class="item"><div class="tile"><div><h1>' + (i + 1) + '</h1></div><h3>Title</h3><p>content</p></div></div>'
+                    }
+                    $(this).append(dat);
+                }
+            });
+        </script>
+        <script src="{{asset('js/resCarousel.js')}}"></script>
     </x-slot>
 </x-app-layout>
