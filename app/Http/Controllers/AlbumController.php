@@ -91,4 +91,9 @@ class AlbumController extends Controller
         return view('album.albumdetalles', compact('musica','album'));
     }
 
+    public function pagination(){
+        $album = Album::orderBy('id', 'DESC')->paginate(9);
+        return view('album.pagination', compact('album'));
+    }
+
 }

@@ -29,7 +29,9 @@ Route::resource('inicios', InicioController::class);
 Route::resource('autores', AutorController::class);
 
 //Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
-Route::get('album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
-Route::get('autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');
+Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
+Route::get('/autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');
+
+Route::get('/album/pagination', [AlbumController::class, 'pagination']);
 
 require __DIR__.'/auth.php';

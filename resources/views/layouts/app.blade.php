@@ -41,6 +41,7 @@
     </main>
 
     {{ $script }}
+
 </body>
 
 </html>
