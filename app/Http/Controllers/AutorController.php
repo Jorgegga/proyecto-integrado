@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Autor;
+use App\Models\{Autor, Album, Music};
 use Illuminate\Http\Request;
 
 class AutorController extends Controller
@@ -82,5 +82,16 @@ class AutorController extends Controller
     public function destroy(Autor $autor)
     {
         //
+    }
+
+    public function mostrarAutor(Autor $autor, $nombre)
+    {
+        $album = Album::where('autor_id', '=', $autor->id)->orderBy('created_at', 'desc')->get();
+        return view('autor.autordetalles', compact('album', 'autor'));
+    }
+
+    public function pagination(){
+        $autor = Autor::orderBy('nombre')->paginate(5);
+        return view('autor.pagination', compact('autor'));
     }
 }

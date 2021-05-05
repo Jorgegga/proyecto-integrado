@@ -54,18 +54,18 @@
     </x-slot>
 
     <x-slot name="cuerpo">
-        <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4">
+        <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeInLeft" id="autores">
             <!--<div class="col-10 pr-3">-->
             @foreach ($autor as $item)
-                <div class="card mb-5 w-100">
+                <div class="card mb-5 w-100" style="background-color:#212E36;">
                     <img src='{{asset($item->foto)}}'
                         class="card-img-top"/>
                     <div class="card-body">
-                        <h5 class="card-title">{{$item->nombre}}</h5>
-                        <p class="card-text">
+                        <h5 class="card-title" style="font-size:1.75vw; text-align: left; color: #EFF3F5">{{$item->nombre}}</h5>
+                        <p class="card-text" style="font-size:0.9vw; color: #C8CDD0">
                             {{$item->descripcion}}
                         </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="{{route('verAutor', ['autor' => $item, 'nombre'=> $item->nombre])}}" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             @endforeach
@@ -74,5 +74,31 @@
 
     </x-slot>
     <x-slot name="script">
+        <script>
+            let page = 2;
+            let bool = true;
+            window.onscroll = () => {
+            if (((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) && (bool == true)) {
+                    bool = false;
+                    const section = document.getElementById('autores');
+
+                    // Pedir al servidor
+                    fetch(`/autor/pagination?page=${page}`, {
+                        method: 'get'
+                    })
+                    .then(response => response.text())
+                    .then(htmlContent => {
+                        // Respuesta en HTML
+                        if(htmlContent != ""){
+                            section.innerHTML += htmlContent;
+                            page += 1;
+                            bool = true;
+                        }
+
+                    })
+                    .catch(err => console.log(err));
+                }
+            }
+        </script>
     </x-slot>
 </x-app-layout>

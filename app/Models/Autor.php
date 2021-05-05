@@ -20,4 +20,9 @@ class Autor extends Model
         $consulta = Autor::select('nombre')->where('id', $consulta->autor_id)->get()->first();
         return $consulta->nombre;
     }
+
+    public function autMusic($id){
+        $consulta = Music::where('album_id','=', $id)->orderBy('created_at', 'desc')->paginate(5);
+        return $consulta;
+    }
 }
