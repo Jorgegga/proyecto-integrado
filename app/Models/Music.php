@@ -9,10 +9,14 @@ class Music extends Model
 {
     use HasFactory;
 
-    protected $fillable=['nombre', 'descripcion', 'autor', 'album_id', 'portada', 'ruta', 'numCancion'];
+    protected $fillable=['nombre', 'descripcion', 'autor_id', 'album_id', 'portada', 'ruta', 'numCancion'];
 
     public function album(){
         return $this->belongsTo(Album::class);
+    }
+
+    public function autor(){
+        return $this->belongsTo(Autor::class);
     }
 
     public function nomAlbum($id){
@@ -20,5 +24,8 @@ class Music extends Model
         return $alb;
     }
 
-
+    public function nomAutor($id){
+        $aut = Autor::where('id', '=', $id)->get()->first();
+        return $aut;
+    }
 }

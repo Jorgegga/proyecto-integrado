@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Album, Music};
+use App\Models\{Album, Music, Autor};
 use Illuminate\Http\Request;
 
 class InicioController extends Controller
@@ -15,7 +15,8 @@ class InicioController extends Controller
     public function index()
     {
         $albumNew = Album::orderBy('created_at', 'desc')->limit(7)->get();
-        return view('dashboard', compact('albumNew'));
+        $autorNew = Autor::orderBy('created_at', 'desc')->limit(7)->get();
+        return view('dashboard', compact('albumNew', 'autorNew'));
     }
 
     /**

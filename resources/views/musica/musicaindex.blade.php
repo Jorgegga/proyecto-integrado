@@ -33,7 +33,8 @@
                                 <a href="{{ route('verAlbum', ['album' => $musicMet->nomAlbum($item->album_id)[0],
                                     'nombre' => $musicMet->nomAlbum($item->album_id)[0]->nombre]) }}">{{ $musicMet->nomAlbum($item->album_id)[0]->nombre }}</a>
                             </td>
-                            <td>{{ $nomAutor->nomAutor($item->album_id) }}</td>
+                            <!--<td> <a href="{{route('verAutor', ['autor' => $nomAutor->autorComp($item->album_id), 'nombre'=> $nomAutor->autorComp($item->album_id)->nombre])}}"> {{ $nomAutor->autorComp($item->album_id)->nombre }}</a></td>-->
+                            <td><a href="{{route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre])}}">{{$musicMet->nomAutor($item->autor_id)->nombre}}</a></td>
                             <!-- Los audios cargan correctamente en modo incognito -->
                             <td><audio controls preload="auto">
                                     <source src="{{asset($item->ruta) }}" type="audio/ogg">

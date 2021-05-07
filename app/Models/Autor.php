@@ -15,10 +15,20 @@ class Autor extends Model
         return $this->hasMany(Album::class);
     }
 
+    public function autor(){
+        return $this->hasMany(Music::class);
+    }
+
     public function nomAutor($id){
         $consulta = Album::select('autor_id')->where('id', $id)->get()->first();
         $consulta = Autor::select('nombre')->where('id', $consulta->autor_id)->get()->first();
         return $consulta->nombre;
+    }
+
+    public function autorComp($id){
+        $consulta = Album::select('autor_id')->where('id', $id)->get()->first();
+        $consulta = Autor::where('id', $consulta->autor_id)->get()->first();
+        return $consulta;
     }
 
     public function autMusic($id){

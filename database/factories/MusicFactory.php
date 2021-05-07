@@ -22,11 +22,14 @@ class MusicFactory extends Factory
      */
     public function definition()
     {
+        $id_alb = random_int(0, 57);
+        $id_autor = Album::select('autor_id')->where('id', $id_alb)->get()->first()->autor_id;
         return [
-            'nombre'=>ucwords($this->faker->sentence($nbWords = 4, $variableNBWords = true)),
+            'nombre'=>ucwords($this->faker->unique()->sentence($nbWords = 4, $variableNBWords = true)),
             'descripcion'=>$this->faker->text($maxNbChars = 30),
-            'album_id'=>$this->faker->numberBetween($min=0, $max= 57),
+            'album_id'=>$id_alb,
             'numCancion'=>$this->faker->numberBetween($min=1, $max= 28),
+            'autor_id'=>$id_autor,
         ];
     }
 }

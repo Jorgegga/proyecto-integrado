@@ -1,3 +1,4 @@
+@inject('musicMet', 'App\Models\Music')
 <x-app-layout>
     <x-slot name="fonts">
     </x-slot>
@@ -33,7 +34,7 @@
                         <td>
                             {{$album->nombre}}
                         </td>
-                        <td>{{ $item->autor_id }}</td>
+                        <td><a href="{{route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre])}}">{{$musicMet->nomAutor($item->autor_id)->nombre}}</a></td>
                         <td>{{ $item->numCancion }}</td>
                         <td><audio controls preload="auto"><source src="{{ $item->ruta }}" type="audio/mpeg"></audio></td>
                     </tr>

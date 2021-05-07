@@ -7,7 +7,7 @@
                         <p class="card-text" style="font-size:0.9vw; color: #C8CDD0">
                             {{$item->descripcion}}
                         </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="{{route('verAutor', ['autor' => $item, 'nombre'=> $item->nombre])}}" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             @endforeach

@@ -22,8 +22,8 @@ class AutorFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'=>ucwords($this->faker->sentence($nbWords = 1, $variableNBWords = true)),
-            'descripcion'=>ucfirst($this->faker->text(35)),
+            'nombre'=>ucwords($this->faker->unique()->sentence($nbWords = 1, $variableNBWords = true)),
+            'descripcion'=>ucfirst($this->faker->text(100)),
         ];
     }
 }

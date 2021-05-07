@@ -10,11 +10,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </x-slot>
     <x-slot name="header">
+
         <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Inicio') }}
         </h2>
+
     </x-slot>
     <x-slot name="cuerpo">
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
+                <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
+                    <div class="p-6 border-b border-gray-200 text-center">
+                        <h4 style="color: #EFF3F5">¡Bienvenido a la página principal!</h4>
+                        <p style="color: #C8CDD0">Aquí encontraras los últimos álbums que hemos añadido a nuestro repertorio junto con alguna cosilla más, ¡disfrutalos!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <h3 class="font-semibold text-xl text-white leading-tight text-center">
             Últimos álbums añadidos
         </h3>
@@ -45,18 +57,20 @@
             </a>
         </div>
 
-        <div class="container p8">
+        <div class="container p8 mt-4">
             <h3 class="font-semibold text-xl text-white leading-tight text-center">
-                Últimos álbums añadidos
+                Últimos autores añadidos
             </h3>
             <div class="resCarousel" data-items="2-4-4-4" data-interval="2000" data-slide="1" data-animator="lazy">
                 <div class="resCarousel-inner">
-                    @foreach ($albumNew as $item)
+                    @foreach ($autorNew as $item)
+                    <a href="{{route('verAutor', ['autor' => $item, 'nombre'=> $item->nombre])}}">
                     <div class="item">
                         <div class="tile">
-                            <img src="{{asset($item->portada)}}" style="height:300px; width:300px" class="img-responsive">
+                            <img src="{{asset($item->foto)}}" style="height:300px; width:300px" class="img-responsive">
                         </div>
                     </div>
+                </a>
                     @endforeach
 
                 </div>
