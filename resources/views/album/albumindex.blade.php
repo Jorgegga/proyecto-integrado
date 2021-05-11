@@ -14,6 +14,16 @@
     </x-slot>
 
     <x-slot name="cuerpo">
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
+                <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
+                    <div class="p-6 border-b border-gray-200 text-center">
+                        <h4 style="color: #EFF3F5">¡Álbums de todo tipo!</h4>
+                        <p style="color: #C8CDD0">Tenemos una gran selección de álbums que hemos ido añadiendo con el tiempo.<br> Si hay alguno que no está mandanos un correo, ¡y en la medida de lo posible intetaremos añadirlo a nuestro repertorio! </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn" id="albums">
             <!--<div class="col-10 pr-3">-->
                 @foreach ($album as $item)

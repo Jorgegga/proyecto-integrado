@@ -2,7 +2,7 @@
 @foreach ($album as $item)
             <a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}">
                 <div class="card col-md-3 col-sm-3 mr-sm-5 mr-md-5 pt-3 mt-4"
-                    style="width: 18rem; background-color:#212E36; font-family: 'New Tegomin', serif; font-weight: bold; animate__animated animate__fadeIn">
+                    style="width: 18rem; background-color:#212E36; font-family: 'New Tegomin', serif; font-weight: bold;">
                     <img class="card-img-top" src='{{ asset($item->portada) }}' alt="Card image cap" style="height:300px;">
                     <div class="card-body align-items-center">
                         <p class="card-title" style="font-size:1.2vw; text-align: center; color: #C8CDD0">
@@ -16,3 +16,4 @@
                 </div>
             </a>
             @endforeach
+

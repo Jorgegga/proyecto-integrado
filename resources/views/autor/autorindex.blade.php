@@ -54,6 +54,16 @@
     </x-slot>
 
     <x-slot name="cuerpo">
+        <div class="py-12 animate__animated animate__fadeInLeft">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
+                <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
+                    <div class="p-6 border-b border-gray-200 text-center">
+                        <h4 style="color: #EFF3F5">Si por el contrario buscas un artista en concreto...</h4>
+                        <p style="color: #C8CDD0">Entonces tenemos una gran base de datos de artistas, ¡quizas descubras alguno nuevo!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeInLeft" id="autores">
             <!--<div class="col-10 pr-3">-->
             @foreach ($autor as $item)
