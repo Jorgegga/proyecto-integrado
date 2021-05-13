@@ -17,7 +17,7 @@
 
     </x-slot>
     <x-slot name="cuerpo">
-        <div class="py-12">
+        <div class="py-12 animate__animated animate__fadeInDown">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
                 <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
                     <div class="p-6 border-b border-gray-200 text-center">
@@ -27,10 +27,10 @@
                 </div>
             </div>
         </div>
-        <h3 class="font-semibold text-xl text-white leading-tight text-center">
+        <h3 class="font-semibold text-xl text-white leading-tight text-center animate__animated animate__fadeInRight">
             Últimos álbums añadidos
         </h3>
-        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3" data-ride="carousel">
+        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeInRight" data-ride="carousel">
             <ol class="carousel-indicators">
                 @foreach ($albumNew as $item)
                     <li data-target="#ultimosAlbum" data-slide-to="{{ $loop->index }}"
@@ -42,7 +42,7 @@
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}"  title="{{$item->nombre}}">
                         <a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}">
                         <img class="d-block w-50 m-auto img-responsive"  src="{{ asset($item->portada) }}"
-                            style="height:600px; width:600px">
+                            style="height:500px; width:500px">
                         </a>
                     </div>
                 @endforeach
@@ -57,7 +57,7 @@
             </a>
         </div>
 
-        <div class="container p8 mt-4">
+        <div class="container p8 mt-4  animate__animated animate__fadeInUp">
             <h3 class="font-semibold text-xl text-white leading-tight text-center">
                 Últimos autores añadidos
             </h3>

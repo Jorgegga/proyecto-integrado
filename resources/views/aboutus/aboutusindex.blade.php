@@ -4,20 +4,20 @@
     </x-slot>
     <x-slot name="styles">
         <style>
-            .contact{
+            .contact {
                 background-color: black;
                 color: #C8CDD0;
-                transition:0.7s;
+                transition: 0.7s;
             }
 
-            .contact:hover{
+            .contact:hover {
                 background-color: black;
                 color: #C8CDD0;
                 opacity: 0.75;
                 border-color: blue;
                 border-top-color: blue
-
             }
+
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
@@ -64,55 +64,189 @@
                 <h3 style="color: #EFF3F5" class="mt-3">Contacto</h3>
             </div>
             <div class="col-5 m-auto text-center animate__animated animate__fadeInUp">
-                <div class="list-group" >
+                <div class="list-group">
                     <button class="btn mb-2 rounded contact" data-toggle="modal" data-target="#añadirForm" role="tab">
                         Añadir canción o albúm
                     </button>
-                    <button class="btn mb-2 rounded contact" data-toggle="modal" role="tab">
+                    <button class="btn mb-2 rounded contact" data-toggle="modal" data-target="#quitarForm" role="tab">
                         Quitar canción o albúm
                     </button>
-                    <button class="btn mb-2 rounded contact" data-toggle="modal" role="tab">
+                    <button class="btn mb-2 rounded contact" data-toggle="modal" data-target="#negocForm" role="tab">
                         Negocios
                     </button>
-                    <button class="btn mb-3 rounded contact" data-toggle="modal" role="tab">
+                    <button class="btn mb-3 rounded contact" data-toggle="modal" data-target="#otrosForm" role="tab">
                         Otros
                     </button>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="añadirForm" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade rounded" id="añadirForm" data-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header bg-success">
-                        <h5 class="modal-title" id="exampleModalLabel">Entrar en la sesion</h5>
+                    <div class="modal-header border-bottom border-primary"
+                        style="background-color: #0f2738; color: #EFF3F5;">
+                        <h4 class="modal-title" id="exampleModalLabel">Petición para añadir canción o album</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label>Usuario</label>
-                                <input type="text" class="form-control" placeholder="Pon tu nombre" required>
+                    <form>
+                        <div class="modal-body" style="background-color: #192229">
+                            @csrf
+                            <h5 style="color: #EFF3F5;">Tipo</h5>
+                            <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+                                <label class="btn btn-dark active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" value="cancion"
+                                        checked>Canción
+                                </label>
+                                <label class="btn btn-dark">
+                                    <input type="radio" name="options" id="option2" autocomplete="off"
+                                        value="album">Álbum
+                                </label>
                             </div>
                             <div class="form-group">
-                                <label>Contraseña</label>
-                                <input type="password" class="form-control" placeholder="Pon tu contraseña"
-                                    required>
+                                <h5 style="color: #EFF3F5;">Título</h5>
+                                <input type="text" class="form-control border-0"
+                                    placeholder="Pon el nombre de la canción o el álbum"
+                                    style="background-color:#212E36; color: #C8CDD0;" title="" required>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Loguearse</button>
-                    </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Autor</h5>
+                                <input type="text" class="form-control border-0" placeholder="Pon el nombre del autor"
+                                    style="background-color:#212E36; color: #C8CDD0;" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-primary" style="background-color: #0f2738;">
+                            <button type="button" class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade rounded" id="quitarForm" data-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom border-primary"
+                        style="background-color: #0f2738; color: #EFF3F5;">
+                        <h4 class="modal-title" id="exampleModalLabel">Petición para quitar canción o album</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body" style="background-color: #192229">
+                            @csrf
+                            <h5 style="color: #EFF3F5;">Tipo</h5>
+                            <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+                                <label class="btn btn-dark active">
+                                    <input type="radio" name="options" id="option3" autocomplete="off" value="cancion"
+                                        checked>Canción
+                                </label>
+                                <label class="btn btn-dark">
+                                    <input type="radio" name="options" id="option4" autocomplete="off"
+                                        value="album">Álbum
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Título</h5>
+                                <input type="text" class="form-control border-0"
+                                    placeholder="Pon el nombre de la canción o el álbum"
+                                    style="background-color:#212E36; color: #C8CDD0;" title="" required>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Autor</h5>
+                                <input type="text" class="form-control border-0" placeholder="Pon el nombre del autor"
+                                    style="background-color:#212E36; color: #C8CDD0;" required>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Comentarios adicionales</h5>
+                                <textarea class="form-control border-0"
+                                    placeholder="Si tienes algo más que comunicarnos"
+                                    style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="4"
+                                    maxlength="200"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-primary" style="background-color: #0f2738;">
+                            <button type="button" class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade rounded" id="negocForm" data-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom border-primary"
+                        style="background-color: #0f2738; color: #EFF3F5;">
+                        <h4 class="modal-title" id="exampleModalLabel">Petición de negocios</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body" style="background-color: #192229">
+                            @csrf
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Nombre de la empresa</h5>
+                                <input type="text" class="form-control border-0" placeholder="Nombre de tu empresa"
+                                    style="background-color:#212E36; color: #C8CDD0;" title="" required>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Intereses</h5>
+                                <textarea class="form-control border-0" placeholder="¿Que oferta de negocios tiene?"
+                                    style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="8"
+                                    maxlength="400"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-primary" style="background-color: #0f2738;">
+                            <button type="button" class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <div class="modal fade rounded" id="otrosForm"  tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-bottom border-primary"
+                            style="background-color: #0f2738; color: #EFF3F5;">
+                            <h4 class="modal-title" id="exampleModalLabel">Petición de negocios</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form>
+                            <div class="modal-body" style="background-color: #192229">
+                                @csrf
+                                <div class="form-group">
+                                    <h5 style="color: #EFF3F5;">Titulo</h5>
+                                    <input type="text" class="form-control border-0"
+                                        placeholder="Pon el nombre de la canción o el álbum"
+                                        style="background-color:#212E36; color: #C8CDD0;" title="" required>
+                                </div>
+                                <div class="form-group">
+                                    <h5 style="color: #EFF3F5;">Descripción</h5>
+                                    <textarea class="form-control border-0" placeholder="¿Necesitas algo?"
+                                        style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="4"
+                                        maxlength="200"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-primary" style="background-color: #0f2738;">
+                                <button type="button" class="btn btn-success">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
     </x-slot>
     <x-slot name="script">
-        <script>
-
-        </script>
-
     </x-slot>
 </x-app-layout>

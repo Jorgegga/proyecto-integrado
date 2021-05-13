@@ -27,7 +27,7 @@
                     {{ __('About us') }}
                 </x-nav-link>
             </ul>
-
+            <!--<img src="/storage/img/otros/default.png" height="100px">-->
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
 
