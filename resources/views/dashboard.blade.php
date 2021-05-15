@@ -27,10 +27,12 @@
                 </div>
             </div>
         </div>
-        <h3 class="font-semibold text-xl text-white leading-tight text-center animate__animated animate__fadeInRight">
+        <h3 class="font-semibold text-xl text-white leading-tight text-center animate__animated animate__fadeIn mb-3">
             Últimos álbums añadidos
         </h3>
-        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeInRight" data-ride="carousel">
+        <!--A este paquete de animaciones al parecer no le gusta el carousel de bootstrap y si pones una animacion desde los lados
+        la pagina recibe una embolia y todos los elementos de la pagina reciben animaciones raras-->
+        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeIn" data-ride="carousel">
             <ol class="carousel-indicators">
                 @foreach ($albumNew as $item)
                     <li data-target="#ultimosAlbum" data-slide-to="{{ $loop->index }}"
@@ -57,7 +59,7 @@
             </a>
         </div>
 
-        <div class="container p8 mt-4  animate__animated animate__fadeInUp">
+        <div class="container p8 mt-4 animate__animated animate__fadeInUp">
             <h3 class="font-semibold text-xl text-white leading-tight text-center">
                 Últimos autores añadidos
             </h3>

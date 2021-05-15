@@ -18,6 +18,7 @@ class CreateAutorsTable extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('foto')->default('/storage/img/autor/default.png');
+            $table->integer('genero_id')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

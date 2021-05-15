@@ -18,11 +18,13 @@ class AutorSeeder extends Seeder
             'nombre'=>'Desconocido',
             'descripcion'=>'Musica sin autor',
             'id'=>'0',
+            'genero_id'=>'0',
         ]);
         Autor::create([
             'nombre'=>'Zun',
             'descripcion'=>'Gran música',
             'id'=>'1',
+            'genero_id'=>'6',
         ]);
     }
 }

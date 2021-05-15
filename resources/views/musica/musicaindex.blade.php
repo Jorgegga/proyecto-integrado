@@ -32,6 +32,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Álbum</th>
                         <th scope="col">Autor</th>
+                        <th scope="col">Género</th>
                         <th scope="col">Play</th>
                     </tr>
                 </thead>
@@ -45,6 +46,7 @@
                             </td>
                             <!--<td> <a href="{{route('verAutor', ['autor' => $nomAutor->autorComp($item->album_id), 'nombre'=> $nomAutor->autorComp($item->album_id)->nombre])}}"> {{ $nomAutor->autorComp($item->album_id)->nombre }}</a></td>-->
                             <td><a href="{{route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre])}}">{{$musicMet->nomAutor($item->autor_id)->nombre}}</a></td>
+                            <td>{{ucfirst($item->genero_id)}}</td>
                             <!-- Los audios cargan correctamente en modo incognito -->
                             <td><audio controls preload="auto">
                                     <source src="{{asset($item->ruta) }}" type="audio/ogg">

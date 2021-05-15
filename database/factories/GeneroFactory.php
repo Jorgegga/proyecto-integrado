@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\{Autor, Genero};
+use App\Models\Genero;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AutorFactory extends Factory
+class GeneroFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Autor::class;
+    protected $model = Genero::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class AutorFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'=>ucwords($this->faker->unique()->sentence($nbWords = 1, $variableNBWords = true)),
-            'descripcion'=>ucfirst($this->faker->text(100)),
-            'genero_id'=>$this->faker->numberBetween(0, 6),
+            //
         ];
     }
 }

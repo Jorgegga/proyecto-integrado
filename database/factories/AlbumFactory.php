@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Album;
+use App\Models\{Album, Autor};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AlbumFactory extends Factory
@@ -21,10 +21,13 @@ class AlbumFactory extends Factory
      */
     public function definition()
     {
+        $id_autor=random_int(0,50);
+        $gener = Autor::select('genero_id')->where('id',$id_autor)->get()->first()->genero_id;
         return [
             'nombre'=>ucwords($this->faker->unique()->sentence($nbWords = 3, $variableNBWords = true)),
             'descripcion'=>ucfirst($this->faker->text(35)),
-            'autor_id'=>$this->faker->numberBetween($min=0, $max= 50),
+            'autor_id'=>$id_autor,
+            'genero_id'=>$gener,
         ];
     }
 }
