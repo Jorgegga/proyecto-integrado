@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Album, Music};
+use App\Models\{Album, Music, Genero};
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -12,11 +12,13 @@ class AlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $album = Album::orderBy('id', 'DESC')->paginate(9);
+        $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->paginate(9);
         $music = Music::orderBy('album_id');
-        return view('album.albumindex', compact('album', 'music',));
+        $genero = Genero::orderBy('id', 'desc')->get();
+        $this->pagination($request);
+        return view('album.albumindex', compact('album', 'music', 'genero', 'request'));
     }
 
     /**
@@ -91,8 +93,8 @@ class AlbumController extends Controller
         return view('album.albumdetalles', compact('musica','album'));
     }
 
-    public function pagination(){
-        $album = Album::orderBy('id', 'DESC')->paginate(9);
+    public function pagination(Request $request){
+        $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->paginate(9);
         return view('album.pagination', compact('album'));
     }
 

@@ -1,4 +1,5 @@
 @inject('albumMet', 'App\Models\Album')
+
 <x-app-layout>
     <x-slot name="fonts">
         <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
@@ -28,15 +29,19 @@
         </div>
         <div class="text-center position-fixed pr-5 pl-5" style="background-color:#212E36; left: 85%;">
             <h5 class="border-bottom border-secondary" style="color: white">Géneros</h5>
-            <ul class="" style="color: white; margin-left:-35%" type="none">
-                <li>Rock</li>
-                <li>Pop</li>
-                <li>Clásica</li>
-                <li>Electrónica</li>
-                <li>Trap</li>
-                <li>Instrumental</li>
-                <li>Otro</li>
-            </ul>
+                <form name="b" action={{route('albums.index')}} >
+                    <select class="" style="color: black; margin-left:-35%" name="tematica" onchange="this.form.submit()">
+                        <option value="%">Todos</option>
+                @foreach ($genero as $item)
+                    @if($request->tematica == "$item->id")
+                    <option value={{$item->id}} selected>{{ucfirst($item->nombre)}}</option>
+                    @else
+                    <option value={{$item->id}}>{{ucfirst($item->nombre)}}</option>
+                    @endif
+                @endforeach
+            </select>
+                </form>
+
         </div>
         <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn"
             id="albums">
@@ -58,13 +63,14 @@
                                 {{ $albumMet->nomAutor($item->autor_id) }}</p>
                             <p class="text-muted text-right" style="float:right;">{{ $albumMet->numTemas($item->id) }}
                                 temas</p>
+                                <p>{{$item->genero_id}}</p>
                         </div>
                     </div>
                 </a>
             @endforeach
             <!--</div>-->
-        </section>
 
+        </section>
         <!--<p><button class="btn btn-primary" id='carga' onclick="carga()"></button></p>-->
     </x-slot>
     <x-slot name="script">
@@ -75,8 +81,11 @@
                 if (((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) && (bool == true)) {
                     bool = false;
                     const section = document.getElementById('albums');
+                    //Necesario para hacer el **** paginado con scopes
+                    let temat = "<?php echo $request->tematica; ?>"
 
                     // Pedir al servidor
+                    if(temat == null || temat == "%"){
                     fetch(`/album/pagination?page=${page}`, {
                             method: 'get'
                         })
@@ -91,6 +100,22 @@
 
                         })
                         .catch(err => console.log(err));
+                    }else{
+                        fetch(`/album/pagination?tematica=${temat}&page=${page}`, {
+                            method: 'get'
+                        })
+                        .then(response => response.text())
+                        .then(htmlContent => {
+                            // Respuesta en HTML
+                            if (htmlContent != "") {
+                                section.innerHTML += htmlContent;
+                                page += 1;
+                                bool = true;
+                            }
+
+                        })
+                        .catch(err => console.log(err));
+                    }
                 }
             }
 

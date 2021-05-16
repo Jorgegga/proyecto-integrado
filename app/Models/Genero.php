@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genero extends Model
 {
+    use HasFactory;
+
     protected $fillable=['nombre'];
 
-
-    use HasFactory;
+    public function nomGenero($id){
+        $nom = Genero::select('nombre')->where('id', $id)->get()->first()->nombre;
+        return $nom;
+    }
 }

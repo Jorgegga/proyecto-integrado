@@ -1,5 +1,6 @@
 @inject('musicMet', 'App\Models\Music')
 @inject('nomAutor', 'App\Models\Autor')
+@inject('generoNom', 'App\Models\Genero')
 <x-app-layout>
     <x-slot name="fonts">
     </x-slot>
@@ -46,7 +47,7 @@
                             </td>
                             <!--<td> <a href="{{route('verAutor', ['autor' => $nomAutor->autorComp($item->album_id), 'nombre'=> $nomAutor->autorComp($item->album_id)->nombre])}}"> {{ $nomAutor->autorComp($item->album_id)->nombre }}</a></td>-->
                             <td><a href="{{route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre])}}">{{$musicMet->nomAutor($item->autor_id)->nombre}}</a></td>
-                            <td>{{ucfirst($item->genero_id)}}</td>
+                            <td>{{ucfirst($generoNom->nomGenero($item->genero_id))}}</td>
                             <!-- Los audios cargan correctamente en modo incognito -->
                             <td><audio controls preload="auto">
                                     <source src="{{asset($item->ruta) }}" type="audio/ogg">
