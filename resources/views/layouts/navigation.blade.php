@@ -34,6 +34,9 @@
                 <x-nav-link href="{{ route('aboutus.index') }}" :active="request()->routeIs('aboutus.index')" style="color: #C8CDD0;">
                     {{ __('About us') }}
                 </x-nav-link>
+                <x-nav-link href="{{ route('admins.index') }}" :active="request()->routeIs('admins.index')" style="color: #C8CDD0;">
+                    {{ __('Area admin') }}
+                </x-nav-link>
             </ul>
             <!--<img src="/storage/img/otros/default.png" height="100px">-->
             <!-- Right Side Of Navbar -->

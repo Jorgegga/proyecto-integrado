@@ -7,6 +7,9 @@
     <x-slot name="styles">
     </x-slot>
     <x-slot name="scriptsCDN">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -27,6 +30,7 @@
                 </div>
             </div>
         </div>
+        <select class="livesearch form-control" name="livesearch"></select>
         <div class="text-center position-fixed pr-5 pl-5" style="background-color:#212E36; left: 85%;">
             <h5 class="border-bottom border-secondary" style="color: white">Géneros</h5>
                 <form name="b" action={{route('albums.index')}} >
@@ -118,6 +122,26 @@
                     }
                 }
             }
+
+            $('.livesearch').select2({
+        placeholder: 'Select movie',
+        ajax: {
+            url: '/ajax-autocomplete-search',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.nombre,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
 
         </script>
     </x-slot>

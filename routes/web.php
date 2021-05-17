@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AboutusController, AlbumController, AutorController, InicioController, MusicController};
+use App\Http\Controllers\{AboutusController, AdminController, AlbumController, AutorController, InicioController, MusicController};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +28,14 @@ Route::resource('musics', MusicController::class);
 Route::resource('inicios', InicioController::class);
 Route::resource('autores', AutorController::class);
 Route::resource('aboutus', AboutusController::class);
+Route::resource('admins', AdminController::class);
 
 //Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
 Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
 Route::get('/autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');
 
 Route::get('/album/pagination', [AlbumController::class, 'pagination']);
+Route::Get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch']);
 Route::get('/autor/pagination', [AutorController::class, 'pagination']);
 
 require __DIR__.'/auth.php';

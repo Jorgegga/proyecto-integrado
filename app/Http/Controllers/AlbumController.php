@@ -98,4 +98,16 @@ class AlbumController extends Controller
         return view('album.pagination', compact('album'));
     }
 
+    public function selectSearch(Request $request)
+    {
+    	$movies = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $movies =Album::select("id", "nombre")
+            		->where('nombre', 'LIKE', "%$search%")
+            		->get();
+        }
+        return response()->json($movies);
+    }
+
 }

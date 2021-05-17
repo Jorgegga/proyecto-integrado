@@ -26,6 +26,8 @@ class Album extends Model
         }
     }
 
+
+
     public function numTemas($id){
         $contar = Music::where('album_id', '=', $id)->count();
         return $contar;
