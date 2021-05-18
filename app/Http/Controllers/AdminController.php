@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Autor, Album, Music};
+use App\Models\{Autor, Album, Music, Genero};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
@@ -18,8 +20,9 @@ class AdminController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         $album = Album::orderBy('id', 'DESC')->paginate(9);
-        $ruta = [InicioController::class, 'index'];
-        return view('administrador.adminindex', compact('album', 'ruta'));
+        $genero = Genero::orderBy('id', 'asc')->get();
+        $autor = Autor::orderBy('id', 'asc')->get();
+        return view('administrador.adminindex', compact('album', 'genero', 'autor'));
     }
 
     /**
@@ -30,6 +33,7 @@ class AdminController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -40,7 +44,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -49,7 +53,7 @@ class AdminController extends Controller
      * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function show(Autor $autor)
+    public function show(Album $album)
     {
         //
     }
@@ -60,7 +64,7 @@ class AdminController extends Controller
      * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Autor $autor)
+    public function edit(Album $album)
     {
         //
     }
@@ -72,7 +76,7 @@ class AdminController extends Controller
      * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Autor $autor)
+    public function update(Request $request, Album $album)
     {
         //
     }
@@ -83,9 +87,9 @@ class AdminController extends Controller
      * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Autor $autor)
+    public function destroy(Album $album)
     {
-        //
+
     }
 
 

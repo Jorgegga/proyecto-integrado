@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\{Album, Music, Genero};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AlbumController extends Controller
 {
@@ -39,7 +41,37 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!auth()->check() || auth()->user()->permisos != 0){
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        $request->validate([
+            'nombre'=>['required', 'string'],
+            'descripcion'=>['required', 'string'],
+            'autor'=>['required', 'integer'],
+            'genero'=>['required', 'integer']
+        ]);
+
+        $album = new Album();
+        $album->nombre = ucwords($request->nombre);
+        $album->descripcion = ucwords($request->descripcion);
+        $album->autor_id = $request->autor;
+        $album->genero_id = $request->genero;
+
+        if($request->has('foto')){
+            $request->validate([
+                'foto'=>['image']
+            ]);
+            $archivoImagen = $request->file('foto');
+            $ruta = "/img/album/". uniqid(). "_" . $archivoImagen->getClientOriginalName();
+            Storage::Disk('public')->put($ruta, File::get($archivoImagen));
+            $album->portada = '/storage'.$ruta;
+        }
+        try{
+            $album->save();
+            return redirect()->route('admins.index')->with("mensaje", "Album guardado correctamente");
+        }catch(\Exception $ex){
+            return redirect()->route('admins.index')->with("error", "Error al crear al album" . $ex ->getMessage());
+        }
     }
 
     /**
@@ -84,7 +116,18 @@ class AlbumController extends Controller
      */
     public function destroy(Album $album)
     {
-        //
+        if(!auth()->check() || auth()->user()->permisos != 0){
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        if (basename($album->portada) != "default.png"){
+            unlink($album->portada);
+        }
+        try{
+            $album->delete();
+            return redirect()->route('admins.index')->with("mensaje", "Album borrado correctamente");
+        }catch(\Exception $ex){
+            return redirect()->route('admins.index')->with("error", "Error al borrar el album" . $ex ->getMessage());
+        }
     }
 
     public function mostrarAlbum(Album $album, $nombre)

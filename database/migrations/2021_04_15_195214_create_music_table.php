@@ -17,14 +17,14 @@ class CreateMusicTable extends Migration
             $table->id()->unique();
             $table->string('nombre');
             $table->string('descripcion')->default('No se ha proporcionado ninguna descripcion');
-            $table->foreignId('album_id')->default(0);
+            $table->foreignId('album_id')->unsigned()->default(0);
             $table->foreign('album_id')
             ->references('id')->on('albums')
-            ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('autor_id')->default(0);
+            ->onDelete('set default')->onUpdate('cascade');
+            $table->foreignId('autor_id')->unsigned()->default(0);
             $table->foreign('autor_id')
             ->references('id')->on('autors')
-            ->onDelete('cascade')->onUpdate('cascade');
+            ->onDelete('set default')->onUpdate('cascade');
             $table->string('portada')->default('/storage/img/musica/default.png');
             $table->string('ruta')->default('/storage/music/default.ogg');
             $table->integer('numCancion')->default(0);

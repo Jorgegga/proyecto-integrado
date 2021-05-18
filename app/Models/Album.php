@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Album extends Model
 {
     use HasFactory;
-    protected $fillable=['nombre', 'descripcion', 'autor_id', 'portada'];
+    protected $fillable=['nombre', 'descripcion', 'autor_id', 'genero_id', 'portada'];
 
     public function music(){
         return $this->hasMany(Music::class);
