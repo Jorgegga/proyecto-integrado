@@ -41,14 +41,14 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        if(!auth()->check() || auth()->user()->permisos != 0){
+        if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
         $request->validate([
-            'nombre'=>['required', 'string'],
-            'descripcion'=>['required', 'string'],
-            'autor'=>['required', 'integer'],
-            'genero'=>['required', 'integer']
+            'nombre' => ['required', 'string'],
+            'descripcion' => ['required', 'string'],
+            'autor' => ['required', 'integer'],
+            'genero' => ['required', 'integer']
         ]);
 
         $album = new Album();
@@ -57,20 +57,20 @@ class AlbumController extends Controller
         $album->autor_id = $request->autor;
         $album->genero_id = $request->genero;
 
-        if($request->has('foto')){
+        if ($request->has('foto')) {
             $request->validate([
-                'foto'=>['image']
+                'foto' => ['image']
             ]);
             $archivoImagen = $request->file('foto');
-            $ruta = "/img/album/". uniqid(). "_" . $archivoImagen->getClientOriginalName();
+            $ruta = "/img/album/" . uniqid() . "_" . $archivoImagen->getClientOriginalName();
             Storage::Disk('public')->put($ruta, File::get($archivoImagen));
-            $album->portada = '/storage'.$ruta;
+            $album->portada = 'storage' . $ruta;
         }
-        try{
+        try {
             $album->save();
             return redirect()->route('admins.index')->with("mensaje", "Album guardado correctamente");
-        }catch(\Exception $ex){
-            return redirect()->route('admins.index')->with("error", "Error al crear al album" . $ex ->getMessage());
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index')->with("error", "Error al crear al album" . $ex->getMessage());
         }
     }
 
@@ -82,7 +82,6 @@ class AlbumController extends Controller
      */
     public function show(Album $album)
     {
-
     }
 
     /**
@@ -105,7 +104,42 @@ class AlbumController extends Controller
      */
     public function update(Request $request, Album $album)
     {
-        //
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+
+        $request->validate([
+            'nombre' => ['required', 'string'],
+            'descripcion' => ['required', 'string'],
+            'autor' => ['required', 'integer'],
+            'genero' => ['required', 'integer']
+        ]);
+
+
+        if ($request->has('foto')) {
+            $request->validate([
+                'foto' => ['image']
+            ]);
+
+            $archivoImagen = $request->file('foto');
+            $ruta = "/img/album/" . uniqid() . "_" . $archivoImagen->getClientOriginalName();
+            if (basename($album->portada) != "default.png") {
+                unlink($album->portada);
+            }
+            Storage::Disk('public')->put($ruta, File::get($archivoImagen));
+            $album->update(['portada' => 'storage' . $ruta]);
+        }
+        try {
+            $album->update([
+                'nombre' => ucwords($request->nombre),
+                'descripcion' => ucfirst($request->descripcion),
+                'autor_id' => $request->autor,
+                'genero_id' => $request->genero
+            ]);
+            return redirect()->route('admins.index')->with("mensaje", "Album actualizado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index')->with("error", "Error al actualizar el album" . $ex->getMessage());
+        }
     }
 
     /**
@@ -116,41 +150,41 @@ class AlbumController extends Controller
      */
     public function destroy(Album $album)
     {
-        if(!auth()->check() || auth()->user()->permisos != 0){
+        if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
-        if (basename($album->portada) != "default.png"){
+        if (basename($album->portada) != "default.png") {
             unlink($album->portada);
         }
-        try{
+        try {
             $album->delete();
             return redirect()->route('admins.index')->with("mensaje", "Album borrado correctamente");
-        }catch(\Exception $ex){
-            return redirect()->route('admins.index')->with("error", "Error al borrar el album" . $ex ->getMessage());
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index')->with("error", "Error al borrar el album" . $ex->getMessage());
         }
     }
 
     public function mostrarAlbum(Album $album, $nombre)
     {
         $musica = Music::where('album_id', '=', $album->id)->orderBy('numCancion', 'asc')->get();
-        return view('album.albumdetalles', compact('musica','album'));
+        return view('album.albumdetalles', compact('musica', 'album'));
     }
 
-    public function pagination(Request $request){
+    public function pagination(Request $request)
+    {
         $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->paginate(9);
         return view('album.pagination', compact('album'));
     }
 
     public function selectSearch(Request $request)
     {
-    	$movies = [];
-        if($request->has('q')){
+        $movies = [];
+        if ($request->has('q')) {
             $search = $request->q;
-            $movies =Album::select("id", "nombre")
-            		->where('nombre', 'LIKE', "%$search%")
-            		->get();
+            $movies = Album::select("id", "nombre")
+                ->where('nombre', 'LIKE', "%$search%")
+                ->get();
         }
         return response()->json($movies);
     }
-
 }

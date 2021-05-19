@@ -76,6 +76,7 @@
 
         </section>
         <!--<p><button class="btn btn-primary" id='carga' onclick="carga()"></button></p>-->
+
     </x-slot>
     <x-slot name="script">
         <script>
