@@ -35,7 +35,8 @@ Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])-
 Route::get('/autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');
 
 Route::get('/album/pagination', [AlbumController::class, 'pagination']);
-Route::Get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch']);
+Route::get('/tablas/album', [AdminController::class, 'album']);
+Route::get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch']);
 Route::get('/autor/pagination', [AutorController::class, 'pagination']);
 
 require __DIR__.'/auth.php';

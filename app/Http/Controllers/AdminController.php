@@ -92,5 +92,16 @@ class AdminController extends Controller
 
     }
 
+    public function album()
+    {
+        if(!auth()->check() || auth()->user()->permisos != 0){
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        $album = Album::orderBy('id', 'DESC')->paginate(9);
+        $genero = Genero::orderBy('id', 'asc')->get();
+        $autor = Autor::orderBy('id', 'asc')->get();
+        return view('administrador.adminalbum', compact('album', 'genero', 'autor'));
+    }
+
 
 }
