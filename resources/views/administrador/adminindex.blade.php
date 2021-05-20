@@ -29,7 +29,7 @@
     </x-slot>
     <x-slot name="cuerpo">
         <button class="btn btn-primary" onclick="cambio('album')">Cambiar</button>
-        <div class="w-100" id="cuerpo">
+        <div class="w-100 " id="cuerpo">
         </div>
         <a href="{{ route('inicios.index') }}"><button class="btn btn-primary">Volver</button></a>
     </x-slot>

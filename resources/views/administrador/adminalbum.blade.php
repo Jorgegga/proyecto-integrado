@@ -2,14 +2,14 @@
 @inject('generoNom', 'App\Models\Genero')
 @inject('nomAutor', 'App\Models\Autor')
 
-<h3 class="font-semibold text-xl text-white leading-tight text-center">
+<h3 class="font-semibold text-xl text-white leading-tight text-center animate__animated animate__fadeIn">
     Modificación de albums
 </h3>
 <x-mensajes-alertas></x-mensajes-alertas>
-<button class="btn btn-primary mb-2 rounded contact" data-toggle="modal" data-target="#createForm" role="tab">
+<button class="btn btn-primary mb-2 rounded contact  animate__animated animate__fadeIn" data-toggle="modal" data-target="#createForm" role="tab">
     Crear álbum
 </button>
-<table class="table table-striped table-dark ">
+<table class="table table-striped table-dark  animate__animated animate__fadeIn">
     <thead>
         <tr>
             <th scope="col">Portada</th>
@@ -121,90 +121,13 @@
             </div>
             <!--------------------------------------------------------------------------------------------------------------->
 
-            <!-------------------------------------------Edit modal------------------------------------------------------>
-            <div class="modal fade rounded" id="updateForm{{ $item->id }}" data-backdrop="static"
-                tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-bottom border-primary"
-                            style="background-color: #0f2738; color: #EFF3F5;">
-                            <h4 class="modal-title" id="exampleModalLabel">Modificar álbum</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form name="a" action="{{ route('albums.update', $item) }}" method="POST"
-                            enctype="multipart/form-data">
-                            <div class="modal-body" style="background-color: #192229">
-                                <img src='{{ asset($item->portada) }}'
-                                    class="mx-auto d-block img-fluid w-50 mb-3" height="50px">
-                                @csrf
-                                @method('PUT')
-                                <div class="form-group">
-                                    <h5 style="color: #EFF3F5;">Nombre</h5>
-                                    <input type="text" class="form-control border-0"
-                                        style="background-color:#212E36; color: #C8CDD0;" title="" name="nombre"
-                                        value="{{ $item->nombre }}" />
-                                </div>
-                                <div class="form-group">
-                                    <h5 style="color: #EFF3F5;">Descripcion</h5>
-                                    <textarea class="form-control border-0"
-                                        style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="4"
-                                        maxlength="200"
-                                        name="descripcion">{{ $item->descripcion }}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <h5 style="color: #EFF3F5;">Autor</h5>
-                                    <select class="custom-select"
-                                        style="background-color:#212E36; color: #C8CDD0; border:none;"
-                                        name="autor">
-                                        @foreach ($autor as $item2)
-                                            @if ($item2->id == $item->autor_id)
-                                                <option value={{ $item2->id }} selected>
-                                                    {{ ucfirst($item2->nombre) }}</option>
-                                            @else
-                                                <option value={{ $item2->id }}>
-                                                    {{ ucfirst($item2->nombre) }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <h5 style="color: #EFF3F5;">Género</h5>
-                                    <select class="custom-select"
-                                        style="background-color:#212E36; color: #C8CDD0; border:none;"
-                                        name="genero">
-                                        @foreach ($genero as $item2)
-                                            @if ($item2->id == $item->genero_id)
-                                                <option value={{ $item2->id }} selected>
-                                                    {{ ucfirst($item2->nombre) }}</option>
-                                            @else
-                                                <option value={{ $item2->id }}>
-                                                    {{ ucfirst($item2->nombre) }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <input class="form-control-file" type="file" name="foto"
-                                    style="color: #C8CDD0;" />
-                            </div>
-                            <div class="modal-footer border-primary" style="background-color: #0f2738;">
-                                <button type="submit" class="btn btn-primary"
-                                    data-dismiss="modal">Volver</button>
-                                <button type="reset" class="btn btn-danger">Reset</button>
-                                <button type="submit" class="btn btn-success">Actualizar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!--------------------------------------------------------------------------------------------------------------->
+
         @endforeach
     </tbody>
 </table>
 
 <nav aria-label="Page navigation example">
-<ul class="pagination">
+<ul class="pagination  animate__animated animate__fadeIn">
     @for ($i = 1; $album->lastpage()>=$i;$i++)
     <li class="page-item" id="li{{$i}}"><button class="page-link" id={{$i}} onclick="carga(this.id, 'album')">{{$i}}</button></li>
     @endfor
@@ -265,5 +188,87 @@
         </div>
     </div>
 </div>
+
+<!-------------------------------------------Edit modal------------------------------------------------------>
+<!--Si el modal no esta aparte no hace el update, no se como ni porque pero ocurre :/-->
+@foreach ($album as $item)
+<div class="modal fade rounded" id="updateForm{{ $item->id }}" data-backdrop="static"
+    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom border-primary"
+                style="background-color: #0f2738; color: #EFF3F5;">
+                <h4 class="modal-title" id="exampleModalLabel">Modificar álbum</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form name="a" action="{{ route('albums.update', $item) }}" method="POST"
+                enctype="multipart/form-data">
+                <div class="modal-body" style="background-color: #192229">
+                    <img src='{{ asset($item->portada) }}'
+                        class="mx-auto d-block img-fluid w-50 mb-3" height="50px">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Nombre</h5>
+                        <input type="text" class="form-control border-0"
+                            style="background-color:#212E36; color: #C8CDD0;" title="" name="nombre"
+                            value="{{ $item->nombre }}" />
+                    </div>
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Descripcion</h5>
+                        <textarea class="form-control border-0"
+                            style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="4"
+                            maxlength="200"
+                            name="descripcion">{{ $item->descripcion }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Autor</h5>
+                        <select class="custom-select"
+                            style="background-color:#212E36; color: #C8CDD0; border:none;"
+                            name="autor">
+                            @foreach ($autor as $item2)
+                                @if ($item2->id == $item->autor_id)
+                                    <option value={{ $item2->id }} selected>
+                                        {{ ucfirst($item2->nombre) }}</option>
+                                @else
+                                    <option value={{ $item2->id }}>
+                                        {{ ucfirst($item2->nombre) }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Género</h5>
+                        <select class="custom-select"
+                            style="background-color:#212E36; color: #C8CDD0; border:none;"
+                            name="genero">
+                            @foreach ($genero as $item2)
+                                @if ($item2->id == $item->genero_id)
+                                    <option value={{ $item2->id }} selected>
+                                        {{ ucfirst($item2->nombre) }}</option>
+                                @else
+                                    <option value={{ $item2->id }}>
+                                        {{ ucfirst($item2->nombre) }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <input class="form-control-file" type="file" name="foto"
+                        style="color: #C8CDD0;" />
+                </div>
+                <div class="modal-footer border-primary" style="background-color: #0f2738;">
+                    <button type="submit" class="btn btn-primary"
+                        data-dismiss="modal">Volver</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+<!--------------------------------------------------------------------------------------------------------------->
 
 
