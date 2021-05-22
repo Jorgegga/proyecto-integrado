@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\{Autor, Album, Music};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AutorController extends Controller
 {
@@ -15,7 +17,7 @@ class AutorController extends Controller
     public function index()
     {
         $autor = Autor::orderBy('nombre')->paginate(5);
-        return(view('autor.autorindex', compact('autor')));
+        return (view('autor.autorindex', compact('autor')));
     }
 
     /**
@@ -36,7 +38,35 @@ class AutorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        try {
+            $request->validate([
+                'nombre' => ['required', 'string'],
+                'descripcion' => ['required', 'string'],
+                'genero' => ['required', 'integer']
+            ]);
+
+            $autor = new Autor();
+            $autor->nombre = ucwords($request->nombre);
+            $autor->descripcion = ucwords($request->descripcion);
+            $autor->genero_id = $request->genero;
+
+            if ($request->has('foto')) {
+                $request->validate([
+                    'foto' => ['image']
+                ]);
+                $archivoImagen = $request->file('foto');
+                $ruta = "/img/autor/" . uniqid() . "_" . $archivoImagen->getClientOriginalName();
+                Storage::Disk('public')->put($ruta, File::get($archivoImagen));
+                $autor->foto = 'storage' . $ruta;
+            }
+            $autor->save();
+            return redirect()->route('admins.index', 'tabla=autor')->with("mensaje", "Autor guardado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al crear el autor" . $ex->getMessage());
+        }
     }
 
     /**
@@ -70,7 +100,41 @@ class AutorController extends Controller
      */
     public function update(Request $request, Autor $autor)
     {
-        //
+        dd($autor);
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+
+        try {
+            $request->validate([
+                'nombre' => ['required', 'string'],
+                'descripcion' => ['required', 'string'],
+                'genero' => ['required', 'integer']
+            ]);
+
+            if ($request->has('foto')) {
+                $request->validate([
+                    'foto' => ['image']
+                ]);
+
+                $archivoImagen = $request->file('foto');
+                $ruta = "/img/autor/" . uniqid() . "_" . $archivoImagen->getClientOriginalName();
+                if (basename($autor->foto) != "default.png") {
+                    unlink($autor->foto);
+                }
+                Storage::Disk('public')->put($ruta, File::get($archivoImagen));
+                $autor->update(['foto' => 'storage' . $ruta]);
+            }
+
+            $autor->update([
+                'nombre' => ucwords($request->nombre),
+                'descripcion' => ucfirst($request->descripcion),
+                'genero_id' => $request->genero,
+            ]);
+            return redirect()->route('admins.index', 'tabla=autor')->with("mensaje", "Autor actualizado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al actualizar el autor" . $ex->getMessage());
+        }
     }
 
     /**
@@ -81,7 +145,19 @@ class AutorController extends Controller
      */
     public function destroy(Autor $autor)
     {
-        //
+
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        try {
+            if (basename($autor->portada) != "default.png") {
+                unlink($autor->portada);
+            }
+            $autor->delete();
+            return redirect()->route('admins.index', 'tabla=autor')->with("mensaje", "Autor borrado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al borrar el autor" . $ex->getMessage());
+        }
     }
 
     public function mostrarAutor(Autor $autor, $nombre)
@@ -90,7 +166,8 @@ class AutorController extends Controller
         return view('autor.autordetalles', compact('album', 'autor'));
     }
 
-    public function pagination(){
+    public function pagination()
+    {
         $autor = Autor::orderBy('nombre')->paginate(5);
         return view('autor.pagination', compact('autor'));
     }

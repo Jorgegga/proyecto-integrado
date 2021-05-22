@@ -103,5 +103,15 @@ class AdminController extends Controller
         return view('administrador.adminalbum', compact('album', 'genero', 'autor'));
     }
 
+    public function autor()
+    {
+        if(!auth()->check() || auth()->user()->permisos != 0){
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        $autor = Autor::orderBy('id', 'DESC')->paginate(9);
+        $genero = Genero::orderBy('id', 'asc')->get();
+        return view('administrador.adminautor', compact('autor', 'genero'));
+    }
+
 
 }

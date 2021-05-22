@@ -9,7 +9,7 @@ class Autor extends Model
 {
     use HasFactory;
 
-    protected $fillable=['nombre', 'descripcion', 'foto'];
+    protected $fillable=['nombre', 'descripcion', 'foto', 'genero_id'];
 
     public function album(){
         return $this->hasMany(Album::class);
