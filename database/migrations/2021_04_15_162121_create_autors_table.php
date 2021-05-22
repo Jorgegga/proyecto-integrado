@@ -14,7 +14,7 @@ class CreateAutorsTable extends Migration
     public function up()
     {
         Schema::create('autors', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('foto')->default('/storage/img/autor/default.png');

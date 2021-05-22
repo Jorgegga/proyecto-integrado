@@ -37,6 +37,7 @@ Route::get('/autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])-
 Route::get('/album/pagination', [AlbumController::class, 'pagination']);
 Route::get('/tablas/album', [AdminController::class, 'album']);
 Route::get('/tablas/autor', [AdminController::class, 'autor']);
+Route::get('/tablas/music', [AdminController::class, 'musica']);
 Route::get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch']);
 Route::get('/autor/pagination', [AutorController::class, 'pagination']);
 

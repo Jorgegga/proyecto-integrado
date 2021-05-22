@@ -113,5 +113,16 @@ class AdminController extends Controller
         return view('administrador.adminautor', compact('autor', 'genero'));
     }
 
+    public function musica(){
+        if(!auth()->check() || auth()->user()->permisos != 0){
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        $music = Music::orderBy('nombre')->paginate(9);
+        $album = Album::orderBy('nombre')->get();
+        $genero = Genero::orderBy('id', 'asc')->get();
+        $autor = Autor::orderBy('id', 'asc')->get();
+        return view('administrador.adminmusic', compact('music', 'album', 'autor', 'genero'));
+    }
+
 
 }

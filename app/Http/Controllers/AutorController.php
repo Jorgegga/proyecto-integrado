@@ -171,4 +171,5 @@ class AutorController extends Controller
         $autor = Autor::orderBy('nombre')->paginate(5);
         return view('autor.pagination', compact('autor'));
     }
+
 }

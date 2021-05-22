@@ -83,6 +83,17 @@ class MusicController extends Controller
      */
     public function destroy(Music $music)
     {
-        //
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        try {
+            if (basename($music->portada) != "default.png") {
+                unlink($music->portada);
+            }
+            $music->delete();
+            return redirect()->route('admins.index', 'tabla=music')->with("mensaje", "Album borrado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=music')->with("error", "Error al borrar el album" . $ex->getMessage());
+        }
     }
 }
