@@ -98,9 +98,9 @@ class AutorController extends Controller
      * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Autor $autor)
+    public function update(Request $request, Autor $autore)
     {
-        dd($autor);
+        $autor = $autore;
         if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
@@ -143,17 +143,17 @@ class AutorController extends Controller
      * @param  \App\Models\Autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Autor $autor)
+    public function destroy(Autor $autore)
     {
-
         if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
+
         try {
-            if (basename($autor->portada) != "default.png") {
-                unlink($autor->portada);
+            if (basename($autore->foto) != "default.png") {
+                unlink($autore->foto);
             }
-            $autor->delete();
+            $autore->delete();
             return redirect()->route('admins.index', 'tabla=autor')->with("mensaje", "Autor borrado correctamente");
         } catch (\Exception $ex) {
             return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al borrar el autor" . $ex->getMessage());

@@ -51,13 +51,13 @@
                     <div class="modal-content">
                         <div class="modal-header border-bottom border-primary"
                             style="background-color: #0f2738; color: #EFF3F5;">
-                            <h4 class="modal-title" id="exampleModalLabel">Modificar álbum</h4>
+                            <h4 class="modal-title" id="exampleModalLabel">Modificar autor</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body" style="background-color: #192229">
-                            <img src='{{ asset($item->portada) }}'
+                            <img src='{{ asset($item->foto) }}'
                                 class="mx-auto d-block img-fluid w-50 mb-3" height="50px">
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Nombre</h5>
@@ -120,7 +120,7 @@
         <div class="modal-content">
             <div class="modal-header border-bottom border-primary"
                 style="background-color: #0f2738; color: #EFF3F5;">
-                <h4 class="modal-title" id="exampleModalLabel">Crear álbum</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Crear autor</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -179,7 +179,7 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-body" style="background-color: #192229">
-                    <img src='{{ asset($item->portada) }}'
+                    <img src='{{ asset($item->foto) }}'
                         class="mx-auto d-block img-fluid w-50 mb-3" height="50px">
 
                     <div class="form-group">
