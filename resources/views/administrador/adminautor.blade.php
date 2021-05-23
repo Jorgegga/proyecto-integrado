@@ -21,7 +21,7 @@
             <tr>
                 <td><img src='{{ asset($item->foto) }}' height="50px" width="50px"></td>
                 <td><a
-                        href="">{{ $item->nombre }}</a>
+                        href="{{route('verAutor', ['autor' => $item, 'nombre'=> $item->nombre])}}">{{ $item->nombre }}</a>
                 </td>
                 <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
                 <td>
@@ -51,7 +51,7 @@
                     <div class="modal-content">
                         <div class="modal-header border-bottom border-primary"
                             style="background-color: #0f2738; color: #EFF3F5;">
-                            <h4 class="modal-title" id="exampleModalLabel">Modificar autor</h4>
+                            <h4 class="modal-title" id="exampleModalLabel">Detalles autor</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

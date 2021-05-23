@@ -5,6 +5,7 @@
     <x-slot name="fonts">
     </x-slot>
     <x-slot name="styles">
+
     </x-slot>
     <x-slot name="scriptsCDN">
     </x-slot>

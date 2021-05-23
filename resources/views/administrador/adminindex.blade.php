@@ -7,17 +7,47 @@
     </x-slot>
     <x-slot name="styles">
         <style>
-            td a:link,:focus,:active {
+            td a:link,
+            :focus,
+            :active {
                 text-decoration: none;
                 color: white;
             }
-            td a:visited{
+
+            td a:visited {
                 text-decoration: none;
                 color: white;
             }
-            td a:hover{
+
+            td a:hover {
                 color: lightblue;
             }
+
+            /* Specifies the size of the audio container */
+            audio {
+                width: 115px;
+                height: 25px;
+            }
+
+            audio::-webkit-media-controls-panel {
+                -webkit-justify-content: center;
+                height: 25px;
+            }
+
+            /* Removes the timeline */
+            audio::-webkit-media-controls-timeline {
+                display: none !important;
+            }
+
+            /* Removes the time stamp */
+            audio::-webkit-media-controls-current-time-display {
+                display: none;
+            }
+
+            audio::-webkit-media-controls-time-remaining-display {
+                display: none;
+            }
+
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
@@ -37,34 +67,41 @@
     </x-slot>
     <x-slot name="script">
         <script>
-            window.onload = function(){
+            window.onload = function() {
                 var tabla = parametroTabla();
-                    $('#cuerpo').load(`/tablas/${tabla}`);
-                    var active = `li1`;
-                setTimeout(function(){document.getElementById(`${active}`).className += " active"}, 750);
-                };
+                $('#cuerpo').load(`/tablas/${tabla}`);
+                var active = `li1`;
+                setTimeout(function() {
+                    document.getElementById(`${active}`).className += " active"
+                }, 750);
+            };
 
-            function cambio(tabla){
+            function cambio(tabla) {
                 $('#cuerpo').load(`/tablas/${tabla}`);
                 active = `li1`;
-                setTimeout(function(){document.getElementById(`${active}`).className += " active"}, 750);
+                setTimeout(function() {
+                    document.getElementById(`${active}`).className += " active"
+                }, 750);
             }
 
-            function carga(id, nombre){
+            function carga(id, nombre) {
                 $('#cuerpo').load(`/tablas/${nombre}?page=${id}`);
                 var active = `li${id}`;
-                setTimeout(function(){document.getElementById(`${active}`).className += " active"}, 750);
-                }
+                setTimeout(function() {
+                    document.getElementById(`${active}`).className += " active"
+                }, 750);
+            }
 
-            function parametroTabla(){
+            function parametroTabla() {
                 var queryString = window.location.search;
                 var urlParams = new URLSearchParams(queryString);
                 var tabla = urlParams.get('tabla');
-                if(tabla == null){
+                if (tabla == null) {
                     tabla = 'album';
                 }
                 return tabla;
             }
+
         </script>
     </x-slot>
 </x-adminplantilla>

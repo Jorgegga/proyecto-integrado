@@ -57,7 +57,7 @@
                     <div class="modal-content">
                         <div class="modal-header border-bottom border-primary"
                             style="background-color: #0f2738; color: #EFF3F5;">
-                            <h4 class="modal-title" id="exampleModalLabel">Modificar álbum</h4>
+                            <h4 class="modal-title" id="exampleModalLabel">Detalles álbum</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

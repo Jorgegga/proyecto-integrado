@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Music;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class MusicController extends Controller
 {
@@ -27,7 +29,7 @@ class MusicController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -38,7 +40,40 @@ class MusicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        try{
+            $request->validate([
+                'nombre' => ['required', 'string'],
+                'descripcion' => ['required', 'string'],
+                'autor'=>['required', 'integer'],
+                'album'=>['required', 'integer'],
+                'numCancion'=>['required', 'integer'],
+                'genero'=>['required', 'integer'],
+            ]);
+
+            $music = new Music();
+            $music->nombre = ucwords($request->nombre);
+            $music->descripcion = ucwords($request->descripcion);
+            $music->autor_id = $request->autor;
+            $music->album_id = $request->album;
+            $music->numCancion = $request->numCancion;
+            $music->genero_id = $request->genero;
+
+            if($request->has('foto')){
+                $request->validate([
+                    'foto'=>['image']
+                ]);
+                $archivoImagen = $request->file('foto');
+                $ruta = "/img/album/" . uniqid() . "_" . $archivoImagen->getClientOriginalName();
+                Storage::Disk('public')->put($ruta, File::get($archivoImagen));
+                $music->portada = 'storage' . $ruta;
+            }
+
+        }catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=music')->with("error", "Error al crear la canción" . $ex->getMessage());
+        }
     }
 
     /**

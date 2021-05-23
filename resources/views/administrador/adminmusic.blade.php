@@ -1,6 +1,7 @@
 @inject('albumMet', 'App\Models\Album')
 @inject('generoNom', 'App\Models\Genero')
 @inject('nomAutor', 'App\Models\Autor')
+@inject('musicMet', 'App\Models\Music')
 
 <h3 class="font-semibold text-xl text-white leading-tight text-center animate__animated animate__fadeIn">
     Modificación de música
@@ -16,6 +17,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Autor</th>
             <th scope="col">Género</th>
+            <th scope="col">Canción</th>
             <th scope="col">Opciones</th>
         </tr>
     </thead>
@@ -28,6 +30,10 @@
                 </td>
                 <td>{{ $albumMet->nomAutor($item->autor_id) }}</td>
                 <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
+                <td><audio controls preload="auto">
+                    <source src="{{asset($item->ruta) }}" type="audio/ogg">
+                        No lo soporta
+                </audio></td>
                 <td>
                     <div class="row">
                         <form name="a" action='{{ route('musics.destroy', $item) }}' method="POST">
@@ -55,7 +61,7 @@
                     <div class="modal-content">
                         <div class="modal-header border-bottom border-primary"
                             style="background-color: #0f2738; color: #EFF3F5;">
-                            <h4 class="modal-title" id="exampleModalLabel">Modificar álbum</h4>
+                            <h4 class="modal-title" id="exampleModalLabel">Detalles música</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -81,6 +87,17 @@
                                     style="background-color:#212E36; color: #C8CDD0;">
                                     {{ $albumMet->nomAutor($item->autor_id) }}
                                 </p>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Albúm</h5>
+                                <p class="form-control border-0"
+                                    style="background-color:#212E36; color: #C8CDD0;">
+                                    {{ $musicMet->nomAlbum($item->album_id)[0]->nombre }}
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Número de canción</h5>
+                                <p style="background-color:#212E36; color: #C8CDD0;" name="numCancion">{{$item->numCancion}}</p>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Género</h5>
@@ -160,6 +177,20 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Album</h5>
+                        <select class="custom-select"
+                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="autor">
+                            @foreach ($album as $item)
+                                <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Número de canción</h5>
+                        <input type="number" style="background-color:#212E36; color: #C8CDD0;" name="numCancion" value="{{$item->numCancion}}" min="0">
+                    </div>
+
+                    <div class="form-group">
                         <h5 style="color: #EFF3F5;">Género</h5>
                         <select class="custom-select"
                             style="background-color:#212E36; color: #C8CDD0; border:none;" name="genero">
@@ -168,7 +199,16 @@
                             @endforeach
                         </select>
                     </div>
-                    <input class="form-control-file" type="file" name="foto" style="color: #C8CDD0;" />
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Portada</h5>
+                        <input class="form-control-file" type="file" name="foto"
+                        style="color: #C8CDD0;" />
+                    </div>
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Canción</h5>
+                        <input class="form-control-file" type="file" name="ruta"
+                        style="color: #C8CDD0;" />
+                    </div>
                 </div>
                 <div class="modal-footer border-primary" style="background-color: #0f2738;">
                     <button type="submit" class="btn btn-primary" data-dismiss="modal">Volver</button>
@@ -189,7 +229,7 @@
         <div class="modal-content">
             <div class="modal-header border-bottom border-primary"
                 style="background-color: #0f2738; color: #EFF3F5;">
-                <h4 class="modal-title" id="exampleModalLabel">Modificar álbum</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Modificar música</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -231,6 +271,26 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Álbum</h5>
+                        <select class="custom-select"
+                            style="background-color:#212E36; color: #C8CDD0; border:none;"
+                            name="album">
+                            @foreach ($album as $item2)
+                                @if ($item2->id == $item->album_id)
+                                    <option value={{ $item2->id }} selected>
+                                        {{ ucfirst($item2->nombre) }}</option>
+                                @else
+                                    <option value={{ $item2->id }}>
+                                        {{ ucfirst($item2->nombre) }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Número de canción</h5>
+                        <input type="number" style="background-color:#212E36; color: #C8CDD0;" name="numCancion" value="{{$item->numCancion}}" min="0">
+                    </div>
+                    <div class="form-group">
                         <h5 style="color: #EFF3F5;">Género</h5>
                         <select class="custom-select"
                             style="background-color:#212E36; color: #C8CDD0; border:none;"
@@ -246,8 +306,16 @@
                             @endforeach
                         </select>
                     </div>
-                    <input class="form-control-file" type="file" name="foto"
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Portada</h5>
+                        <input class="form-control-file" type="file" name="foto"
                         style="color: #C8CDD0;" />
+                    </div>
+                    <div class="form-group">
+                        <h5 style="color: #EFF3F5;">Canción</h5>
+                        <input class="form-control-file" type="file" name="ruta"
+                        style="color: #C8CDD0;" />
+                    </div>
                 </div>
                 <div class="modal-footer border-primary" style="background-color: #0f2738;">
                     <button type="submit" class="btn btn-primary"
