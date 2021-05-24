@@ -36,7 +36,7 @@
                         </td>
                         <td><a href="{{route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre])}}">{{$musicMet->nomAutor($item->autor_id)->nombre}}</a></td>
                         <td>{{ $item->numCancion }}</td>
-                        <td><audio controls preload="auto"><source src="{{ $item->ruta }}" type="audio/mpeg"></audio></td>
+                        <td><audio controls preload="auto"><source src="{{ $item->ruta }}"></audio></td>
                     </tr>
                 @endforeach
             </tbody>

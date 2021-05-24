@@ -18,6 +18,10 @@ class Album extends Model
         return $this->belongsTo(Autor::class);
     }
 
+    public function genero(){
+        return $this->belongsTo(Genero::class);
+    }
+
     public function scopeGenero($query, $generos){
         if($generos == null || $generos == "%"){
             return $query->where("genero_id", "like", "%");

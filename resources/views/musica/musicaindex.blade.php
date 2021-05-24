@@ -51,7 +51,7 @@
                             <td>{{ucfirst($generoNom->nomGenero($item->genero_id))}}</td>
                             <!-- Los audios cargan correctamente en modo incognito -->
                             <td><audio controls preload="auto">
-                                    <source src="{{asset($item->ruta) }}" type="audio/ogg">
+                                    <source src="{{asset($item->ruta) }}">
                                         No lo soporta
                                 </audio>
                             </td>

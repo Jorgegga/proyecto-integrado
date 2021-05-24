@@ -61,6 +61,7 @@
         <button class="btn btn-primary" onclick="cambio('album')">Album</button>
         <button class="btn btn-primary" onclick="cambio('autor')">Autor</button>
         <button class="btn btn-primary" onclick="cambio('music')">Música</button>
+        <x-mensajes-alertas></x-mensajes-alertas>
         <div class="w-100 " id="cuerpo">
         </div>
         <a href="{{ route('inicios.index') }}"><button class="btn btn-primary">Volver</button></a>

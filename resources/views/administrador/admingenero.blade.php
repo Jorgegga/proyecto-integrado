@@ -13,27 +13,16 @@
 <table class="table table-striped table-dark  animate__animated animate__fadeIn">
     <thead>
         <tr>
-            <th scope="col">Portada</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Género</th>
-            <th scope="col">Canción</th>
             <th scope="col">Opciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($music as $item)
             <tr>
-                <td><img src='{{ asset($item->portada) }}' height="50px" width="50px"></td>
                 <td><a
                         href="">{{ $item->nombre }}</a>
                 </td>
-                <td>{{ $albumMet->nomAutor($item->autor_id) }}</td>
-                <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
-                <td><audio controls preload="auto">
-                    <source src="{{asset($item->ruta) }}">
-                        No lo soporta
-                </audio></td>
                 <td>
                     <div class="row">
                         <form name="a" action='{{ route('musics.destroy', $item) }}' method="POST">

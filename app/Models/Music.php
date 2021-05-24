@@ -19,6 +19,10 @@ class Music extends Model
         return $this->belongsTo(Autor::class);
     }
 
+    public function genero(){
+        return $this->belongsTo(Genero::class);
+    }
+
     public function nomAlbum($id){
         $alb = Album::where('id', '=', $id)->get();
         return $alb;

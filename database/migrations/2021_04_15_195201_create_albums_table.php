@@ -20,7 +20,10 @@ class CreateAlbumsTable extends Migration
             $table->string('portada')->default('/storage/img/album/default.png');
             $table->foreignId('autor_id')->unsigned()->default(0);
             $table->foreign('autor_id')->references('id')->on('autors')->onDelete('set default')->onUpdate('cascade');
-            $table->integer('genero_id')->default(0);
+            $table->foreignId('genero_id')->default(0);
+            $table->foreign('genero_id')
+            ->references('id')->on('generos')
+            ->onDelete('set default')->onUpdate('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

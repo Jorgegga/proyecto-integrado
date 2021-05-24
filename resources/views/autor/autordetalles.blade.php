@@ -65,7 +65,7 @@
                             </td>
                             <!-- Los audios cargan correctamente en modo incognito -->
                             <td><audio controls preload="auto">
-                                    <source src="{{asset($item2->ruta) }}" type="audio/ogg">
+                                    <source src="{{asset($item2->ruta) }}">
                                         No lo soporta
                                 </audio>
                             </td>

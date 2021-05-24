@@ -15,8 +15,12 @@ class Autor extends Model
         return $this->hasMany(Album::class);
     }
 
-    public function autor(){
+    public function music(){
         return $this->hasMany(Music::class);
+    }
+
+    public function genero(){
+        return $this->belongsTo(Genero::class);
     }
 
     public function nomAutor($id){
