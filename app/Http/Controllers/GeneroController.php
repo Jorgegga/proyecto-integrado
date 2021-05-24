@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Genero;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class GeneroController extends Controller
 {
@@ -35,7 +37,31 @@ class GeneroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        try {
+            $request->validate([
+                'nombre' => ['required', 'string'],
+            ]);
+            $music = new Genero();
+            $music->nombre = ucwords($request->nombre);
+
+            if ($request->has('foto')) {
+                $request->validate([
+                    'foto' => ['image']
+                ]);
+                $archivoImagen = $request->file('foto');
+                $ruta = "/img/genero/" . uniqid() . "_" . $archivoImagen->getClientOriginalName();
+                Storage::Disk('public')->put($ruta, File::get($archivoImagen));
+                $music->portada = 'storage' . $ruta;
+            }
+
+            $music->save();
+            return redirect()->route('admins.index', 'tabla=genero')->with("mensaje", "Género guardado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al crear el genero" . $ex->getMessage());
+        }
     }
 
     /**
@@ -69,7 +95,39 @@ class GeneroController extends Controller
      */
     public function update(Request $request, Genero $genero)
     {
-        //
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        try {
+            if($genero->id == 0){
+                return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al actualizar el genero, el default no es modificable");
+            }
+            $request->validate([
+                'nombre' => ['required', 'string'],
+            ]);
+
+            if ($request->has('foto')) {
+                $request->validate([
+                    'foto' => ['image']
+                ]);
+
+                $archivoImagen = $request->file('foto');
+                $ruta = "/img/genero/" . uniqid() . "_" . $archivoImagen->getClientOriginalName();
+                if (basename($genero->portada) != "default.png") {
+                    unlink($genero->portada);
+                }
+                Storage::Disk('public')->put($ruta, File::get($archivoImagen));
+                $genero->update(['portada' => 'storage'.$ruta]);
+
+            }
+
+            $genero->update([
+                'nombre' => ucwords($request->nombre),
+            ]);
+            return redirect()->route('admins.index', 'tabla=genero')->with("mensaje", "Genero actualizado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al actualizar el genero " . $ex->getMessage());
+        }
     }
 
     /**
@@ -80,6 +138,20 @@ class GeneroController extends Controller
      */
     public function destroy(Genero $genero)
     {
-        //
+        if (!auth()->check() || auth()->user()->permisos != 0) {
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        try {
+            if($genero->id == 0){
+                return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al actualizar el genero, el default no es modificable");
+            }
+            if (basename($genero->portada) != "default.png") {
+                unlink($genero->portada);
+            }
+            $genero->delete();
+            return redirect()->route('admins.index', 'tabla=genero')->with("mensaje", "Genero borrado correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al borrar la canción" . $ex->getMessage());
+        }
     }
 }

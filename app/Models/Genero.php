@@ -9,7 +9,7 @@ class Genero extends Model
 {
     use HasFactory;
 
-    protected $fillable=['nombre'];
+    protected $fillable=['nombre', 'portada'];
 
     public function album(){
         return $this->hasMany(Album::class);

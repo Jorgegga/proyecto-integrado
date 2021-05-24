@@ -142,7 +142,7 @@
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Género</h5>
                         <select class="custom-select"
-                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="genero">
+                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="genero" required>
                             @foreach ($genero as $item2)
                                 <option value={{ $item2->id }}>{{ ucfirst($item2->nombre) }}</option>
                             @endforeach
@@ -186,7 +186,7 @@
                         <h5 style="color: #EFF3F5;">Nombre</h5>
                         <input type="text" class="form-control border-0"
                             style="background-color:#212E36; color: #C8CDD0;" title="" name="nombre"
-                            value="{{ $item->nombre }}" />
+                            value="{{ $item->nombre }}" required/>
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Descripcion</h5>
@@ -199,7 +199,7 @@
                         <h5 style="color: #EFF3F5;">Género</h5>
                         <select class="custom-select"
                             style="background-color:#212E36; color: #C8CDD0; border:none;"
-                            name="genero">
+                            name="genero" required>
                             @foreach ($genero as $item2)
                                 @if ($item2->id == $item->genero_id)
                                     <option value={{ $item2->id }} selected>

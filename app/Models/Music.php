@@ -9,7 +9,7 @@ class Music extends Model
 {
     use HasFactory;
 
-    protected $fillable=['nombre', 'descripcion', 'autor_id', 'album_id', 'portada', 'ruta', 'numCancion'];
+    protected $fillable=['nombre', 'descripcion', 'autor_id', 'album_id','genero_id', 'portada', 'ruta', 'numCancion'];
 
     public function album(){
         return $this->belongsTo(Album::class);

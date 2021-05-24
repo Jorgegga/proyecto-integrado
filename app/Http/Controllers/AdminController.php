@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Autor, Album, Music, Genero};
+use App\Models\{Autor, Album, Music, Genero, User};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -124,5 +124,19 @@ class AdminController extends Controller
         return view('administrador.adminmusic', compact('music', 'album', 'autor', 'genero'));
     }
 
+    public function genero(){
+        if(!auth()->check() || auth()->user()->permisos != 0){
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        $genero = Genero::orderBy('id', 'desc')->paginate(9);
+        return view('administrador.admingenero', compact('genero'));
+    }
 
+    public function user(){
+        if(!auth()->check() || auth()->user()->permisos != 0){
+            return redirect()->action([InicioController::class, 'index']);
+        }
+        $user = User::orderBy('permisos', 'asc')->paginate(9);
+        return view('administrador.adminuser', compact('user'));
+    }
 }

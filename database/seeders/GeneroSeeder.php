@@ -17,31 +17,31 @@ class GeneroSeeder extends Seeder
         //$array = ['otro', 'rock', 'pop', 'clasica', 'electronica', 'trap', 'instrumental'];
         Genero::create([
             'id'=>0,
-            'nombre'=>'otro',
+            'nombre'=>'Otro',
         ]);
         Genero::create([
             'id'=>1,
-            'nombre'=>'rock',
+            'nombre'=>'Rock',
         ]);
         Genero::create([
             'id'=>2,
-            'nombre'=>'pop',
+            'nombre'=>'Pop',
         ]);
         Genero::create([
             'id'=>3,
-            'nombre'=>'clasica',
+            'nombre'=>'Clasica',
         ]);
         Genero::create([
             'id'=>4,
-            'nombre'=>'electronica',
+            'nombre'=>'Electronica',
         ]);
         Genero::create([
             'id'=>5,
-            'nombre'=>'trap',
+            'nombre'=>'Trap',
         ]);
         Genero::create([
             'id'=>6,
-            'nombre'=>'instrumental',
+            'nombre'=>'Instrumental',
         ]);
     }
 }

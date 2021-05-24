@@ -81,7 +81,7 @@ class MusicController extends Controller
             $music->save();
             return redirect()->route('admins.index', 'tabla=music')->with("mensaje", "Canción guardada correctamente");
         } catch (\Exception $ex) {
-            return redirect()->route('admins.index', 'tabla=music')->with("error", "Error al crear la canción" . $ex->getMessage());
+            return redirect()->route('admins.index', 'tabla=music')->with("error", "Error al crear la canción " . $ex->getMessage());
         }
     }
 
@@ -162,8 +162,8 @@ class MusicController extends Controller
                 'autor_id' => $request->autor,
                 'album_id' => $request->album,
                 'numCancion' => $request->numCancion,
+                'genero_id' => $request->genero,
             ]);
-            $music->genero_id = $request->genero;
             $music->update();
             return redirect()->route('admins.index', 'tabla=music')->with("mensaje", "Cancion actualizado correctamente");
         } catch (\Exception $ex) {

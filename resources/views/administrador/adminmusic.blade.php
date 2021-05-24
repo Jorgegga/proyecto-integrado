@@ -170,7 +170,7 @@
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Autor</h5>
                         <select class="custom-select"
-                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="autor">
+                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="autor" required>
                             @foreach ($autor as $item)
                                 <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
                             @endforeach
@@ -179,7 +179,7 @@
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Album</h5>
                         <select class="custom-select"
-                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="album">
+                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="album" required>
                             @foreach ($album as $item)
                                 <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
                             @endforeach
@@ -187,13 +187,13 @@
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Número de canción</h5>
-                        <input type="number" style="background-color:#212E36; color: #C8CDD0;" name="numCancion" value="0" min="0">
+                        <input type="number" style="background-color:#212E36; color: #C8CDD0;" name="numCancion" value="0" min="0" required>
                     </div>
 
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Género</h5>
                         <select class="custom-select"
-                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="genero">
+                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="genero" required>
                             @foreach ($genero as $item)
                                 <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
                             @endforeach
@@ -245,7 +245,7 @@
                         <h5 style="color: #EFF3F5;">Nombre</h5>
                         <input type="text" class="form-control border-0"
                             style="background-color:#212E36; color: #C8CDD0;" title="" name="nombre"
-                            value="{{ $item->nombre }}" />
+                            value="{{ $item->nombre }}" required/>
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Descripcion</h5>
@@ -258,7 +258,7 @@
                         <h5 style="color: #EFF3F5;">Autor</h5>
                         <select class="custom-select"
                             style="background-color:#212E36; color: #C8CDD0; border:none;"
-                            name="autor">
+                            name="autor" required>
                             @foreach ($autor as $item2)
                                 @if ($item2->id == $item->autor_id)
                                     <option value={{ $item2->id }} selected>
@@ -274,7 +274,7 @@
                         <h5 style="color: #EFF3F5;">Álbum</h5>
                         <select class="custom-select"
                             style="background-color:#212E36; color: #C8CDD0; border:none;"
-                            name="album">
+                            name="album" required>
                             @foreach ($album as $item2)
                                 @if ($item2->id == $item->album_id)
                                     <option value={{ $item2->id }} selected>
@@ -288,13 +288,13 @@
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Número de canción</h5>
-                        <input type="number" style="background-color:#212E36; color: #C8CDD0;" name="numCancion" value="{{$item->numCancion}}" min="0">
+                        <input type="number" style="background-color:#212E36; color: #C8CDD0;" name="numCancion" value="{{$item->numCancion}}" min="0" required>
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Género</h5>
                         <select class="custom-select"
                             style="background-color:#212E36; color: #C8CDD0; border:none;"
-                            name="genero">
+                            name="genero" required>
                             @foreach ($genero as $item2)
                                 @if ($item2->id == $item->genero_id)
                                     <option value={{ $item2->id }} selected>

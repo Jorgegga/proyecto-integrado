@@ -54,13 +54,15 @@
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ __('Albums') }}
+            {{ __('Modificación de tablas') }}
         </h2>
     </x-slot>
     <x-slot name="cuerpo">
         <button class="btn btn-primary" onclick="cambio('album')">Album</button>
         <button class="btn btn-primary" onclick="cambio('autor')">Autor</button>
         <button class="btn btn-primary" onclick="cambio('music')">Música</button>
+        <button class="btn btn-primary" onclick="cambio('genero')">Género</button>
+        <button class="btn btn-primary" onclick="cambio('user')">Usuario</button>
         <x-mensajes-alertas></x-mensajes-alertas>
         <div class="w-100 " id="cuerpo">
         </div>

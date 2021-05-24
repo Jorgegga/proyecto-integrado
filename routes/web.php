@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AboutusController, AdminController, AlbumController, AutorController, InicioController, MusicController};
+use App\Http\Controllers\{AboutusController, AdminController, AlbumController, AutorController, GeneroController, InicioController, MusicController, UserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +29,8 @@ Route::resource('inicios', InicioController::class);
 Route::resource('autores', AutorController::class);
 Route::resource('aboutus', AboutusController::class);
 Route::resource('admins', AdminController::class);
+Route::resource('generos', GeneroController::class);
+Route::resource('users', UserController::class);
 
 //Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
 Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
@@ -38,6 +40,8 @@ Route::get('/album/pagination', [AlbumController::class, 'pagination']);
 Route::get('/tablas/album', [AdminController::class, 'album']);
 Route::get('/tablas/autor', [AdminController::class, 'autor']);
 Route::get('/tablas/music', [AdminController::class, 'musica']);
+Route::get('/tablas/genero', [AdminController::class, 'genero']);
+Route::get('/tablas/user', [AdminController::class, 'user']);
 Route::get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch']);
 Route::get('/autor/pagination', [AutorController::class, 'pagination']);
 

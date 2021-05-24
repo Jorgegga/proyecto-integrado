@@ -100,12 +100,14 @@ class AutorController extends Controller
      */
     public function update(Request $request, Autor $autore)
     {
-        $autor = $autore;
         if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
-
         try {
+            $autor = $autore;
+            if($autor->id == 0){
+                return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al actualizar el autor, el default no se puede borrar");
+            }
             $request->validate([
                 'nombre' => ['required', 'string'],
                 'descripcion' => ['required', 'string'],
@@ -133,7 +135,7 @@ class AutorController extends Controller
             ]);
             return redirect()->route('admins.index', 'tabla=autor')->with("mensaje", "Autor actualizado correctamente");
         } catch (\Exception $ex) {
-            return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al actualizar el autor" . $ex->getMessage());
+            return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al actualizar el autor " . $ex->getMessage());
         }
     }
 
@@ -148,8 +150,10 @@ class AutorController extends Controller
         if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
-
         try {
+            if($autore->id == 0){
+                return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al actualizar el autor, el default no se puede borrar");
+            }
             if (basename($autore->foto) != "default.png") {
                 unlink($autore->foto);
             }

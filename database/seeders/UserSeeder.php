@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'email'=>'ejemplo@ejemplo.es',
             'password'=>Hash::make('admin'),
             'permisos'=>0,
+            'id'=>0,
         ]);
     }
 }

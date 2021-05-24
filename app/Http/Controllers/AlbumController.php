@@ -106,12 +106,14 @@ class AlbumController extends Controller
      */
     public function update(Request $request, Album $album)
     {
-        dd($album);
         if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
 
         try {
+            if($album->id == 0){
+            return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al actualizar el album, el default no se puede modificar");
+            }
             $request->validate([
                 'nombre' => ['required', 'string'],
                 'descripcion' => ['required', 'string'],
@@ -142,7 +144,7 @@ class AlbumController extends Controller
             ]);
             return redirect()->route('admins.index', 'tabla=album')->with("mensaje", "Album actualizado correctamente");
         } catch (\Exception $ex) {
-            return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al actualizar el album" . $ex->getMessage());
+            return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al actualizar el album " . $ex->getMessage());
         }
     }
 
@@ -158,6 +160,9 @@ class AlbumController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         try {
+            if($album->id == 0){
+                return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al actualizar el album, el default no se puede modificar");
+                }
             if (basename($album->portada) != "default.png") {
                 unlink($album->portada);
             }
