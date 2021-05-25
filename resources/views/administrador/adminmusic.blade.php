@@ -25,9 +25,7 @@
         @foreach ($music as $item)
             <tr>
                 <td><img src='{{ asset($item->portada) }}' height="50px" width="50px"></td>
-                <td><a
-                        href="">{{ $item->nombre }}</a>
-                </td>
+                <td>{{ $item->nombre }}</td>
                 <td>{{ $albumMet->nomAutor($item->autor_id) }}</td>
                 <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
                 <td><audio controls preload="auto">

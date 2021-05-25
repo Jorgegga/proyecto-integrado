@@ -50,7 +50,7 @@
                             <td><a href="{{route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre])}}">{{$musicMet->nomAutor($item->autor_id)->nombre}}</a></td>
                             <td>{{ucfirst($generoNom->nomGenero($item->genero_id))}}</td>
                             <!-- Los audios cargan correctamente en modo incognito -->
-                            <td><audio controls preload="auto">
+                            <td><audio controls="true" preload="auto" id='{{$item->id}}' onplay="parar(this.id)">
                                     <source src="{{asset($item->ruta) }}">
                                         No lo soporta
                                 </audio>
@@ -65,5 +65,17 @@
         {{ $musica->links() }}
         </x-slot>
     <x-slot name="script">
+        <script>
+            function parar(idEl){
+                var elementos = document.getElementsByTagName('audio');
+                for(var i=0; i<elementos.length;i++){
+                    if(elementos[i].id == idEl){
+                        elementos[i].play();
+                    } else{
+                        elementos[i].pause();
+                    }
+                }
+            }
+        </script>
     </x-slot>
 </x-app-layout>
