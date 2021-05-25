@@ -121,7 +121,7 @@
     <ul class="pagination animate__animated animate__fadeIn">
         @for ($i = 1; $user->lastpage() >= $i; $i++)
             <li class="page-item" id="li{{ $i }}"><button class="page-link" id={{ $i }}
-                    onclick="carga(this.id, 'music')">{{ $i }}</button></li>
+                    onclick="carga(this.id, 'User')">{{ $i }}</button></li>
         @endfor
     </ul>
 </nav>

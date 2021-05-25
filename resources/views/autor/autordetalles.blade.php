@@ -64,11 +64,11 @@
                                     'nombre' => $musicMet->nomAlbum($item2->album_id)[0]->nombre]) }}">{{ $musicMet->nomAlbum($item2->album_id)[0]->nombre }}</a>
                             </td>
                             <!-- Los audios cargan correctamente en modo incognito -->
-                            <td><audio controls preload="auto">
-                                    <source src="{{asset($item2->ruta) }}">
-                                        No lo soporta
-                                </audio>
-                            </td>
+                            <td><audio controls="true" preload="auto" id='{{ $item2->id }}' onplay="parar(this.id)">
+                                <source src="{{ asset($item2->ruta) }}" type="audio/ogg">
+                                <source src="{{ asset($item2->ruta) }}" type="audio/mp3">
+                                No lo soporta
+                            </audio></td>
                         </tr>
                     @endforeach
                     @endforeach
@@ -77,6 +77,41 @@
     </x-slot>
     <x-slot name="script">
         <script>
+            function parar(idEl) {
+                var elementos = document.getElementsByTagName('audio');
+                for (var i = 0; i < elementos.length; i++) {
+                    try {
+                        if (elementos[i].id == idEl) {
+                            elementos[i].play();
+
+                        } else {
+                            elementos[i].pause();
+                        }
+                    } catch (e) {
+                        console.log("Error " + e)
+                    }
+                }
+            }
+
+            function siguiente(id) {
+                id = parseInt(id);
+                var elementos = document.getElementsByTagName('audio');
+                for (var i = 0; i < elementos.length; i++) {
+                    if (elementos[i].id == id) {
+                        try {
+                            if (elementos[i + 1] != null) {
+                                elementos[i + 1].play();
+                            } else {
+                                console.log("Fin de la lista");
+                            }
+                        } catch (e) {
+                            console.log("Error " + e)
+                        }
+                    } else {
+                        elementos[i].pause();
+                    }
+                }
+            }
 
         </script>
 

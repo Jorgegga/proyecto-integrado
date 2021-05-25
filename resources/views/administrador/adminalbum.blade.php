@@ -129,7 +129,7 @@
 <nav aria-label="Page navigation example">
 <ul class="pagination animate__animated animate__fadeIn">
     @for ($i = 1; $album->lastpage()>=$i;$i++)
-    <li class="page-item" id="li{{$i}}"><button class="page-link" id={{$i}} onclick="carga(this.id, 'album')">{{$i}}</button></li>
+    <li class="page-item" id="li{{$i}}"><button class="page-link" id={{$i}} onclick="carga(this.id, 'Album')">{{$i}}</button></li>
     @endfor
 </ul>
 </nav>

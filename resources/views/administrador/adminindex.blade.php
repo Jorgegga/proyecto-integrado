@@ -51,6 +51,7 @@
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -58,11 +59,11 @@
         </h2>
     </x-slot>
     <x-slot name="cuerpo">
-        <button class="btn btn-primary" onclick="cambio('album')">Album</button>
-        <button class="btn btn-primary" onclick="cambio('autor')">Autor</button>
-        <button class="btn btn-primary" onclick="cambio('music')">Música</button>
-        <button class="btn btn-primary" onclick="cambio('genero')">Género</button>
-        <button class="btn btn-primary" onclick="cambio('user')">Usuario</button>
+        <button class="btn btn-primary" onclick="cambio('Album')">Album</button>
+        <button class="btn btn-primary" onclick="cambio('Autor')">Autor</button>
+        <button class="btn btn-primary" onclick="cambio('Music')">Música</button>
+        <button class="btn btn-primary" onclick="cambio('Genero')">Género</button>
+        <button class="btn btn-primary" onclick="cambio('User')">Usuario</button>
         <x-mensajes-alertas></x-mensajes-alertas>
         <div class="w-100 " id="cuerpo">
         </div>
@@ -72,7 +73,7 @@
         <script>
             window.onload = function() {
                 var tabla = parametroTabla();
-                $('#cuerpo').load(`/tablas/${tabla}`);
+                $('#cuerpo').load(`${tabla}`);
                 var active = `li1`;
                 setTimeout(function() {
                     document.getElementById(`${active}`).className += " active"
@@ -80,7 +81,27 @@
             };
 
             function cambio(tabla) {
-                $('#cuerpo').load(`/tablas/${tabla}`);
+                switch(tabla){
+                    case "Album":
+                    var link = "{{route('adminAlbum')}}";
+                    break;
+                    case "Autor":
+                    var link = "{{route('adminAutor')}}";
+                    break;
+                    case "Music":
+                    var link = "{{route('adminMusic')}}";
+                    break;
+                    case "Genero":
+                    var link = "{{route('adminGenero')}}";
+                    break;
+                    case "User":
+                    var link = "{{route('adminUser')}}";
+                    break;
+                    default:
+                    var link = "{{route('adminAlbum')}}";
+                    break;
+                }
+                $('#cuerpo').load(`${link}`);
                 active = `li1`;
                 setTimeout(function() {
                     document.getElementById(`${active}`).className += " active"
@@ -88,7 +109,28 @@
             }
 
             function carga(id, nombre) {
-                $('#cuerpo').load(`/tablas/${nombre}?page=${id}`);
+                switch(nombre){
+                    case "Album":
+                    var link = "{{route('adminAlbum')}}";
+                    break;
+                    case "Autor":
+                    var link = "{{route('adminAutor')}}";
+                    break;
+                    case "Music":
+                    var link = "{{route('adminMusic')}}";
+                    break;
+                    case "Genero":
+                    var link = "{{route('adminGenero')}}";
+                    break;
+                    case "User":
+                    var link = "{{route('adminUser')}}";
+                    break;
+                    default:
+                    var link = "{{route('adminAlbum')}}";
+                    break;
+                }
+                link += `?page=${id}`;
+                $('#cuerpo').load(link);
                 var active = `li${id}`;
                 setTimeout(function() {
                     document.getElementById(`${active}`).className += " active"
@@ -99,11 +141,33 @@
                 var queryString = window.location.search;
                 var urlParams = new URLSearchParams(queryString);
                 var tabla = urlParams.get('tabla');
+                console.log(tabla);
                 if (tabla == null) {
-                    tabla = 'album';
+                    tabla = "{{route('adminAlbum')}}";
+                }else{
+                    switch(tabla){
+                    case "album":
+                    return link = "{{route('adminAlbum')}}";
+                    break;
+                    case "autor":
+                    return link = "{{route('adminAutor')}}";
+                    break;
+                    case "music":
+                    return link = "{{route('adminMusic')}}";
+                    break;
+                    case "genero":
+                    return link = "{{route('adminGenero')}}";
+                    break;
+                    case "user":
+                    return link = "{{route('adminUser')}}";
+                    break;
+                    default:
+                    return link = "{{route('adminAlbum')}}";
+                    break;
                 }
-                return tabla;
+                }
             }
+
 
         </script>
     </x-slot>

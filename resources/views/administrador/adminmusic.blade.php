@@ -28,10 +28,12 @@
                 <td>{{ $item->nombre }}</td>
                 <td>{{ $albumMet->nomAutor($item->autor_id) }}</td>
                 <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
-                <td><audio controls preload="auto">
-                    <source src="{{asset($item->ruta) }}">
-                        No lo soporta
+                <td><audio controls="true" preload="auto" id='{{ $item->id }}' onplay="parar(this.id)">
+                    <source src="{{ asset($item->ruta) }}" type="audio/ogg">
+                    <source src="{{ asset($item->ruta) }}" type="audio/mp3">
+                    No lo soporta
                 </audio></td>
+
                 <td>
                     <div class="row">
                         <form name="a" action='{{ route('musics.destroy', $item) }}' method="POST">
@@ -135,7 +137,7 @@
 <nav aria-label="Page navigation example">
 <ul class="pagination animate__animated animate__fadeIn">
     @for ($i = 1; $music->lastpage()>=$i;$i++)
-    <li class="page-item" id="li{{$i}}"><button class="page-link" id={{$i}} onclick="carga(this.id, 'music')">{{$i}}</button></li>
+    <li class="page-item" id="li{{$i}}"><button class="page-link" id={{$i}} onclick="carga(this.id, 'Music')">{{$i}}</button></li>
     @endfor
 </ul>
 </nav>

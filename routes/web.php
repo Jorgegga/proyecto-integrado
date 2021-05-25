@@ -37,11 +37,11 @@ Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])-
 Route::get('/autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');
 
 Route::get('/album/pagination', [AlbumController::class, 'pagination']);
-Route::get('/tablas/album', [AdminController::class, 'album']);
-Route::get('/tablas/autor', [AdminController::class, 'autor']);
-Route::get('/tablas/music', [AdminController::class, 'musica']);
-Route::get('/tablas/genero', [AdminController::class, 'genero']);
-Route::get('/tablas/user', [AdminController::class, 'user']);
+Route::get('/tablas/album', [AdminController::class, 'album'])->name('adminAlbum');
+Route::get('/tablas/autor', [AdminController::class, 'autor'])->name('adminAutor');
+Route::get('/tablas/music', [AdminController::class, 'musica'])->name('adminMusic');
+Route::get('/tablas/genero', [AdminController::class, 'genero'])->name('adminGenero');
+Route::get('/tablas/user', [AdminController::class, 'user'])->name('adminUser');
 Route::get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch']);
 Route::get('/autor/pagination', [AutorController::class, 'pagination']);
 

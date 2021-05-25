@@ -169,7 +169,7 @@ class AlbumController extends Controller
             $album->delete();
             return redirect()->route('admins.index', 'tabla=album')->with("mensaje", "Album borrado correctamente");
         } catch (\Exception $ex) {
-            return redirect()->route('admins.index', 'album')->with("error", "Error al borrar el album" . $ex->getMessage());
+            return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al borrar el album" . $ex->getMessage());
         }
     }
 

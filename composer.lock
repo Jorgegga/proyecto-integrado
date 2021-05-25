@@ -4,8 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cce24d87a6f1ff4e25fefb801417abb7",
+    "content-hash": "f40373dc655d301e8a9600509a24f122",
     "packages": [
+        {
+            "name": "acekyd/laravelmp3",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/acekyd/laravelMp3.git",
+                "reference": "28a870499a489fe7da8ce84aba2ffa62903a4d68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/acekyd/laravelMp3/zipball/28a870499a489fe7da8ce84aba2ffa62903a4d68",
+                "reference": "28a870499a489fe7da8ce84aba2ffa62903a4d68",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "illuminate/support": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Acekyd\\LaravelMP3\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Abati AceKYD Adewale",
+                    "email": "acekyd01@gmail.com",
+                    "homepage": "http://acekyd.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A light weight Laravel package for simple operations with mp3 files",
+            "homepage": "https://github.com/acekyd/laravelmp3",
+            "keywords": [
+                "audio",
+                "laravel",
+                "media",
+                "mp3"
+            ],
+            "support": {
+                "issues": "https://github.com/acekyd/laravelMp3/issues",
+                "source": "https://github.com/acekyd/laravelMp3/tree/master"
+            },
+            "time": "2016-08-30T13:26:03+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",
@@ -1091,16 +1148,16 @@
         },
         {
             "name": "jaybizzle/crawler-detect",
-            "version": "v1.2.105",
+            "version": "v1.2.106",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JayBizzle/Crawler-Detect.git",
-                "reference": "719c1ed49224857800c3dc40838b6b761d046105"
+                "reference": "78bf6792cbf9c569dc0bf2465481978fd2ed0de9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/719c1ed49224857800c3dc40838b6b761d046105",
-                "reference": "719c1ed49224857800c3dc40838b6b761d046105",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/78bf6792cbf9c569dc0bf2465481978fd2ed0de9",
+                "reference": "78bf6792cbf9c569dc0bf2465481978fd2ed0de9",
                 "shasum": ""
             },
             "require": {
@@ -1137,9 +1194,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JayBizzle/Crawler-Detect/issues",
-                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.105"
+                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.106"
             },
-            "time": "2021-03-03T20:55:48+00:00"
+            "time": "2021-05-24T20:30:32+00:00"
         },
         {
             "name": "jenssegers/agent",
@@ -1226,22 +1283,22 @@
         },
         {
             "name": "laravel/breeze",
-            "version": "v1.1.8",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/breeze.git",
-                "reference": "13026f7b3afd408d227b4f0c029b65f4ae4ba01e"
+                "reference": "322d60b8dfe452c807f01524ce0f6a76a985f72d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/13026f7b3afd408d227b4f0c029b65f4ae4ba01e",
-                "reference": "13026f7b3afd408d227b4f0c029b65f4ae4ba01e",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/322d60b8dfe452c807f01524ce0f6a76a985f72d",
+                "reference": "322d60b8dfe452c807f01524ce0f6a76a985f72d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/filesystem": "^8.40",
-                "illuminate/support": "^8.40",
-                "illuminate/validation": "^8.40",
+                "illuminate/filesystem": "^8.42",
+                "illuminate/support": "^8.42",
+                "illuminate/validation": "^8.42",
                 "php": "^7.3|^8.0"
             },
             "type": "library",
@@ -1279,7 +1336,7 @@
                 "issues": "https://github.com/laravel/breeze/issues",
                 "source": "https://github.com/laravel/breeze"
             },
-            "time": "2021-05-18T15:15:45+00:00"
+            "time": "2021-05-20T13:41:13+00:00"
         },
         {
             "name": "laravel/fortify",

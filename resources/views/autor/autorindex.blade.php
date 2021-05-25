@@ -54,7 +54,7 @@
     </x-slot>
 
     <x-slot name="cuerpo">
-        <div class="py-12 animate__animated animate__fadeInLeft">
+        <div class="py-12 animate__animated animate__fadeInDown">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
                 <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
                     <div class="p-6 border-b border-gray-200 text-center">
