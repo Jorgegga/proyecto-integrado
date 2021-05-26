@@ -36,13 +36,16 @@ Route::resource('users', UserController::class);
 Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
 Route::get('/autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');
 
-Route::get('/album/pagination', [AlbumController::class, 'pagination']);
+Route::get('/album/pagination', [AlbumController::class, 'pagination'])->name('paginAlbum');
+Route::get('/autor/pagination', [AutorController::class, 'pagination'])->name('paginAutor');
+
+Route::get('/album/{id}',[AlbumController::class, 'albumRaw'])->name('albumRaw');
+Route::get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch'])->name('albumAuto');
+
 Route::get('/tablas/album', [AdminController::class, 'album'])->name('adminAlbum');
 Route::get('/tablas/autor', [AdminController::class, 'autor'])->name('adminAutor');
 Route::get('/tablas/music', [AdminController::class, 'musica'])->name('adminMusic');
 Route::get('/tablas/genero', [AdminController::class, 'genero'])->name('adminGenero');
 Route::get('/tablas/user', [AdminController::class, 'user'])->name('adminUser');
-Route::get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch']);
-Route::get('/autor/pagination', [AutorController::class, 'pagination']);
 
 require __DIR__.'/auth.php';

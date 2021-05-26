@@ -179,6 +179,11 @@ class AlbumController extends Controller
         return view('album.albumdetalles', compact('musica', 'album'));
     }
 
+    public function albumRaw($id){
+        $music = Music::where('album_id', $id)->orderBy('numCancion', 'asc')->get();
+        return view('album.albumraw', compact('music'));
+    }
+
     public function pagination(Request $request)
     {
         $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->paginate(9);
