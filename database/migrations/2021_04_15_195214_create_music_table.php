@@ -25,8 +25,8 @@ class CreateMusicTable extends Migration
             $table->foreign('autor_id')
             ->references('id')->on('autors')
             ->onDelete('set default')->onUpdate('cascade');
-            $table->string('portada')->default('/storage/img/musica/default.png');
-            $table->string('ruta')->default('/storage/music/default.ogg');
+            $table->string('portada')->default('storage/img/musica/default.png');
+            $table->string('ruta')->default('storage/music/default.ogg');
             $table->integer('numCancion')->default(0);
             $table->foreignId('genero_id')->default(0);
             $table->foreign('genero_id')

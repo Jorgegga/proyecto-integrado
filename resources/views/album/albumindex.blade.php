@@ -5,11 +5,56 @@
         <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
     </x-slot>
     <x-slot name="styles">
+        <style>
+            .modal-body .card {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .modal-body .card-title {
+                font-weight: bold;
+            }
+
+            .modal-body .card img {
+                width: 40%;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: calc(0.25rem - 1px);
+            }
+
+            @media only screen and (max-width: 768px) {
+                .modal-body a {
+                    display: none;
+                }
+
+                .modal-body .card-body {
+                    padding: 0.5em 1.2em;
+                }
+
+                .modal-body .card-body .card-text {
+                    margin: 0;
+                }
+
+                .modal-body .card img {
+                    width: 50%;
+                }
+            }
+
+            @media only screen and (max-width: 1200px) {
+                .modal-body .card img {
+                    width: 40%;
+                }
+            }
+
+
+
+        </style>
     </x-slot>
     <x-slot name="scriptsCDN">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -33,25 +78,24 @@
         <!--<select class="livesearch form-control" name="livesearch"></select>-->
         <div class="text-center position-fixed pr-5 pl-5" style="background-color:#212E36; left: 85%;">
             <h5 class="border-bottom border-secondary" style="color: white">Géneros</h5>
-                <form name="b" action={{route('albums.index')}} >
-                    <select class="" style="color: black; margin-left:-35%" name="tematica" onchange="this.form.submit()">
-                        <option value="%">Todos</option>
-                @foreach ($genero as $item)
-                    @if($request->tematica == "$item->id")
-                    <option value={{$item->id}} selected>{{ucfirst($item->nombre)}}</option>
-                    @else
-                    <option value={{$item->id}}>{{ucfirst($item->nombre)}}</option>
-                    @endif
-                @endforeach
-            </select>
-                </form>
+            <form name="b" action={{ route('albums.index') }}>
+                <select class="" style="color: black; margin-left:-35%" name="tematica" onchange="this.form.submit()">
+                    <option value="%">Todos</option>
+                    @foreach ($genero as $item)
+                        @if ($request->tematica == " $item->id")
+                            <option value={{ $item->id }} selected>{{ ucfirst($item->nombre) }}</option>
+                        @else
+                            <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </form>
 
         </div>
         <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn"
             id="albums">
             <!--<div class="col-10 pr-3">-->
             @foreach ($album as $item)
-                <a href="{{ route('verAlbum', ['album' => $item, 'nombre' => $item->nombre]) }}">
                     <div class="card col-md-3 col-sm-3 mr-sm-5 mr-md-5 pt-3 mt-4"
                         style="width: 18rem; background-color:#212E36; font-family: 'New Tegomin', serif; font-weight: bold;">
                         <img class="card-img-top" src='{{ asset($item->portada) }}' alt="Card image cap"
@@ -62,28 +106,29 @@
                         </div>
                         <div class="card-footer text-center mt-auto" style="background-color:#212E36;">
                             <p><a href="{{ route('verAlbum', ['album' => $item, 'nombre' => $item->nombre]) }}"
-                                    class="btn btn-primary mb-4">Escuchar</a></p>
-                                <p><button class="mr-1" data-toggle="modal" data-target="#albumRaw"
-                                    role="tab" title="Raw" onclick="carga({{$item->id}})">Raw</button></p>
+                                    class="btn btn-primary mb-1">Escuchar</a></p>
+                            <p><button class="btn btn-success" data-toggle="modal" data-target="#albumRaw" role="tab" title="Raw"
+                                    onclick="carga({{ $item->id }})">Ventana</button></p>
                             <p class="text-muted text-left" style="float:left;">
                                 {{ $albumMet->nomAutor($item->autor_id) }}</p>
-                            <p class="text-muted text-right" style="float:right;">{{ $albumMet->numTemas($item->id) }}
+                            <p class="text-muted text-right" style="float:right;">
+                                {{ $albumMet->numTemas($item->id) }}
                                 temas</p>
                         </div>
                     </div>
-                </a>
+
             @endforeach
             <!--</div>-->
         </section>
         <!--<p><button class="btn btn-primary" id='carga' onclick="carga()"></button></p>-->
-        <div class="modal fade rounded" id="albumRaw" data-backdrop="static"
-            tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade rounded" id="albumRaw" data-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-bottom border-primary"
                         style="background-color: #0f2738; color: #EFF3F5;">
                         <h4 class="modal-title" id="exampleModalLabel">Álbum</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="pararTodo()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -91,7 +136,7 @@
 
                     </div>
                     <div class="modal-footer border-primary" style="background-color: #0f2738;">
-                        <button type="submit" class="btn btn-success" data-dismiss="modal">Volver</button>
+                        <button type="submit" class="btn btn-success" data-dismiss="modal" onclick="pararTodo()">Volver</button>
                     </div>
                 </div>
             </div>
@@ -110,67 +155,66 @@
                     let temat = "<?php echo $request->tematica; ?>"
 
                     // Pedir al servidor
-                    if(temat == null || temat == "%"){
-                    fetch(`{{route('paginAlbum')}}?page=${page}`, {
-                            method: 'get'
-                        })
-                        .then(response => response.text())
-                        .then(htmlContent => {
-                            // Respuesta en HTML
-                            if (htmlContent != "") {
-                                section.innerHTML += htmlContent;
-                                page += 1;
-                                bool = true;
-                            }
+                    if (temat == null || temat == "%") {
+                        fetch(`{{ route('paginAlbum') }}?page=${page}`, {
+                                method: 'get'
+                            })
+                            .then(response => response.text())
+                            .then(htmlContent => {
+                                // Respuesta en HTML
+                                if (htmlContent != "") {
+                                    section.innerHTML += htmlContent;
+                                    page += 1;
+                                    bool = true;
+                                }
 
-                        })
-                        .catch(err => console.log(err));
-                    }else{
-                        fetch(`{{route('paginAlbum')}}?tematica=${temat}&page=${page}`, {
-                            method: 'get'
-                        })
-                        .then(response => response.text())
-                        .then(htmlContent => {
-                            // Respuesta en HTML
-                            if (htmlContent != "") {
-                                section.innerHTML += htmlContent;
-                                page += 1;
-                                bool = true;
-                            }
+                            })
+                            .catch(err => console.log(err));
+                    } else {
+                        fetch(`{{ route('paginAlbum') }}?tematica=${temat}&page=${page}`, {
+                                method: 'get'
+                            })
+                            .then(response => response.text())
+                            .then(htmlContent => {
+                                // Respuesta en HTML
+                                if (htmlContent != "") {
+                                    section.innerHTML += htmlContent;
+                                    page += 1;
+                                    bool = true;
+                                }
 
-                        })
-                        .catch(err => console.log(err));
+                            })
+                            .catch(err => console.log(err));
                     }
                 }
             }
 
             $('.livesearch').select2({
-        placeholder: 'Select movie',
-        ajax: {
-            url: '{{route('albumAuto')}}',
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
+                placeholder: 'Select movie',
+                ajax: {
+                    url: '{{ route('albumAuto') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
                         return {
-                            text: item.nombre,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
+                            results: $.map(data, function(item) {
+                                return {
+                                    text: item.nombre,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
 
-    function parar(idEl) {
+            function parar(idEl) {
                 var elementos = document.getElementsByTagName('audio');
                 for (var i = 0; i < elementos.length; i++) {
                     try {
                         if (elementos[i].id == idEl) {
                             elementos[i].play();
-
                         } else {
                             elementos[i].pause();
                         }
@@ -180,32 +224,50 @@
                 }
             }
 
-            function siguiente(id) {
-                id = parseInt(id);
+            function pararTodo(){
                 var elementos = document.getElementsByTagName('audio');
                 for (var i = 0; i < elementos.length; i++) {
-                    if (elementos[i].id == id) {
+                    try {
+                        elementos[i].pause();
+                    } catch (e) {
+                        console.log("Error " + e)
+                    }
+                }
+            }
+
+            function siguiente(id) {
+                id = parseInt(id);
+                var elementos = document.getElementsByName("botonsito");
+                for (var i = 0; i < elementos.length; i++) {
+                    if(elementos[i].id == id){
                         try {
                             if (elementos[i + 1] != null) {
-                                elementos[i + 1].play();
+                                elementos[i + 1].click();
                             } else {
                                 console.log("Fin de la lista");
                             }
                         } catch (e) {
                             console.log("Error " + e)
                         }
-                    } else {
-                        elementos[i].pause();
                     }
                 }
             }
 
-            function carga(id){
-                var url = "{{route('albumRaw', ':id')}}";
+            function carga(id) {
+                var url = "{{ route('albumRaw', ':id') }}";
                 url = url.replace(':id', id);
                 $('#modalBody').load(`${url}`);
             }
 
+            function cabecera(nom, ruta, id){
+                document.getElementById("cabeceraCard").innerHTML = nom;
+                document.getElementById("oggAudio").src=ruta;
+                document.getElementById("mp3Audio").src=ruta;
+                document.getElementsByName("audio")[0].id = id;
+                document.getElementsByName("audio")[0].src = ruta;
+                parar(id);
+                document.getElementsByName("audio")[0].play;
+            }
         </script>
     </x-slot>
 </x-app-layout>

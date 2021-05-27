@@ -180,8 +180,9 @@ class AlbumController extends Controller
     }
 
     public function albumRaw($id){
+        $album = Album::where('id', $id)->get()->first();
         $music = Music::where('album_id', $id)->orderBy('numCancion', 'asc')->get();
-        return view('album.albumraw', compact('music'));
+        return view('album.albumraw', compact('music', 'album'));
     }
 
     public function pagination(Request $request)

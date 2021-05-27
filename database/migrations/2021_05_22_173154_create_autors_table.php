@@ -17,7 +17,7 @@ class CreateAutorsTable extends Migration
             $table->id()->unique();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('foto')->default('/storage/img/autor/default.png');
+            $table->string('foto')->default('storage/img/autor/default.png');
             $table->foreignId('genero_id')->default(0);
             $table->foreign('genero_id')
             ->references('id')->on('generos')
