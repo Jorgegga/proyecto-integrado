@@ -6,12 +6,14 @@
             <div class="card-body">
                 <h5 class="card-title" style="font-size:1.75vw; text-align: left; color: #EFF3F5" id="cabeceraCard">Selecciona una canción</h5>
                 <p class="card-text" style="font-size:0.9vw; color: #C8CDD0" id="cuerpoCard">{{$album->nombre}}</p>
-                <audio controls="true" preload="auto" name="audio" id='' onplay="parar(this.id)"
-            onended="siguiente(this.id)">
+                <div class="audioExample">
+                <audio preload="auto" name="audio" onplay="parar(this.id)"
+            onended="siguiente(this.id)" style="color: black" crossorigin>
             <source src="" id="oggAudio" type="audio/ogg">
             <source src="" id="mp3Audio" type="audio/mp3">
             No lo soporta
         </audio>
+    </div>
             </div>
         </div>
     <!--</div>-->

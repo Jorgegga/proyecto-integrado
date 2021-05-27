@@ -5,10 +5,16 @@
 
     </x-slot>
     <x-slot name="styles">
-
+        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet" >
+        <style>
+            .green-audio-player{
+                background-color: #0c171d;
+            }
+        </style>
     </x-slot>
     <x-slot name="scriptsCDN">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{{ asset('js/green-audio-player.js') }}" defer></script>
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -64,11 +70,11 @@
                                     'nombre' => $musicMet->nomAlbum($item2->album_id)[0]->nombre]) }}">{{ $musicMet->nomAlbum($item2->album_id)[0]->nombre }}</a>
                             </td>
                             <!-- Los audios cargan correctamente en modo incognito -->
-                            <td><audio controls="true" preload="auto" id='{{ $item2->id }}' onplay="parar(this.id)">
+                            <td><div class="audioExample"><audio preload="auto" id='{{ $item2->id }}' onplay="parar(this.id)">
                                 <source src="{{ asset($item2->ruta) }}" type="audio/ogg">
                                 <source src="{{ asset($item2->ruta) }}" type="audio/mp3">
                                 No lo soporta
-                            </audio></td>
+                            </audio></div></td>
                         </tr>
                     @endforeach
                     @endforeach
@@ -77,12 +83,29 @@
     </x-slot>
     <x-slot name="script">
         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var audios = document.getElementsByClassName("audioExample");
+                for (var i = 0; i<audios.length;i++){
+                    new GreenAudioPlayer(audios[i], {
+                        selector: '.player',
+                        stopOthersOnPlay: true,
+                    });
+                }
+
+                });
+
             function parar(idEl) {
                 var elementos = document.getElementsByTagName('audio');
                 for (var i = 0; i < elementos.length; i++) {
                     try {
                         if (elementos[i].id == idEl) {
-                            elementos[i].play();
+                            var playPromise = elementos[i].play();
+                            //Es necesario para que no salte error
+                            playPromise.then(_ =>{
+
+                            }).catch(error =>{
+
+                            });
 
                         } else {
                             elementos[i].pause();

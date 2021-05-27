@@ -93,7 +93,7 @@
                     const section = document.getElementById('autores');
 
                     // Pedir al servidor
-                    fetch(`/autor/pagination?page=${page}`, {
+                    fetch(`{{ route('paginAutor') }}?page=${page}`, {
                         method: 'get'
                     })
                     .then(response => response.text())

@@ -3,6 +3,7 @@
 <x-app-layout>
     <x-slot name="fonts">
         <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
+        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet" >
     </x-slot>
     <x-slot name="styles">
         <style>
@@ -45,7 +46,9 @@
                 }
             }
 
-
+            .green-audio-player{
+                background-color: #0c171d;
+            }
 
         </style>
     </x-slot>
@@ -54,6 +57,7 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <script src="{{ asset('js/green-audio-player.js') }}" defer></script>
 
     </x-slot>
     <x-slot name="header">
@@ -214,7 +218,14 @@
                 for (var i = 0; i < elementos.length; i++) {
                     try {
                         if (elementos[i].id == idEl) {
-                            elementos[i].play();
+                            var playPromise = elementos[i].play();
+                            //Es necesario para que no salte error
+                            playPromise.then(_ =>{
+
+                            }).catch(error =>{
+
+                            });
+
                         } else {
                             elementos[i].pause();
                         }
@@ -257,17 +268,25 @@
                 var url = "{{ route('albumRaw', ':id') }}";
                 url = url.replace(':id', id);
                 $('#modalBody').load(`${url}`);
+                setTimeout(function() {
+                    new GreenAudioPlayer('.audioExample', {
+                        selector: '.player',
+                        stopOthersOnPlay: true,
+                    });
+                }, 750);
+
             }
 
             function cabecera(nom, ruta, id){
                 document.getElementById("cabeceraCard").innerHTML = nom;
                 document.getElementById("oggAudio").src=ruta;
                 document.getElementById("mp3Audio").src=ruta;
-                document.getElementsByName("audio")[0].id = id;
-                document.getElementsByName("audio")[0].src = ruta;
+                var audio = document.getElementsByName("audio")[0];
+                audio.id = id;
+                audio.src = ruta;
                 parar(id);
-                document.getElementsByName("audio")[0].play;
             }
+
         </script>
     </x-slot>
 </x-app-layout>
