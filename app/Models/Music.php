@@ -23,6 +23,10 @@ class Music extends Model
         return $this->belongsTo(Genero::class);
     }
 
+    public function playlist(){
+        return $this->hasOne(Playlist::class);
+    }
+
     public function nomAlbum($id){
         $alb = Album::where('id', '=', $id)->get();
         return $alb;

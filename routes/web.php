@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AboutusController, AdminController, AlbumController, AutorController, GeneroController, InicioController, MusicController, UserController};
+use App\Http\Controllers\{AboutusController, AdminController, AlbumController, AreaController, AutorController, GeneroController, InicioController, MusicController, UserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +47,7 @@ Route::get('/tablas/autor', [AdminController::class, 'autor'])->name('adminAutor
 Route::get('/tablas/music', [AdminController::class, 'musica'])->name('adminMusic');
 Route::get('/tablas/genero', [AdminController::class, 'genero'])->name('adminGenero');
 Route::get('/tablas/user', [AdminController::class, 'user'])->name('adminUser');
+
+Route::get('/user/{id}/{user}/playlist', [AreaController::class, 'playlist'])->name('areaUser');
 
 require __DIR__.'/auth.php';

@@ -60,6 +60,7 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
+                            <x-dropdown-link :href="route('areaUser', ['id'=>Auth::user()->id, 'user'=>Auth::user()->name])">{{__('Playlist')}} </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 @endauth

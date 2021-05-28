@@ -81,21 +81,21 @@
                                 <h5 style="color: #EFF3F5;">Autor</h5>
                                 <p class="form-control border-0"
                                     style="background-color:#212E36; color: #C8CDD0;">
-                                    {{ $albumMet->nomAutor($item->autor_id) }}
+                                    {{ $item->autor->nombre }}
                                 </p>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Género</h5>
                                 <p class="form-control border-0"
                                     style="background-color:#212E36; color: #C8CDD0;">
-                                    {{ ucfirst($generoNom->nomGenero($item->genero_id)) }}
+                                    {{ ucfirst($item->genero->nombre) }}
                                 </p>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Nº de temas</h5>
                                 <p class="form-control border-0"
                                     style="background-color:#212E36; color: #C8CDD0;">
-                                    {{ $albumMet->numTemas($item->id) }}
+                                    {{ $item->music->count('id')}}
                                 </p>
                             </div>
                             <div class="form-group">

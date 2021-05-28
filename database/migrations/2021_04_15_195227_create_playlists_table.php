@@ -15,7 +15,16 @@ class CreatePlaylistsTable extends Migration
     {
         Schema::create('playlists', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id')->unique();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('music_id');
+            $table->foreign('id')
+            ->references('id')->on('musics')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

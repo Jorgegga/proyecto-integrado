@@ -16,6 +16,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     {{ $styles }}
 
     <!-- Scripts -->
@@ -27,7 +28,6 @@
 </head>
 
 <body class="font-sans antialiased" style="background-color: #192229">
-    @include('layouts.navigation')
 
     <!-- Page Heading -->
     <header class="d-flex py-3 shadow-sm border-bottom border-secondary col-12">

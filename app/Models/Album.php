@@ -42,4 +42,6 @@ class Album extends Model
         return $nombre->nombre;
     }
 
+
+
 }

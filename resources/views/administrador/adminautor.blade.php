@@ -75,7 +75,7 @@
                                 <h5 style="color: #EFF3F5;">Género</h5>
                                 <p class="form-control border-0"
                                     style="background-color:#212E36; color: #C8CDD0;">
-                                    {{ ucfirst($generoNom->nomGenero($item->genero_id)) }}
+                                    {{ ucfirst($item->genero->nombre) }}
                                 </p>
                             </div>
                             <div class="form-group">
