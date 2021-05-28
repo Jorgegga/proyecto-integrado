@@ -16,7 +16,7 @@
             <th scope="col">Portada</th>
             <th scope="col">Nombre</th>
             <th scope="col">Autor</th>
-            <th scope="col">Género</th>
+            <th scope="col">Álbum</th>
             <th scope="col">Canción</th>
             <th scope="col">Opciones</th>
         </tr>
@@ -26,9 +26,9 @@
             <tr>
                 <td><img src='{{ asset($item->portada) }}' height="50px" width="50px"></td>
                 <td>{{ $item->nombre }}</td>
-                <td>{{ $albumMet->nomAutor($item->autor_id) }}</td>
-                <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
-                <td><audio controls="true" preload="auto" id='{{ $item->id }}' onplay="parar(this.id)">
+                <td>{{ $item->autor->nombre }}</td>
+                <td>{{ ucfirst($item->album->nombre) }}</td>
+                <td><audio controls="true" preload="auto" id='{{ $item->id }}' onplay="parar(this.id)" onended="siguiente(this.id)">
                     <source src="{{ asset($item->ruta) }}" type="audio/ogg">
                     <source src="{{ asset($item->ruta) }}" type="audio/mp3">
                     No lo soporta
@@ -85,14 +85,14 @@
                                 <h5 style="color: #EFF3F5;">Autor</h5>
                                 <p class="form-control border-0"
                                     style="background-color:#212E36; color: #C8CDD0;">
-                                    {{ $albumMet->nomAutor($item->autor_id) }}
+                                    {{ $item->autor->nombre }}
                                 </p>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Albúm</h5>
                                 <p class="form-control border-0"
                                     style="background-color:#212E36; color: #C8CDD0;">
-                                    {{ $musicMet->nomAlbum($item->album_id)[0]->nombre }}
+                                    {{ $item->album->nombre }}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -103,7 +103,7 @@
                                 <h5 style="color: #EFF3F5;">Género</h5>
                                 <p class="form-control border-0"
                                     style="background-color:#212E36; color: #C8CDD0;">
-                                    {{ ucfirst($generoNom->nomGenero($item->genero_id)) }}
+                                    {{ ucfirst($item->genero->nombre) }}
                                 </p>
                             </div>
                             <div class="form-group">

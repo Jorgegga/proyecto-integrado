@@ -27,9 +27,9 @@
                 <td><a
                         href="{{ route('verAlbum', ['album' => $item->id, 'nombre' => $item->nombre]) }}">{{ $item->nombre }}</a>
                 </td>
-                <td>{{ $albumMet->nomAutor($item->autor_id) }}</td>
-                <td>{{ $albumMet->numTemas($item->id) }}</td>
-                <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
+                <td>{{ $item->autor->nombre}}</td>
+                <td>{{ $item->music->count('id')}}</td>
+                <td>{{ ucfirst($item->genero->nombre) }}</td>
                 <td>
                     <div class="row">
                         <form name="a" action='{{ route('albums.destroy', $item) }}' method="POST">

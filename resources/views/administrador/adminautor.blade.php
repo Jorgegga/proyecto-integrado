@@ -21,9 +21,9 @@
             <tr>
                 <td><img src='{{ asset($item->foto) }}' height="50px" width="50px"></td>
                 <td><a
-                        href="{{route('verAutor', ['autor' => $item, 'nombre'=> $item->nombre])}}">{{ $item->nombre }}</a>
+                        href="{{route('verAutor', ['autor' => $item->id, 'nombre'=> $item->nombre])}}">{{ $item->nombre }}</a>
                 </td>
-                <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
+                <td>{{ ucfirst($item->genero->nombre) }}</td>
                 <td>
                     <div class="row">
                         <form name="a" action='{{ route('autores.destroy', $item) }}' method="POST">

@@ -36,7 +36,7 @@ class Autor extends Model
     }
 
     public function autMusic($id){
-        $consulta = Music::where('album_id','=', $id)->orderBy('created_at', 'desc')->paginate(5);
+        $consulta = Music::where('autor_id','=', $id)->orderBy('created_at', 'desc')->paginate(8);
         return $consulta;
     }
 }

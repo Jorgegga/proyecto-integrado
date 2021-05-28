@@ -5,7 +5,7 @@
                 class="card-img-top"/>
             <div class="card-body">
                 <h5 class="card-title" style="font-size:1.75vw; text-align: left; color: #EFF3F5" id="cabeceraCard">Selecciona una canción</h5>
-                <p class="card-text" style="font-size:0.9vw; color: #C8CDD0" id="cuerpoCard">{{$album->nombre}}</p>
+                <p class="card-text" style="font-size:0.9vw; color: #C8CDD0" id="cuerpoCard"></p>
                 <div class="audioExample">
                 <audio preload="auto" name="audio" onplay="parar(this.id)"
             onended="siguiente(this.id)" style="color: black" crossorigin>
@@ -37,7 +37,7 @@
             <source src="{{ asset($item->ruta) }}" type="audio/mp3">
             No lo soporta
         </audio>-->
-        <button class="circle" name="botonsito" id="{{$item->id}}" onclick="cabecera( '{{$item->nombre}}', '{{$item->ruta}}', '{{$item->id}}')"><i class="fas fa-play-circle"></i></button></td>
+        <button class="circle" name="botonsito" id="{{$item->id}}" onclick="cabecera( '{{$item->nombre}}', '{{$item->ruta}}', '{{$item->id}}', '{{$item->autor->nombre}}')"><i class="fas fa-play-circle"></i></button></td>
       </tr>
       @endforeach
     </tbody>

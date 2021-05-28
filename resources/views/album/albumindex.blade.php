@@ -109,14 +109,14 @@
                                 {{ $item->nombre }}</p>
                         </div>
                         <div class="card-footer text-center mt-auto" style="background-color:#212E36;">
-                            <p><a href="{{ route('verAlbum', ['album' => $item, 'nombre' => $item->nombre]) }}"
+                            <p><a href="{{ route('verAlbum', ['album' => $item->id, 'nombre' => $item->nombre]) }}"
                                     class="btn btn-primary mb-1">Escuchar</a></p>
                             <p><button class="btn btn-success" data-toggle="modal" data-target="#albumRaw" role="tab" title="Raw"
-                                    onclick="carga({{ $item->id }})">Ventana</button></p>
+                                    onclick="carga('{{ $item->id }}', '{{$item->nombre}}')">Ventana</button></p>
                             <p class="text-muted text-left" style="float:left;">
-                                {{ $albumMet->nomAutor($item->autor_id) }}</p>
+                                {{ $item->autor->nombre }}</p>
                             <p class="text-muted text-right" style="float:right;">
-                                {{ $albumMet->numTemas($item->id) }}
+                                {{ $item->music->count('id') }}
                                 temas</p>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                 <div class="modal-content">
                     <div class="modal-header border-bottom border-primary"
                         style="background-color: #0f2738; color: #EFF3F5;">
-                        <h4 class="modal-title" id="exampleModalLabel">Álbum</h4>
+                        <h4 class="modal-title" id="modalHeader">Álbum</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="pararTodo()">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -264,7 +264,8 @@
                 }
             }
 
-            function carga(id) {
+            function carga(id, nom) {
+                document.getElementById('modalHeader').innerHTML = nom;
                 var url = "{{ route('albumRaw', ':id') }}";
                 url = url.replace(':id', id);
                 $('#modalBody').load(`${url}`);
@@ -277,8 +278,9 @@
 
             }
 
-            function cabecera(nom, ruta, id){
+            function cabecera(nom, ruta, id, autor){
                 document.getElementById("cabeceraCard").innerHTML = nom;
+                document.getElementById("cuerpoCard").innerHTML = autor;
                 document.getElementById("oggAudio").src=ruta;
                 document.getElementById("mp3Audio").src=ruta;
                 var audio = document.getElementsByName("audio")[0];

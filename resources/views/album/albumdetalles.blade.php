@@ -42,7 +42,7 @@
                         <td>
                             {{$album->nombre}}
                         </td>
-                        <td><a href="{{route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre])}}">{{$musicMet->nomAutor($item->autor_id)->nombre}}</a></td>
+                        <td><a href="{{route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre])}}">{{$item->autor->nombre}}</a></td>
                         <td>{{ $item->numCancion }}</td>
                         <td><div class="audioExample"><audio preload="auto" id='{{ $item->id }}' onplay="parar(this.id)"
                             onended="siguiente(this.id)">

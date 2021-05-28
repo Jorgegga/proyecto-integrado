@@ -12,8 +12,8 @@
                         <p><a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}" class="btn btn-primary mb-1">Escuchar</a></p>
                         <p><button class="btn btn-success" data-toggle="modal" data-target="#albumRaw" role="tab" title="Raw"
                             onclick="carga({{ $item->id }})">Ventana</button></p>
-                        <p class="text-muted text-left" style="float:left;">{{ $albumMet->nomAutor($item->autor_id) }}</p>
-                        <p class="text-muted text-right" style="float:right;">{{ $albumMet->numTemas($item->id)}} temas</p>
+                        <p class="text-muted text-left" style="float:left;">{{ $item->autor->nombre }}</p>
+                        <p class="text-muted text-right" style="float:right;">{{ $item->music->count('id')}} temas</p>
                     </div>
                 </div>
             </a>

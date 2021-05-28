@@ -52,13 +52,12 @@
                             <td>{{ $item->nombre }}</td>
                             <td>
                                 <a
-                                    href="{{ route('verAlbum', ['album' => $musicMet->nomAlbum($item->album_id)[0], 'nombre' => $musicMet->nomAlbum($item->album_id)[0]->nombre]) }}">{{ $musicMet->nomAlbum($item->album_id)[0]->nombre }}</a>
+                                    href="{{ route('verAlbum', ['album' => $item->album->id, 'nombre' => $item->album->nombre]) }}">{{ $item->album->nombre }}</a>
                             </td>
-                            <!--<td> <a href="{{ route('verAutor', ['autor' => $nomAutor->autorComp($item->album_id), 'nombre' => $nomAutor->autorComp($item->album_id)->nombre]) }}"> {{ $nomAutor->autorComp($item->album_id)->nombre }}</a></td>-->
                             <td><a
-                                    href="{{ route('verAutor', ['autor' => $musicMet->nomAutor($item->autor_id), 'nombre' => $musicMet->nomAutor($item->autor_id)->nombre]) }}">{{ $musicMet->nomAutor($item->autor_id)->nombre }}</a>
+                                    href="{{ route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre]) }}">{{ $item->autor->nombre }}</a>
                             </td>
-                            <td>{{ ucfirst($generoNom->nomGenero($item->genero_id)) }}</td>
+                            <td>{{ ucfirst($item->genero->nombre) }}</td>
                             <!-- Los audios cargan correctamente en apache y al usar php artisan serve en modo incognito -->
                             <td><div class="audioExample"><audio preload="auto" id='{{ $item->id }}' onplay="parar(this.id)"
                                     onended="siguiente(this.id)">
