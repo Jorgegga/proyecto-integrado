@@ -30,13 +30,17 @@
                 <x-nav-link href="{{ route('musics.index') }}" :active="request()->routeIs('musics.index')" style="color: #C8CDD0;">
                     {{ __('Música') }}
                 </x-nav-link>
-
+                <x-nav-link href="{{ route('playlistUser',  ['id'=>Auth::user()->id, 'user'=>Auth::user()->name]) }}" :active="request()->routeIs('playlistUser')" style="color: #C8CDD0;">
+                    {{ __('Tu Playlist') }}
+                </x-nav-link>
                 <x-nav-link href="{{ route('aboutus.index') }}" :active="request()->routeIs('aboutus.index')" style="color: #C8CDD0;">
                     {{ __('About us') }}
                 </x-nav-link>
+                @if(Auth::user()->permisos == 0)
                 <x-nav-link href="{{ route('admins.index', 'tabla=album') }}" :active="request()->routeIs('admins.index', 'tabla=album')" style="color: #C8CDD0;">
                     {{ __('Area admin') }}
                 </x-nav-link>
+                @endif
             </ul>
             <!--<img src="/storage/img/otros/default.png" height="100px">-->
             <!-- Right Side Of Navbar -->
@@ -45,11 +49,14 @@
                 <!-- Settings Dropdown -->
                 @auth
                     <x-dropdown id="settingsDropdown" style="color: #C8CDD0;">
+
                         <x-slot name="trigger">
                             {{ Auth::user()->name }}
                         </x-slot>
 
                         <x-slot name="content">
+                            <x-dropdown-link :href="route('areaUser', ['id'=>Auth::user()->id, 'user'=>Auth::user()->name])">{{__('Area del usuario')}} </x-dropdown-link>
+
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -60,7 +67,7 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
-                            <x-dropdown-link :href="route('areaUser', ['id'=>Auth::user()->id, 'user'=>Auth::user()->name])">{{__('Playlist')}} </x-dropdown-link>
+
                         </x-slot>
                     </x-dropdown>
                 @endauth

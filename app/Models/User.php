@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
 
     public function playlist(){
-        return $this->hasOne(Playlist::class);
+        return $this->hasMany(Playlist::class);
     }
 }

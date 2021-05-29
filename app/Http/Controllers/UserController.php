@@ -107,7 +107,7 @@ class UserController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         try {
-            if($user->id == 0){
+            if($user->id == 1){
                 return redirect()->route('admins.index', 'tabla=user')->with("error", "Error al actualizar el usuario, el default no es modificable");
             }
             $request->validate([
@@ -162,7 +162,7 @@ class UserController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         try {
-            if($user->id == 0){
+            if($user->id == 1){
                 return redirect()->route('admins.index', 'tabla=user')->with("error", "Error al actualizar el usuario, el default no es modificable");
             }
             if (basename($user->foto) != "default.png") {

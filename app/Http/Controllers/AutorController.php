@@ -44,14 +44,19 @@ class AutorController extends Controller
         try {
             $request->validate([
                 'nombre' => ['required', 'string'],
-                'descripcion' => ['required', 'string'],
                 'genero' => ['required', 'integer']
             ]);
 
             $autor = new Autor();
             $autor->nombre = ucwords($request->nombre);
-            $autor->descripcion = ucwords($request->descripcion);
             $autor->genero_id = $request->genero;
+
+            if ($request->has('descripcion') && $request->descripcion != null) {
+                $request->validate([
+                    'descripcion' => ['string'],
+                ]);
+                $autor->descripcion = ucwords($request->descripcion);
+            }
 
             if ($request->has('foto')) {
                 $request->validate([
@@ -110,7 +115,6 @@ class AutorController extends Controller
             }
             $request->validate([
                 'nombre' => ['required', 'string'],
-                'descripcion' => ['required', 'string'],
                 'genero' => ['required', 'integer']
             ]);
 
@@ -128,9 +132,21 @@ class AutorController extends Controller
                 $autor->update(['foto' => 'storage' . $ruta]);
             }
 
+            if ($request->has('descripcion')) {
+                if ($request->descripcion == null) {
+                    $request->descripcion = "No se ha proporcionado ninguna descripción";
+                    $autor->descripcion = $request->descripcion;
+                } else {
+                    $request->validate([
+                        'descripcion' => ['string'],
+                    ]);
+                    $autor->descripcion = ucwords($request->descripcion);
+                }
+                $autor->update(['descripcion' => $request->descripcion,]);
+            }
+
             $autor->update([
                 'nombre' => ucwords($request->nombre),
-                'descripcion' => ucfirst($request->descripcion),
                 'genero_id' => $request->genero,
             ]);
             return redirect()->route('admins.index', 'tabla=autor')->with("mensaje", "Autor actualizado correctamente");

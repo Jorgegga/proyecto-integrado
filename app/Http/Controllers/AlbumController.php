@@ -47,17 +47,21 @@ class AlbumController extends Controller
         try {
             $request->validate([
                 'nombre' => ['required', 'string'],
-                'descripcion' => ['required', 'string'],
                 'autor' => ['required', 'integer'],
                 'genero' => ['required', 'integer']
             ]);
 
             $album = new Album();
             $album->nombre = ucwords($request->nombre);
-            $album->descripcion = ucwords($request->descripcion);
             $album->autor_id = $request->autor;
             $album->genero_id = $request->genero;
 
+            if ($request->has('descripcion') && $request->descripcion != null) {
+                $request->validate([
+                    'descripcion' => ['string'],
+                ]);
+                $album->descripcion = ucwords($request->descripcion);
+            }
 
             if ($request->has('foto')) {
                 $request->validate([
@@ -116,7 +120,6 @@ class AlbumController extends Controller
             }
             $request->validate([
                 'nombre' => ['required', 'string'],
-                'descripcion' => ['required', 'string'],
                 'autor' => ['required', 'integer'],
                 'genero' => ['required', 'integer']
             ]);
@@ -136,9 +139,21 @@ class AlbumController extends Controller
                 $album->update(['portada' => 'storage' . $ruta]);
             }
 
+            if ($request->has('descripcion')) {
+                if ($request->descripcion == null) {
+                    $request->descripcion = "No se ha proporcionado ninguna descripción";
+                    $album->descripcion = $request->descripcion;
+                } else {
+                    $request->validate([
+                        'descripcion' => ['string'],
+                    ]);
+                    $album->descripcion = ucwords($request->descripcion);
+                }
+                $album->update(['descripcion' => $request->descripcion,]);
+            }
+
             $album->update([
                 'nombre' => ucwords($request->nombre),
-                'descripcion' => ucfirst($request->descripcion),
                 'autor_id' => $request->autor,
                 'genero_id' => $request->genero
             ]);

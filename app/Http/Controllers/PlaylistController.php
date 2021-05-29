@@ -35,7 +35,28 @@ class PlaylistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!auth()->check()) {
+            return redirect()->action([MusicController::class, 'index']);
+        }
+        try {
+            $request->validate([
+                'user' => ['required', 'integer'],
+                'music' => ['required', 'integer'],
+            ]);
+
+            $repetido = Playlist::where('user_id', $request->user)->where('music_id', $request->music)->first();
+            if($repetido != null){
+                return redirect()->action([MusicController::class, 'index']);
+            }
+            $playlist = new Playlist();
+            $playlist->user_id = $request->user;
+            $playlist->music_id = $request->music;
+
+            $playlist->save();
+            return redirect()->route('musics.index')->with("mensaje", "Canción guardada correctamente");
+        } catch (\Exception $ex) {
+            return redirect()->route('musics.index')->with("error", "Error al añadir la creación" . $ex->getMessage());
+        }
     }
 
     /**

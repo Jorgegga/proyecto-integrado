@@ -16,7 +16,7 @@ class CreateAutorsTable extends Migration
         Schema::create('autors', function (Blueprint $table) {
             $table->id()->unique();
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->default("No se ha proporcionado ninguna descripción");
             $table->string('foto')->default('storage/img/autor/default.png');
             $table->foreignId('genero_id')->default(0);
             $table->foreign('genero_id')

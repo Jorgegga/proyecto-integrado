@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AboutusController, AdminController, AlbumController, AreaController, AutorController, GeneroController, InicioController, MusicController, UserController};
+use App\Http\Controllers\{AboutusController, AdminController, AlbumController, AreaController, AutorController, GeneroController, InicioController, MusicController, UserController, PlaylistController};
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +31,7 @@ Route::resource('aboutus', AboutusController::class);
 Route::resource('admins', AdminController::class);
 Route::resource('generos', GeneroController::class);
 Route::resource('users', UserController::class);
+Route::resource('playlists', PlaylistController::class);
 
 //Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
 Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
@@ -48,6 +49,7 @@ Route::get('/tablas/music', [AdminController::class, 'musica'])->name('adminMusi
 Route::get('/tablas/genero', [AdminController::class, 'genero'])->name('adminGenero');
 Route::get('/tablas/user', [AdminController::class, 'user'])->name('adminUser');
 
-Route::get('/user/{id}/{user}/playlist', [AreaController::class, 'playlist'])->name('areaUser');
+Route::get('/user/{id}/{user}/playlist', [AreaController::class, 'playlist'])->name('playlistUser');
+Route::get('/user/{id}/{user}/area', [AreaController::class, 'inicioUser'])->name('areaUser');
 
 require __DIR__.'/auth.php';

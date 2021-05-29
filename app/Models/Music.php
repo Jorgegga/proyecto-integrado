@@ -24,7 +24,7 @@ class Music extends Model
     }
 
     public function playlist(){
-        return $this->hasOne(Playlist::class);
+        return $this->hasMany(Playlist::class);
     }
 
     public function nomAlbum($id){

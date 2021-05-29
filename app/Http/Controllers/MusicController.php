@@ -45,7 +45,6 @@ class MusicController extends Controller
         try {
             $request->validate([
                 'nombre' => ['required', 'string'],
-                'descripcion' => ['required', 'string'],
                 'autor' => ['required', 'integer'],
                 'album' => ['required', 'integer'],
                 'numCancion' => ['required', 'integer'],
@@ -53,7 +52,6 @@ class MusicController extends Controller
             ]);
             $music = new Music();
             $music->nombre = ucwords($request->nombre);
-            $music->descripcion = ucwords($request->descripcion);
             $music->autor_id = $request->autor;
             $music->album_id = $request->album;
             $music->numCancion = $request->numCancion;
@@ -76,6 +74,13 @@ class MusicController extends Controller
                 $ruta = "/music/" . uniqid() . "_" . $archivoMusic->getClientOriginalName();
                 Storage::Disk('public')->put($ruta, File::get($archivoMusic));
                 $music->ruta = 'storage' . $ruta;
+            }
+
+            if ($request->has('descripcion') && $request->descripcion != null) {
+                $request->validate([
+                    'descripcion' => ['string'],
+                ]);
+                $music->descripcion = ucwords($request->descripcion);
             }
 
             $music->save();
@@ -119,10 +124,10 @@ class MusicController extends Controller
         if (!auth()->check() || auth()->user()->permisos != 0) {
             return redirect()->action([InicioController::class, 'index']);
         }
+
         try {
             $request->validate([
                 'nombre' => ['required', 'string'],
-                'descripcion' => ['required', 'string'],
                 'autor' => ['required', 'integer'],
                 'album' => ['required', 'integer'],
                 'numCancion' => ['required', 'integer'],
@@ -156,18 +161,31 @@ class MusicController extends Controller
                 $music->update(['ruta' => 'storage' . $ruta]);
             }
 
+
+
+            if ($request->has('descripcion')) {
+                if ($request->descripcion == null) {
+                    $request->descripcion = "No se ha proporcionado ninguna descripción";
+                    $music->descripcion = $request->descripcion;
+                } else {
+                    $request->validate([
+                        'descripcion' => ['string'],
+                    ]);
+                    $music->descripcion = ucwords($request->descripcion);
+                }
+                $music->update(['descripcion' => $request->descripcion,]);
+            }
+
             $music->update([
                 'nombre' => ucwords($request->nombre),
-                'descripcion' => ucwords($request->descripcion),
                 'autor_id' => $request->autor,
                 'album_id' => $request->album,
                 'numCancion' => $request->numCancion,
                 'genero_id' => $request->genero,
             ]);
-            $music->update();
             return redirect()->route('admins.index', 'tabla=music')->with("mensaje", "Cancion actualizado correctamente");
         } catch (\Exception $ex) {
-            return redirect()->route('admins.index', 'tabla=music')->with("error", "Error al actualizar el cancion" . $ex->getMessage());
+            return redirect()->route('admins.index', 'tabla=music')->with("error", "Error al actualizar el cancion " . $ex->getMessage());
         }
     }
 
@@ -186,7 +204,7 @@ class MusicController extends Controller
             if (basename($music->portada) != "default.png") {
                 unlink($music->portada);
             }
-            if (basename($music->ruta) != "default.ogg"){
+            if (basename($music->ruta) != "default.ogg") {
                 unlink($music->ruta);
             }
             $music->delete();

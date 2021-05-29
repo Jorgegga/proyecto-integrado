@@ -22,7 +22,8 @@ class PlaylistFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => $this->faker->numberBetween(1, 4),
+            'music_id' => $this->faker->unique()->numberBetween(1, 300),
         ];
     }
 }

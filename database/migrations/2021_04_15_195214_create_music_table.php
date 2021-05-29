@@ -16,7 +16,7 @@ class CreateMusicTable extends Migration
         Schema::create('music', function (Blueprint $table) {
             $table->id()->unique();
             $table->string('nombre');
-            $table->string('descripcion')->default('No se ha proporcionado ninguna descripcion');
+            $table->string('descripcion')->default('No se ha proporcionado ninguna descripción');
             $table->foreignId('album_id')->unsigned()->default(0);
             $table->foreign('album_id')
             ->references('id')->on('albums')
