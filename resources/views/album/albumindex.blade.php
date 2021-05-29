@@ -289,6 +289,19 @@
                 parar(id);
             }
 
+            function submitForm(event, id) {
+                id = "#anadirPlaylist" + id;
+                $.ajax({
+                    type: $(id).attr('method'),
+                    url: $(id).attr('action'),
+                    data: $(id).serialize(),
+                    success: function(data) {
+                        console.log('Datos enviados !!!');
+                    }
+                });
+                event.preventDefault();
+            }
+
         </script>
     </x-slot>
 </x-app-layout>

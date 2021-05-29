@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         //$this->call(MusicSeeder::class);
         \App\Models\Music::factory(310)->create();
         $this->call(UserSeeder::class);
-        \App\Models\Playlist::factory(300)->create();
+        \App\Models\Playlist::factory(15)->create();
     }
 }

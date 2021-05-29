@@ -5,11 +5,12 @@
     <x-slot name="fonts">
     </x-slot>
     <x-slot name="styles">
-        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet" >
+        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet">
         <style>
-            .green-audio-player{
+            .green-audio-player {
                 background-color: #0c171d;
             }
+
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
@@ -60,17 +61,23 @@
                             </td>
                             <td>{{ ucfirst($item->genero->nombre) }}</td>
                             <!-- Los audios cargan correctamente en apache y al usar php artisan serve en modo incognito -->
-                            <td><div class="audioExample"><audio preload="auto" id='{{ $item->id }}' onplay="parar(this.id)"
-                                    onended="siguiente(this.id)">
-                                    <source src="{{ asset($item->ruta) }}" type="audio/ogg">
-                                    <source src="{{ asset($item->ruta) }}" type="audio/mp3">
-                                    No lo soporta
-                                </audio></div>
+                            <td>
+                                <div class="audioExample"><audio preload="auto" id='{{ $item->id }}'
+                                        onplay="parar(this.id)" onended="siguiente(this.id)">
+                                        <source src="{{ asset($item->ruta) }}" type="audio/ogg">
+                                        <source src="{{ asset($item->ruta) }}" type="audio/mp3">
+                                        No lo soporta
+                                    </audio></div>
                             </td>
-                            <td><form method="POST" action="{{route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id])}}" id="anadirPlaylist" onsubmit="submitForm(event)">
-                                @csrf
-                                <button type="submit" title="Añadir a tu playlist"><i class="fas fa-plus"></i></button>
-                            </form>
+                            <td>
+                                <form method="POST"
+                                    action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
+                                    id="anadirPlaylist{{ $item->id }}"
+                                    onsubmit="submitForm(event, {{ $item->id }})">
+                                    @csrf
+                                    <button type="submit" title="Añadir a tu playlist"><i
+                                            class="fas fa-plus"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -85,14 +92,14 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var audios = document.getElementsByClassName("audioExample");
-                for (var i = 0; i<audios.length;i++){
+                for (var i = 0; i < audios.length; i++) {
                     new GreenAudioPlayer(audios[i], {
                         selector: '.player',
                         stopOthersOnPlay: true,
                     });
                 }
 
-                });
+            });
 
             function parar(idEl) {
                 var elementos = document.getElementsByTagName('audio');
@@ -101,9 +108,9 @@
                         if (elementos[i].id == idEl) {
                             var playPromise = elementos[i].play();
                             //Es necesario para que no salte error
-                            playPromise.then(_ =>{
+                            playPromise.then(_ => {
 
-                            }).catch(error =>{
+                            }).catch(error => {
 
                             });
 
@@ -136,15 +143,19 @@
                 }
             }
 
-            function submitForm(event){
-      	$.ajax({
-           		type: $('#anadirPlaylist').attr('method'),
-                url: $('#anadirPlaylist').attr('action'),
-                data: $('#anadirPlaylist').serialize(),
-        		success: function (data) { console.log('Datos enviados !!!');}
-         	});
-           	event.preventDefault();
-  	}
+            function submitForm(event, id) {
+                id = "#anadirPlaylist" + id;
+                $.ajax({
+                    type: $(id).attr('method'),
+                    url: $(id).attr('action'),
+                    data: $(id).serialize(),
+                    success: function(data) {
+                        console.log('Datos enviados !!!');
+                    }
+                });
+                event.preventDefault();
+            }
+
         </script>
     </x-slot>
 </x-app-layout>

@@ -101,6 +101,11 @@ class PlaylistController extends Controller
      */
     public function destroy(Playlist $playlist)
     {
-        //
+        try {
+            $playlist->delete();
+            return back()->with("mensaje", "Canción borrada");
+        } catch (\Exception $ex) {
+            return back()->with("error", "Error al borrar la canción" . $ex->getMessage());
+        }
     }
 }

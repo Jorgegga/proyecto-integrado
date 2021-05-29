@@ -4,6 +4,7 @@
     </x-slot>
     <x-slot name="styles">
         <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
         <style>
             .green-audio-player{
                 background-color: #0c171d;
@@ -29,6 +30,7 @@
                         <th scope="col">Álbum</th>
                         <th scope="col">Autor</th>
                         <th scope="col">Play</th>
+                        <th scope="col">Quitar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +51,13 @@
                                     <source src="{{ asset($item->music->ruta) }}" type="audio/mp3">
                                     No lo soporta
                                 </audio></div>
+                            </td>
+                            <td>
+                                    <form method="POST" action="{{ route('playlists.destroy', $item) }}" name="a">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Borrar de tu playlist"><i class="fas fa-minus"></i></button>
+                                    </form>
                             </td>
                         </tr>
                     @endforeach
@@ -113,8 +122,6 @@
                     }
                 }
             }
-
-
         </script>
     </x-slot>
 

@@ -59,6 +59,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Álbum</th>
                     <th scope="col">Play</th>
+                    <th scope="col">Añadir</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,6 +79,11 @@
                                         <source src="{{ asset($item->ruta) }}" type="audio/mp3">
                                         No lo soporta
                                     </audio></div>
+                            </td>
+                            <td><form method="POST" action="{{route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id])}}" id="anadirPlaylist{{$item->id}}" onsubmit="submitForm(event, {{$item->id}})">
+                                @csrf
+                                <button type="submit" title="Añadir a tu playlist"><i class="fas fa-plus"></i></button>
+                            </form>
                             </td>
                         </tr>
                 @endforeach
@@ -138,6 +144,19 @@
                         elementos[i].pause();
                     }
                 }
+            }
+
+            function submitForm(event, id) {
+                id = "#anadirPlaylist" + id;
+                $.ajax({
+                    type: $(id).attr('method'),
+                    url: $(id).attr('action'),
+                    data: $(id).serialize(),
+                    success: function(data) {
+                        console.log('Datos enviados !!!');
+                    }
+                });
+                event.preventDefault();
             }
 
         </script>
