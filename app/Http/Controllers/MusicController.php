@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Music;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -19,7 +20,8 @@ class MusicController extends Controller
     {
         $musica = Music::orderBy('nombre')->paginate(10);
         $album = Album::orderBy('nombre')->get();
-        return view('musica.musicaindex', compact('musica', 'album'));
+        $playlist = Playlist::get();
+        return view('musica.musicaindex', compact('musica', 'album', 'playlist'));
     }
 
     /**

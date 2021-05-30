@@ -33,7 +33,9 @@
                     <th scope="col">Autor</th>
                     <th scope="col">Pista</th>
                     <th scope="col">Play</th>
+                    @auth
                     <th scope="col">Añadir</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +54,7 @@
                             No lo soporta
                         </audio></div>
                     </td>
+                    @auth
                     <td>
                         <form method="POST"
                             action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
@@ -62,6 +65,7 @@
                                     class="fas fa-plus"></i></button>
                         </form>
                     </td>
+                    @endauth
                     </tr>
                 @endforeach
             </tbody>

@@ -59,7 +59,9 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Álbum</th>
                     <th scope="col">Play</th>
+                    @auth
                     <th scope="col">Añadir</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -80,11 +82,13 @@
                                         No lo soporta
                                     </audio></div>
                             </td>
+                            @auth
                             <td><form method="POST" action="{{route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id])}}" id="anadirPlaylist{{$item->id}}" onsubmit="submitForm(event, {{$item->id}})">
                                 @csrf
                                 <button type="submit" title="Añadir a tu playlist"><i class="fas fa-plus"></i></button>
                             </form>
                             </td>
+                            @endauth
                         </tr>
                 @endforeach
             </tbody>

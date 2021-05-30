@@ -1,6 +1,4 @@
-@inject('musicMet', 'App\Models\Music')
-@inject('nomAutor', 'App\Models\Autor')
-@inject('generoNom', 'App\Models\Genero')
+@inject('playMusic', 'App\Models\Playlist')
 <x-app-layout>
     <x-slot name="fonts">
     </x-slot>
@@ -45,7 +43,9 @@
                         <th scope="col">Autor</th>
                         <th scope="col">Género</th>
                         <th scope="col">Play</th>
+                        @auth
                         <th scope="col">Añadir</th>
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
@@ -69,16 +69,23 @@
                                         No lo soporta
                                     </audio></div>
                             </td>
+                            @auth
                             <td>
+                                @if($playMusic->musicExist(Auth::user(), $item->id) == 0)
                                 <form method="POST"
                                     action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
                                     id="anadirPlaylist{{ $item->id }}"
                                     onsubmit="submitForm(event, {{ $item->id }})">
                                     @csrf
-                                    <button type="submit" title="Añadir a tu playlist"><i
+                                    <button id="btn{{$item->id}}" type="submit" title="Añadir a tu playlist"><i
                                             class="fas fa-plus"></i></button>
                                 </form>
+                                @else
+                                <button type="submit" title="Ya esta en tu playlist" disabled><i
+                                    class="fas fa-plus"></i></button>
+                                @endif
                             </td>
+                            @endauth
                         </tr>
                     @endforeach
                 </tbody>
@@ -144,6 +151,7 @@
             }
 
             function submitForm(event, id) {
+                boton = "btn" + id;
                 id = "#anadirPlaylist" + id;
                 $.ajax({
                     type: $(id).attr('method'),
@@ -151,6 +159,8 @@
                     data: $(id).serialize(),
                     success: function(data) {
                         console.log('Datos enviados !!!');
+                        document.getElementById(boton).disabled = true;
+                        document.getElementById(boton).title = "Ya esta en tu playlist";
                     }
                 });
                 event.preventDefault();

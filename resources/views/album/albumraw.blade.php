@@ -24,7 +24,9 @@
             <th scope="col">Nombre</th>
             <th scope="col">Pista</th>
             <th scope="col">Play</th>
+            @auth
             <th scope="col">Añadir</th>
+            @endauth
         </tr>
     </thead>
     <tbody>
@@ -37,6 +39,7 @@
                         onclick="cabecera( '{{ $item->nombre }}', '{{ $item->ruta }}', '{{ $item->id }}', '{{ $item->autor->nombre }}')"><i
                             class="fas fa-play-circle"></i></button>
                 </td>
+                @auth
                 <td>
                     <form method="POST"
                         action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
@@ -45,6 +48,7 @@
                         <button type="submit" title="Añadir a tu playlist"><i class="fas fa-plus"></i></button>
                     </form>
                 </td>
+                @endauth
             </tr>
         @endforeach
     </tbody>
