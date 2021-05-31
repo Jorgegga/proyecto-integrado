@@ -47,14 +47,6 @@
                     style="color: #C8CDD0;">
                     {{ __('About us') }}
                 </x-nav-link>
-                @auth
-                    @if (Auth::user()->permisos == 0)
-                        <x-nav-link href="{{ route('admins.index', 'tabla=album') }}"
-                            :active="request()->routeIs('admins.index', 'tabla=album')" style="color: #C8CDD0;">
-                            {{ __('Area admin') }}
-                        </x-nav-link>
-                    @endif
-                @endauth
             </ul>
             <!--<img src="/storage/img/otros/default.png" height="100px">-->
             <!-- Right Side Of Navbar -->
@@ -69,6 +61,11 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            @if (Auth::user()->permisos == 0)
+                            <x-dropdown-link
+                                :href="route('admins.index', 'tabla=album')">
+                                {{ __('Area admin') }} </x-dropdown-link>
+                                @endif
                             <x-dropdown-link
                                 :href="route('areaUser', ['id'=>Auth::user()->id, 'user'=>Auth::user()->name])">
                                 {{ __('Area del usuario') }} </x-dropdown-link>

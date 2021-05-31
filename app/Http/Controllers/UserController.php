@@ -117,7 +117,6 @@ class UserController extends Controller
             ]);
 
             if($request->pass != null){
-                dd($request);
                 $request->validate([
                     'pass' => ['string'],
                 ]);

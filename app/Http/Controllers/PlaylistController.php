@@ -36,7 +36,10 @@ class PlaylistController extends Controller
     public function store(Request $request)
     {
         if (!auth()->check()) {
-            return redirect()->action([MusicController::class, 'index']);
+            return redirect()->back();
+        }
+        if(auth()->user()->id != $request->user_id){
+            return redirect()->back();
         }
         try {
             $request->validate([
@@ -102,6 +105,12 @@ class PlaylistController extends Controller
     public function destroy(Playlist $playlist)
     {
         try {
+            if (!auth()->check()) {
+                return redirect()->back();
+            }
+            if(auth()->user()->id != $playlist->user_id){
+                return redirect()->back();
+            }
             $playlist->delete();
             return back()->with("mensaje", "Canción borrada");
         } catch (\Exception $ex) {

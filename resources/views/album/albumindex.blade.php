@@ -1,5 +1,5 @@
 @inject('albumMet', 'App\Models\Album')
-
+@inject('playMusic', 'App\Models\Playlist')
 <x-app-layout>
     <x-slot name="fonts">
         <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
@@ -290,6 +290,7 @@
             }
 
             function submitForm(event, id) {
+                boton = "btn" + id;
                 id = "#anadirPlaylist" + id;
                 $.ajax({
                     type: $(id).attr('method'),
@@ -297,6 +298,8 @@
                     data: $(id).serialize(),
                     success: function(data) {
                         console.log('Datos enviados !!!');
+                        document.getElementById(boton).disabled = true;
+                        document.getElementById(boton).title = "Ya esta en tu playlist";
                     }
                 });
                 event.preventDefault();

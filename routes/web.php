@@ -33,6 +33,9 @@ Route::resource('generos', GeneroController::class);
 Route::resource('users', UserController::class);
 Route::resource('playlists', PlaylistController::class);
 
+//Creacion de un update aparte
+Route::put('/user/update/{id}',[AreaController::class, 'update'])->name('updateUser');
+
 //Route::get('album/{id}/{nombre}', [AlbumController::class, 'show'])->middleware(['auth', 'verified'])->name('verAlbum');
 Route::get('/album/{album}/{nombre}', [AlbumController::class, 'mostrarAlbum'])->name('verAlbum');
 Route::get('/autor/{autor}/{nombre}', [AutorController::class, 'mostrarAutor'])->name('verAutor');

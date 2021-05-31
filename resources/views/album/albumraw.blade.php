@@ -1,3 +1,4 @@
+@inject('playMusic', 'App\Models\Playlist')
 <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4">
     <!--<div class="col-10 pr-3">-->
     <div class="card mb-2" style="background-color:#212E36; width:90%;">
@@ -40,14 +41,20 @@
                             class="fas fa-play-circle"></i></button>
                 </td>
                 @auth
-                <td>
-                    <form method="POST"
-                        action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
-                        id="anadirPlaylist{{ $item->id }}" onsubmit="submitForm(event, {{ $item->id }})">
-                        @csrf
-                        <button type="submit" title="Añadir a tu playlist"><i class="fas fa-plus"></i></button>
-                    </form>
-                </td>
+                    <td>
+                        @if ($playMusic->musicExist(Auth::user(), $item->id) == 0)
+                            <form method="POST"
+                                action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
+                                id="anadirPlaylist{{ $item->id }}" onsubmit="submitForm(event, {{ $item->id }})">
+                                @csrf
+                                <button id="btn{{ $item->id }}" type="submit" title="Añadir a tu playlist"><i
+                                        class="fas fa-plus"></i></button>
+                            </form>
+                        @else
+                            <button type="submit" title="Ya esta en tu playlist" disabled><i
+                                    class="fas fa-plus"></i></button>
+                        @endif
+                    </td>
                 @endauth
             </tr>
         @endforeach

@@ -81,15 +81,13 @@
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Permisos</h5>
-                                <select class="form-control border-0" style="background-color:#212E36; color: #C8CDD0;">
+                                <p class="form-control border-0" style="background-color:#212E36; color: #C8CDD0;">
                                     @if ($item->permisos == 0)
-                                        <option value="0" selected>Administrador</option>
-                                        <option value="1">Usuario</option>
+                                        Administrador
                                     @else
-                                        <option value="0">Administrador</option>
-                                        <option value="1" selected>Usuario</option>
+                                        Usuario
                                     @endif
-                                </select>
+                                </p>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Fecha de creación</h5>
