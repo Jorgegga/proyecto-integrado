@@ -1,14 +1,14 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo width="82" />
+            <a href={{route('inicios.index')}}>
+                <img src="storage/img/pagina/logo.png" height="80" width="300">
             </a>
         </x-slot>
 
         <div class="card-body">
-            <div class="mb-4">
-                {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+            <div class="mb-4 texto">
+                {{ __('¿Olvidaste tu contraseña? Pon tu correo y nosotros nos ocupamos del resto') }}
             </div>
 
             <div class="card-body">
@@ -23,14 +23,14 @@
 
                 <!-- Email Address -->
                     <div class="form-group">
-                        <x-label for="email" :value="__('Email')" />
+                        <x-label for="email" :value="__('Email')" class="texto"/>
 
-                        <x-input id="email" type="email" name="email" :value="old('email')" required autofocus />
+                        <x-input id="email" type="email" name="email" :value="old('email')" class="form-control inputOscuro" required autofocus />
                     </div>
 
                     <div class="d-flex justify-content-end mt-4">
-                        <x-button>
-                            {{ __('Email Password Reset Link') }}
+                        <x-button class="boton">
+                            {{ __('Mandar correo') }}
                         </x-button>
                     </div>
                 </form>

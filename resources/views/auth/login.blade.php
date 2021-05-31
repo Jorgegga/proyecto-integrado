@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo width="82" />
+            <a href={{route('inicios.index')}}>
+                <img src="storage/img/pagina/logo.png" height="80" width="300">
             </a>
         </x-slot>
 
@@ -18,18 +18,18 @@
 
                 <!-- Email Address -->
                 <div class="form-group">
-                    <x-label for="email" :value="__('Email')" />
+                    <x-label for="email" :value="__('Email')" class="texto"/>
 
-                    <x-input id="email" type="email" name="email" :value="old('email')" required autofocus />
+                    <x-input id="email" type="email" name="email" class="form-control inputOscuro" :value="old('email')"  required autofocus />
                 </div>
 
                 <!-- Password -->
                 <div class="form-group">
-                    <x-label for="password" :value="__('Password')" />
+                    <x-label for="password" :value="__('Password')" class="texto"/>
 
                     <x-input id="password" type="password"
                              name="password"
-                             required autocomplete="current-password" />
+                             required autocomplete="current-password" class="form-control inputOscuro" />
                 </div>
 
                 <!-- Remember Me -->
@@ -37,7 +37,7 @@
                     <div class="form-check">
                         <x-checkbox id="remember_me" name="remember" />
 
-                        <label class="form-check-label" for="remember_me">
+                        <label class="form-check-label" for="remember_me" style="color: #EFF3F5;">
                             {{ __('Remember Me') }}
                         </label>
                     </div>
@@ -46,14 +46,16 @@
                 <div class="mb-0">
                     <div class="d-flex justify-content-end align-items-baseline">
                         @if (Route::has('password.request'))
-                            <a class="text-muted mr-3" href="{{ route('password.request') }}">
-                                {{ __('Forgot your password?') }}
+                            <a class="mr-3 texto" href="{{ route('password.request') }}">
+                                {{ __('¿Has olvidado tu contraseña?') }}
                             </a>
                         @endif
 
-                        <x-button>
+                        <x-button class="btn boton">
                             {{ __('Log in') }}
                         </x-button>
+                        <a href="{{route('inicios.index')}}" class="btn boton texto ml-3">Invitado</a>
+
                     </div>
                 </div>
             </form>

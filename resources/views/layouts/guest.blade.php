@@ -12,11 +12,30 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <style>
+            html{
+                background: #0f2738;;
+            }
+            body{
+                background: #192229;
+            }
+            .boton{
+                background:black;
+            }
+            .inputOscuro{
+                background-color:#212E36;
+                color: #C8CDD0;
+                border-color:gray;
+            }
+            .texto{
+                color: #EFF3F5;
+            }
+        </style>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased bg-light">
+    <body class="font-sans antialiased">
         {{ $slot }}
     </body>
 </html>

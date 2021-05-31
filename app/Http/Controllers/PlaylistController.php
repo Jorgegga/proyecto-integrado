@@ -38,7 +38,7 @@ class PlaylistController extends Controller
         if (!auth()->check()) {
             return redirect()->back();
         }
-        if(auth()->user()->id != $request->user_id){
+        if(auth()->user()->id != $request->user){
             return redirect()->back();
         }
         try {

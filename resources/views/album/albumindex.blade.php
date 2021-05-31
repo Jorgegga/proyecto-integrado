@@ -80,10 +80,9 @@
             </div>
         </div>
         <!--<select class="livesearch form-control" name="livesearch"></select>-->
-        <div class="text-center position-fixed pr-5 pl-5" style="background-color:#212E36; left: 85%;">
-            <h5 class="border-bottom border-secondary" style="color: white">Géneros</h5>
+        <div class="w-25 animate__animated animate__fadeInLeft">
             <form name="b" action={{ route('albums.index') }}>
-                <select class="" style="color: black; margin-left:-35%" name="tematica" onchange="this.form.submit()">
+                <select class="custom-select" style="background-color:#212E36; color: #C8CDD0; border:none;float: right;" name="tematica" onchange="this.form.submit()">
                     <option value="%">Todos</option>
                     @foreach ($genero as $item)
                         @if ($request->tematica == " $item->id")
@@ -94,8 +93,8 @@
                     @endforeach
                 </select>
             </form>
-
         </div>
+
         <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn"
             id="albums">
             <!--<div class="col-10 pr-3">-->

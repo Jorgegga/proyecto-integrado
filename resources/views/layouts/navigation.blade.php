@@ -1,17 +1,9 @@
-<style>
-    .navbar-nav.navbar-center {
-        position: absolute;
-        left: 50%;
-        transform: translatex(-50%);
-    }
-
-</style>
 <nav class="navbar navbar-expand-md navbar-light border-bottom border-primary sticky-top"
     style="background-color: #0f2738;">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="/">
-            <x-application-logo width="36" />
+        <a class="navbar-brand" href="{{route('inicios.index')}}">
+            <img src="{{URL::asset('storage/img/pagina/logo.png')}}" height="50" width="200">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -19,8 +11,8 @@
         </button>
 
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav navbar-center">
+            <!-- Center Side Of Navbar -->
+            <ul class="navbar-nav navbar-left">
                 <x-nav-link href="{{ route('inicios.index') }}" :active="request()->routeIs('inicios.index')"
                     style="color: #C8CDD0;">
                     {{ __('Inicio') }}
@@ -54,7 +46,7 @@
 
                 <!-- Settings Dropdown -->
                 @auth
-                    <x-dropdown id="settingsDropdown" style="color: #C8CDD0;">
+                    <x-dropdown id="settingsDropdown" style="color: #C8CDD0;font-size: 32px; font-family: 'Just Another Hand', cursive;">
 
                         <x-slot name="trigger">
                             {{ Auth::user()->name }}
@@ -83,6 +75,16 @@
                         </x-slot>
                     </x-dropdown>
                 @endauth
+                @guest
+                    <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')"
+                        style="color: #C8CDD0;">
+                        {{ __('Iniciar sesión') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')"
+                        style="color: #C8CDD0;">
+                        {{ __('Registrarse') }}
+                    </x-nav-link>
+                @endguest
             </ul>
         </div>
     </div>

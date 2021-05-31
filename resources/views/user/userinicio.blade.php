@@ -77,7 +77,7 @@
                     @csrf
                     @method('PUT')
             <div class="card mb-5 w-100" style="background-color:#212E36;">
-                <img src='{{ asset($user->foto) }}' class="card-img-top" />
+                <img src='{{ asset($user->foto) }}' class="card-img-top pl-4" />
                 <div class="card-body">
                     <div clas="row">
                         <form name="a" action="" method="POST" enctype="multipart/form-data">
@@ -95,7 +95,8 @@
                             value="{{ $user->email }}"><br><br>
                     </div>
                     <div class="row">
-                        <input class="form-control-file" type="file" accept="image/png, image/jpeg" name="foto" style="color:white">
+                        <h3 class="cabeceraOscura ml-3">Subir foto de perfil</h3>
+                        <input class="form-control-file ml-3" type="file" accept="image/png, image/jpeg" name="foto" style="color:white">
                     </div>
                     <button id="boton" type="submit" class="btn btn-primary float-right"  >Guardar cambios</button>
                 </div>

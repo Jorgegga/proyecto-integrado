@@ -10,6 +10,8 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     {{ $fonts }}
 
@@ -40,6 +42,8 @@
     <main class="container my-5">
         {{ $cuerpo }}
     </main>
+
+    @include('layouts.footer')
 
     {{ $script }}
 
