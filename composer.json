@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "nascent-africa/jetstrap": "^2.4",
-        "protonemedia/laravel-form-components": "^2.5"
+        "protonemedia/laravel-form-components": "^2.5",
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

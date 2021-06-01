@@ -18,7 +18,7 @@ class MusicController extends Controller
      */
     public function index()
     {
-        $musica = Music::orderBy('nombre')->paginate(10);
+        $musica = Music::orderBy('nombre')->get();
         $album = Album::orderBy('nombre')->get();
         $playlist = Playlist::get();
         return view('musica.musicaindex', compact('musica', 'album', 'playlist'));

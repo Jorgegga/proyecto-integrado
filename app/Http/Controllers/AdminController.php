@@ -97,7 +97,7 @@ class AdminController extends Controller
         if(!auth()->check() || auth()->user()->permisos != 0){
             return redirect()->action([InicioController::class, 'index']);
         }
-        $album = Album::orderBy('id', 'DESC')->paginate(9);
+        $album = Album::orderBy('id', 'DESC')->get();
         $genero = Genero::orderBy('id', 'asc')->get();
         $autor = Autor::orderBy('id', 'asc')->get();
         return view('administrador.adminalbum', compact('album', 'genero', 'autor'));
@@ -108,7 +108,7 @@ class AdminController extends Controller
         if(!auth()->check() || auth()->user()->permisos != 0){
             return redirect()->action([InicioController::class, 'index']);
         }
-        $autor = Autor::orderBy('id', 'DESC')->paginate(9);
+        $autor = Autor::orderBy('id', 'DESC')->get();
         $genero = Genero::orderBy('id', 'asc')->get();
         return view('administrador.adminautor', compact('autor', 'genero'));
     }
@@ -117,7 +117,7 @@ class AdminController extends Controller
         if(!auth()->check() || auth()->user()->permisos != 0){
             return redirect()->action([InicioController::class, 'index']);
         }
-        $music = Music::orderBy('nombre')->paginate(9);
+        $music = Music::orderBy('nombre')->get();
         $album = Album::orderBy('nombre')->get();
         $genero = Genero::orderBy('id', 'asc')->get();
         $autor = Autor::orderBy('id', 'asc')->get();

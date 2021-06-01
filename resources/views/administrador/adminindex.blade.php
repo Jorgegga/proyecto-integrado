@@ -71,13 +71,10 @@
     </x-slot>
     <x-slot name="script">
         <script>
+
             window.onload = function() {
                 var tabla = parametroTabla();
                 $('#cuerpo').load(`${tabla}`);
-                var active = `li1`;
-                setTimeout(function() {
-                    document.getElementById(`${active}`).className += " active"
-                }, 750);
             };
 
             function cambio(tabla) {
@@ -102,10 +99,6 @@
                     break;
                 }
                 $('#cuerpo').load(`${link}`);
-                active = `li1`;
-                setTimeout(function() {
-                    document.getElementById(`${active}`).className += " active"
-                }, 750);
             }
 
             function carga(id, nombre) {
@@ -129,19 +122,13 @@
                     var link = "{{route('adminAlbum')}}";
                     break;
                 }
-                link += `?page=${id}`;
                 $('#cuerpo').load(link);
-                var active = `li${id}`;
-                setTimeout(function() {
-                    document.getElementById(`${active}`).className += " active"
-                }, 750);
             }
 
             function parametroTabla() {
                 var queryString = window.location.search;
                 var urlParams = new URLSearchParams(queryString);
                 var tabla = urlParams.get('tabla');
-                console.log(tabla);
                 if (tabla == null) {
                     tabla = "{{route('adminAlbum')}}";
                 }else{

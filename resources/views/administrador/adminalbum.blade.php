@@ -9,7 +9,7 @@
 <button class="btn btn-primary mb-2 rounded contact  animate__animated animate__fadeIn" data-toggle="modal" data-target="#createForm" role="tab">
     Crear álbum
 </button>
-<table class="table table-striped table-dark  animate__animated animate__fadeIn">
+<table class="table table-striped table-dark  animate__animated animate__fadeIn" id="tabla">
     <thead>
         <tr>
             <th scope="col">Portada</th>
@@ -126,13 +126,7 @@
     </tbody>
 </table>
 
-<nav aria-label="Page navigation example">
-<ul class="pagination animate__animated animate__fadeIn">
-    @for ($i = 1; $album->lastpage()>=$i;$i++)
-    <li class="page-item" id="li{{$i}}"><button class="page-link" id={{$i}} onclick="carga(this.id, 'Album')">{{$i}}</button></li>
-    @endfor
-</ul>
-</nav>
+
 
 <div class="modal fade rounded" id="createForm" data-backdrop="static" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -269,6 +263,9 @@
     </div>
 </div>
 @endforeach
-<!--------------------------------------------------------------------------------------------------------------->
 
+<!--------------------------------------------------------------------------------------------------------------->
+<script>
+    $('#tabla').DataTable();
+</script>
 

@@ -52,11 +52,20 @@
     @include('layouts.footer')
 <script>
     //Posiciona el footer en la parte de abajo a pesar de que la pantalla sea pequeña
+
 $(document).ready(function(){
     if($("body").height() < $(window).height()){
         $("footer").css({"position":"absolute", "bottom":"0px"});
     }
-})
+});
+
+//En caso de cambiar el tamaño de la ventana, ya sea porque la pasamos a otro monitor u otro motivo
+//esto hara que permanezca abajo
+window.onresize = function(event){
+    if($("body").height() < $(window).height()){
+        $("footer").css({"position":"absolute", "bottom":"0px"});
+    }
+}
 </script>
     {{ $script }}
 

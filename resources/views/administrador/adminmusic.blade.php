@@ -10,7 +10,7 @@
 <button class="btn btn-primary mb-2 rounded contact  animate__animated animate__fadeIn" data-toggle="modal" data-target="#createForm" role="tab">
     Crear música
 </button>
-<table class="table table-striped table-dark  animate__animated animate__fadeIn">
+<table class="table table-striped table-dark  animate__animated animate__fadeIn" id="tabla">
     <thead>
         <tr>
             <th scope="col">Portada</th>
@@ -28,7 +28,7 @@
                 <td>{{ $item->nombre }}</td>
                 <td>{{ $item->autor->nombre }}</td>
                 <td>{{ ucfirst($item->album->nombre) }}</td>
-                <td><audio controls="true" preload="auto" id='{{ $item->id }}' onplay="parar(this.id)" onended="siguiente(this.id)">
+                <td><audio controls="true" preload="none" id='{{ $item->id }}' onplay="parar(this.id)" onended="siguiente(this.id)">
                     <source src="{{ asset($item->ruta) }}" type="audio/ogg">
                     <source src="{{ asset($item->ruta) }}" type="audio/mp3">
                     No lo soporta
@@ -134,13 +134,7 @@
     </tbody>
 </table>
 
-<nav aria-label="Page navigation example">
-<ul class="pagination animate__animated animate__fadeIn">
-    @for ($i = 1; $music->lastpage()>=$i;$i++)
-    <li class="page-item" id="li{{$i}}"><button class="page-link" id={{$i}} onclick="carga(this.id, 'Music')">{{$i}}</button></li>
-    @endfor
-</ul>
-</nav>
+
 
 <div class="modal fade rounded" id="createForm" data-backdrop="static" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -329,3 +323,6 @@
 </div>
 @endforeach
 <!--------------------------------------------------------------------------------------------------------------->
+<script>
+    $('#tabla').DataTable();
+</script>

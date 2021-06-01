@@ -4,6 +4,7 @@
     </x-slot>
     <x-slot name="styles">
         <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
         <style>
             .green-audio-player {
                 background-color: #0c171d;
@@ -12,7 +13,6 @@
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="{{ asset('js/green-audio-player.js') }}" defer></script>
     </x-slot>
     <x-slot name="header">
@@ -35,7 +35,7 @@
             class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn animate__slow">
             <!--<div class="col-10 pr-3">-->
 
-            <table class="table table-striped table-dark">
+            <table class="table table-striped table-dark" id="tabla">
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
@@ -62,7 +62,7 @@
                             <td>{{ ucfirst($item->genero->nombre) }}</td>
                             <!-- Los audios cargan correctamente en apache y al usar php artisan serve en modo incognito -->
                             <td>
-                                <div class="audioExample"><audio preload="auto" id='{{ $item->id }}'
+                                <div class="audioExample"><audio preload="none" id='{{ $item->id }}'
                                         onplay="parar(this.id)" onended="siguiente(this.id)">
                                         <source src="{{ asset($item->ruta) }}" type="audio/ogg">
                                         <source src="{{ asset($item->ruta) }}" type="audio/mp3">
@@ -93,10 +93,14 @@
 
             <!--</div>-->
         </section>
-        {{ $musica->links() }}
+
     </x-slot>
     <x-slot name="script">
         <script>
+            $(document).ready(function(){
+                $('#tabla').DataTable();
+            });
+
             document.addEventListener('DOMContentLoaded', function() {
                 var audios = document.getElementsByClassName("audioExample");
                 for (var i = 0; i < audios.length; i++) {

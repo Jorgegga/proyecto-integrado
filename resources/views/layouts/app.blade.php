@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+
     {{ $fonts }}
 
 
@@ -24,7 +25,8 @@
     {{ $styles }}
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     {{ $scriptsCDN }}
 
@@ -48,6 +50,8 @@
 
     @include('layouts.footer')
 
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     {{ $script }}
 
 </body>
