@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(GeneroSeeder::class);
         $this->call(AutorSeeder::class);
-        \App\Models\Autor::factory(50)->create();
+        \App\Models\Autor::factory(10)->create();
         $this->call(AlbumSeeder::class);
-        \App\Models\Album::factory(50)->create();
+        \App\Models\Album::factory(10)->create();
         //$this->call(MusicSeeder::class);
-        \App\Models\Music::factory(310)->create();
+        \App\Models\Music::factory(50)->create();
         $this->call(UserSeeder::class);
         \App\Models\Playlist::factory(15)->create();
     }

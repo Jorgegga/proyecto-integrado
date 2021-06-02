@@ -101,6 +101,26 @@
                 $('#tabla').DataTable();
             });
 
+            /*$(document).ready(function(){
+                $('#tabla').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax":{
+                        url:"{{url('api/musics')}}",
+
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                    },
+                    "columns": [
+                        {data: 'nombre', name:'nombre',},
+                        {data: 'album_id', name:'album_id',},
+                        {data: 'autor_id', name:'autor_id',},
+                        {data: 'genero_id', name:'genero_id',},
+                        {data: 'ruta', name:'ruta',},
+                    ]
+                });
+            });*/
+
             document.addEventListener('DOMContentLoaded', function() {
                 var audios = document.getElementsByClassName("audioExample");
                 for (var i = 0; i < audios.length; i++) {

@@ -8,6 +8,7 @@ use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class MusicController extends Controller
 {
@@ -21,6 +22,7 @@ class MusicController extends Controller
         $musica = Music::orderBy('nombre')->get();
         $album = Album::orderBy('nombre')->get();
         $playlist = Playlist::get();
+
         return view('musica.musicaindex', compact('musica', 'album', 'playlist'));
     }
 

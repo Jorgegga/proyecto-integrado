@@ -23,7 +23,7 @@ class PlaylistFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1, 4),
-            'music_id' => $this->faker->unique()->numberBetween(1, 300),
+            'music_id' => $this->faker->unique()->numberBetween(1, 50),
         ];
     }
 }

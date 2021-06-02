@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Music extends Model
 {
@@ -36,4 +37,5 @@ class Music extends Model
         $aut = Autor::where('id', '=', $id)->get()->first();
         return $aut;
     }
+
 }

@@ -22,7 +22,7 @@ class MusicFactory extends Factory
      */
     public function definition()
     {
-        $id_alb = random_int(0, 57);
+        $id_alb = random_int(0, 10);
         $id_autor = Album::select('autor_id')->where('id', $id_alb)->get()->first()->autor_id;
         $gener = Autor::select('genero_id')->where('id',$id_autor)->get()->first()->genero_id;
         return [
