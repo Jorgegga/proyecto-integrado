@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href={{route('inicios.index')}}>
-                <img src="storage/img/pagina/logo.png" height="80" width="300">
+            <a href="{{route('inicios.index')}}">
+                <img src="{{URL::asset('storage/img/pagina/logo.png')}}" height="50" width="200">
             </a>
         </x-slot>
 
@@ -32,6 +32,7 @@
                         <x-button class="boton">
                             {{ __('Mandar correo') }}
                         </x-button>
+                        <a href="{{route('login')}}" class="btn boton texto ml-3">Volver</a>
                     </div>
                 </form>
             </div>

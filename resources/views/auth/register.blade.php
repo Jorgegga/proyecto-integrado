@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href={{route('inicios.index')}}>
-                <img src="storage/img/pagina/logo.png" height="80" width="300">
+            <a href="{{route('inicios.index')}}">
+                <img src="{{URL::asset('storage/img/pagina/logo.png')}}" height="50" width="200">
             </a>
         </x-slot>
 
@@ -29,7 +29,7 @@
 
                 <!-- Password -->
                 <div class="form-group">
-                    <x-label for="password" :value="__('Password')" class="texto"/>
+                    <x-label for="password" :value="__('Contraseña')" class="texto"/>
 
                     <x-input id="password" type="password"
                                     name="password" class="form-control inputOscuro"
@@ -38,7 +38,7 @@
 
                 <!-- Confirm Password -->
                 <div class="form-group">
-                    <x-label for="password_confirmation" :value="__('Confirm Password')" class="texto"/>
+                    <x-label for="password_confirmation" :value="__('Confirmar contraseña')" class="texto"/>
 
                     <x-input id="password_confirmation" type="password" class="form-control inputOscuro"
                                     name="password_confirmation" required />

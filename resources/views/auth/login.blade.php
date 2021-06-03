@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href={{route('inicios.index')}}>
-                <img src="storage/img/pagina/logo.png" height="80" width="300">
+            <a href="{{route('inicios.index')}}">
+                <img src="{{URL::asset('storage/img/pagina/logo.png')}}" height="50" width="200">
             </a>
         </x-slot>
 
@@ -25,7 +25,7 @@
 
                 <!-- Password -->
                 <div class="form-group">
-                    <x-label for="password" :value="__('Password')" class="texto"/>
+                    <x-label for="password" :value="__('Contraseña')" class="texto"/>
 
                     <x-input id="password" type="password"
                              name="password"
@@ -38,7 +38,7 @@
                         <x-checkbox id="remember_me" name="remember" />
 
                         <label class="form-check-label" for="remember_me" style="color: #EFF3F5;">
-                            {{ __('Remember Me') }}
+                            {{ __('Recuerdame') }}
                         </label>
                     </div>
                 </div>

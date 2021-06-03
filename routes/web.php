@@ -56,8 +56,10 @@ Route::get('/tablas/user', [AdminController::class, 'user'])->name('adminUser');
 Route::get('/user/{id}/{user}/playlist', [AreaController::class, 'playlist'])->name('playlistUser');
 Route::get('/user/{id}/{user}/area', [AreaController::class, 'inicioUser'])->name('areaUser');
 
+//Route formularios correos
 Route::post('/formNegocios', [ContactoController::class, 'formNegocios'])->name('formNegocios');
 Route::post('/formAdd', [ContactoController::class, 'formAdd'])->name('formAdd');
 Route::post('/formDelete', [ContactoController::class, 'formDelete'])->name('formDelete');
 Route::post('/formOtros', [ContactoController::class, 'formOtros'])->name('formOtros');
+
 require __DIR__.'/auth.php';
