@@ -16,9 +16,10 @@ class AlbumController extends Controller
      */
     public function index(Request $request)
     {
-        $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->paginate(9);
+        $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->Livesearch($request->livesearch)->paginate(9);
         $music = Music::orderBy('album_id');
         $genero = Genero::orderBy('id', 'desc')->get();
+        //Mandar scope al pagination
         $this->pagination($request);
         return view('album.albumindex', compact('album', 'music', 'genero', 'request'));
     }
@@ -184,7 +185,7 @@ class AlbumController extends Controller
             $album->delete();
             return redirect()->route('admins.index', 'tabla=album')->with("mensaje", "Album borrado correctamente");
         } catch (\Exception $ex) {
-            return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al borrar el album" . $ex->getMessage());
+            return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al borrar el album " . $ex->getMessage());
         }
     }
 
@@ -211,9 +212,10 @@ class AlbumController extends Controller
         $movies = [];
         if ($request->has('q')) {
             $search = $request->q;
-            $movies = Album::select("id", "nombre")
-                ->where('nombre', 'LIKE', "%$search%")
-                ->get();
+            $movies = Album::select("albums.id", "albums.nombre", "autors.nombre as autorNom")
+            ->leftjoin("autors", "albums.autor_id", "=", "autors.id")
+            ->where('albums.nombre', 'LIKE', "%$search%")
+            ->get();
         }
         return response()->json($movies);
     }

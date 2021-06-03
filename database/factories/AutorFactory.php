@@ -24,7 +24,7 @@ class AutorFactory extends Factory
         return [
             'nombre'=>ucwords($this->faker->unique()->sentence($nbWords = 1, $variableNBWords = true)),
             'descripcion'=>ucfirst($this->faker->text(100)),
-            'genero_id'=>$this->faker->numberBetween(2, 8),
+            'genero_id'=>$this->faker->numberBetween(0, 6),
         ];
     }
 }

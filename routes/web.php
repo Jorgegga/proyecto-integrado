@@ -44,7 +44,8 @@ Route::get('/album/pagination', [AlbumController::class, 'pagination'])->name('p
 Route::get('/autor/pagination', [AutorController::class, 'pagination'])->name('paginAutor');
 
 Route::get('/album/{id}',[AlbumController::class, 'albumRaw'])->name('albumRaw');
-Route::get('/ajax-autocomplete-search', [AlbumController::class, 'selectSearch'])->name('albumAuto');
+Route::get('/autocompleteAlbum', [AlbumController::class, 'selectSearch'])->name('albumAuto');
+Route::get('/autocompleteAutor', [AutorController::class, 'selectSearch'])->name('autorAuto');
 
 Route::get('/tablas/album', [AdminController::class, 'album'])->name('adminAlbum');
 Route::get('/tablas/autor', [AdminController::class, 'autor'])->name('adminAutor');

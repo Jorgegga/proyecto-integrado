@@ -3,7 +3,7 @@
 <x-app-layout>
     <x-slot name="fonts">
         <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
-        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet" >
+        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet">
     </x-slot>
     <x-slot name="styles">
         <style>
@@ -46,9 +46,26 @@
                 }
             }
 
-            .green-audio-player{
+            .green-audio-player {
                 background-color: #0c171d;
             }
+
+            .select2-container {
+                background-color: #212E36;
+                color: #C8CDD0;
+            }
+
+            .select2-container .select2-results__option {
+                background-color: #212E36;
+                color: #C8CDD0;
+            }
+
+            .select2-container .select2-results__option--highlighted[aria-selected] {
+                background-color: #C8CDD0;
+                color: #212E36;
+            }
+
+
 
         </style>
     </x-slot>
@@ -79,26 +96,34 @@
                 </div>
             </div>
         </div>
-        <!--<select class="livesearch form-control" name="livesearch"></select>-->
-        <div class="w-25 animate__animated animate__fadeInLeft">
-            <form name="b" action={{ route('albums.index') }}>
-                <select class="custom-select" style="background-color:#212E36; color: #C8CDD0; border:none;float: right;" name="tematica" onchange="this.form.submit()">
-                    <option value="%">Todos</option>
-                    @foreach ($genero as $item)
-                        @if ($request->tematica == " $item->id")
-                            <option value={{ $item->id }} selected>{{ ucfirst($item->nombre) }}</option>
-                        @else
-                            <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </form>
+        <div class="row justify-content-center ">
+            <div class="col-md-5 col-sm-10 animate__animated animate__fadeInLeft">
+                <form name="b" action={{ route('albums.index') }}>
+                    <select class="livesearch custom-select w-sm-30 w-md-50 mb-sm-5" name="livesearch" onchange="this.form.submit()"></select>
+                </form>
+            </div>
+            <div class="animate__animated animate__fadeInRight col-md-5 col-sm-10 float-right">
+                <form name="b" action={{ route('albums.index') }}>
+                    <select class="custom-select" style="background-color:#212E36; color: #C8CDD0; border:none;"
+                        name="tematica" onchange="this.form.submit()">
+                        <option value="%">Todos</option>
+                        @foreach ($genero as $item)
+                            @if ($request->tematica == " $item->id")
+                                <option value={{ $item->id }} selected>{{ ucfirst($item->nombre) }}</option>
+                            @else
+                                <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </form>
+            </div>
         </div>
 
         <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn"
             id="albums">
             <!--<div class="col-10 pr-3">-->
             @foreach ($album as $item)
+                <a href="{{ route('verAlbum', ['album' => $item, 'nombre' => $item->nombre]) }}">
                     <div class="card col-md-3 col-sm-3 mr-sm-5 mr-md-5 pt-3 mt-4"
                         style="width: 18rem; background-color:#212E36; font-family: 'New Tegomin', serif; font-weight: bold;">
                         <img class="card-img-top" src='{{ asset($item->portada) }}' alt="Card image cap"
@@ -109,20 +134,28 @@
                         </div>
                         <div class="card-footer text-center mt-auto" style="background-color:#212E36;">
                             <p><a href="{{ route('verAlbum', ['album' => $item->id, 'nombre' => $item->nombre]) }}"
-                                    class="btn btn-primary mb-1">Escuchar</a></p>
-                            <p><button class="btn btn-success" data-toggle="modal" data-target="#albumRaw" role="tab" title="Raw"
-                                    onclick="carga('{{ $item->id }}', '{{$item->nombre}}')">Ventana</button></p>
-                            <p class="text-muted text-left" style="float:left;">
-                                {{ $item->autor->nombre }}</p>
+                                    class="btn btn-primary mb-1">Ir al álbum</a></p>
+                            <p><button class="btn btn-success" data-toggle="modal" data-target="#albumRaw" role="tab"
+                                    title="Raw" onclick="carga('{{ $item->id }}', '{{ $item->nombre }}')">Modo
+                                    ventana</button></p>
+                            <a href="{{ route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre]) }}"
+                                class="text-muted text-left" style="float:left;">
+                                {{ $item->autor->nombre }}</a>
                             <p class="text-muted text-right" style="float:right;">
                                 {{ $item->music->count('id') }}
                                 temas</p>
                         </div>
                     </div>
-
+                </a>
             @endforeach
             <!--</div>-->
+
         </section>
+        @if($request->livesearch != "")
+        <div class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 mr-4 animate__animated animate__fadeIn">
+        <a href="{{route('albums.index')}}" class="btn btn-primary w-25">Volver</a>
+        </div>
+        @endif
         <!--<p><button class="btn btn-primary" id='carga' onclick="carga()"></button></p>-->
         <div class="modal fade rounded" id="albumRaw" data-backdrop="static" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -131,7 +164,8 @@
                     <div class="modal-header border-bottom border-primary"
                         style="background-color: #0f2738; color: #EFF3F5;">
                         <h4 class="modal-title" id="modalHeader">Álbum</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="pararTodo()">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            onclick="pararTodo()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -139,7 +173,8 @@
 
                     </div>
                     <div class="modal-footer border-primary" style="background-color: #0f2738;">
-                        <button type="submit" class="btn btn-success" data-dismiss="modal" onclick="pararTodo()">Volver</button>
+                        <button type="submit" class="btn btn-success" data-dismiss="modal"
+                            onclick="pararTodo()">Volver</button>
                     </div>
                 </div>
             </div>
@@ -155,45 +190,50 @@
                     bool = false;
                     const section = document.getElementById('albums');
                     //Necesario para hacer el **** paginado con scopes
-                    let temat = "<?php echo $request->tematica; ?>"
+                    let temat = "<?php echo $request->tematica; ?>";
+                    let lives = "<?php echo $request->livesearch; ?>";
+                    console.log(lives);
+                    // Pedir al servidor, en caso de que no haya ninguna busqueda hará páginado,
+                    // de lo contrario no lo hará
+                    if (lives == "") {
+                        if (temat == null || temat == "%") {
+                            fetch(`{{ route('paginAlbum') }}?page=${page}`, {
+                                    method: 'get'
+                                })
+                                .then(response => response.text())
+                                .then(htmlContent => {
+                                    // Respuesta en HTML
+                                    if (htmlContent != "") {
+                                        section.innerHTML += htmlContent;
+                                        page += 1;
+                                        bool = true;
+                                    }
 
-                    // Pedir al servidor
-                    if (temat == null || temat == "%") {
-                        fetch(`{{ route('paginAlbum') }}?page=${page}`, {
-                                method: 'get'
-                            })
-                            .then(response => response.text())
-                            .then(htmlContent => {
-                                // Respuesta en HTML
-                                if (htmlContent != "") {
-                                    section.innerHTML += htmlContent;
-                                    page += 1;
-                                    bool = true;
-                                }
+                                })
+                                .catch(err => console.log(err));
+                        } else {
+                            fetch(`{{ route('paginAlbum') }}?tematica=${temat}&page=${page}`, {
+                                    method: 'get'
+                                })
+                                .then(response => response.text())
+                                .then(htmlContent => {
+                                    // Respuesta en HTML
+                                    if (htmlContent != "") {
+                                        section.innerHTML += htmlContent;
+                                        page += 1;
+                                        bool = true;
+                                    }
 
-                            })
-                            .catch(err => console.log(err));
-                    } else {
-                        fetch(`{{ route('paginAlbum') }}?tematica=${temat}&page=${page}`, {
-                                method: 'get'
-                            })
-                            .then(response => response.text())
-                            .then(htmlContent => {
-                                // Respuesta en HTML
-                                if (htmlContent != "") {
-                                    section.innerHTML += htmlContent;
-                                    page += 1;
-                                    bool = true;
-                                }
-
-                            })
-                            .catch(err => console.log(err));
+                                })
+                                .catch(err => console.log(err));
+                        }
                     }
                 }
             }
 
             $('.livesearch').select2({
-                placeholder: 'Select movie',
+                placeholder: 'Buscar álbum',
+                theme: "default",
                 ajax: {
                     url: '{{ route('albumAuto') }}',
                     dataType: 'json',
@@ -202,8 +242,8 @@
                         return {
                             results: $.map(data, function(item) {
                                 return {
-                                    text: item.nombre,
-                                    id: item.id
+                                    text: item.nombre + "  |  " + item.autorNom,
+                                    id: item.id,
                                 }
                             })
                         };
@@ -219,9 +259,9 @@
                         if (elementos[i].id == idEl) {
                             var playPromise = elementos[i].play();
                             //Es necesario para que no salte error
-                            playPromise.then(_ =>{
+                            playPromise.then(_ => {
 
-                            }).catch(error =>{
+                            }).catch(error => {
 
                             });
 
@@ -234,7 +274,7 @@
                 }
             }
 
-            function pararTodo(){
+            function pararTodo() {
                 var elementos = document.getElementsByTagName('audio');
                 for (var i = 0; i < elementos.length; i++) {
                     try {
@@ -249,7 +289,7 @@
                 id = parseInt(id);
                 var elementos = document.getElementsByName("botonsito");
                 for (var i = 0; i < elementos.length; i++) {
-                    if(elementos[i].id == id){
+                    if (elementos[i].id == id) {
                         try {
                             if (elementos[i + 1] != null) {
                                 elementos[i + 1].click();
@@ -277,11 +317,11 @@
 
             }
 
-            function cabecera(nom, ruta, id, autor){
+            function cabecera(nom, ruta, id, autor) {
                 document.getElementById("cabeceraCard").innerHTML = nom;
                 document.getElementById("cuerpoCard").innerHTML = autor;
-                document.getElementById("oggAudio").src=ruta;
-                document.getElementById("mp3Audio").src=ruta;
+                document.getElementById("oggAudio").src = ruta;
+                document.getElementById("mp3Audio").src = ruta;
                 var audio = document.getElementsByName("audio")[0];
                 audio.id = id;
                 audio.src = ruta;

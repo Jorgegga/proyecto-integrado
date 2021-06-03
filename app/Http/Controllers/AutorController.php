@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Autor, Album, Music};
+use App\Models\{Autor, Album, Music, Genero};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -14,10 +14,12 @@ class AutorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $autor = Autor::orderBy('nombre')->paginate(5);
-        return (view('autor.autorindex', compact('autor')));
+        $autor = Autor::orderBy('nombre')->Genero($request->tematica)->Livesearch($request->livesearch)->paginate(5);
+        $genero = Genero::orderBy('id', 'desc')->get();
+        $this->pagination($request);
+        return (view('autor.autorindex', compact('autor', 'genero', 'request')));
     }
 
     /**
@@ -186,10 +188,21 @@ class AutorController extends Controller
         return view('autor.autordetalles', compact('album', 'autor'));
     }
 
-    public function pagination()
+    public function pagination(Request $request)
     {
-        $autor = Autor::orderBy('nombre')->paginate(5);
+        $autor = Autor::orderBy('nombre')->Genero($request->tematica)->paginate(5);
         return view('autor.pagination', compact('autor'));
     }
 
+    public function selectSearch(Request $request)
+    {
+        $movies = [];
+        if ($request->has('q')) {
+            $search = $request->q;
+            $movies = Autor::select("id", "nombre")
+            ->where('nombre', 'LIKE', "%$search%")
+            ->get();
+        }
+        return response()->json($movies);
+    }
 }

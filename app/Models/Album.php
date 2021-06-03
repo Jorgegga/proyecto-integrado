@@ -29,8 +29,13 @@ class Album extends Model
             return $query->where("genero_id", "=", $generos);
         }
     }
-
-
+    public function scopeLivesearch($query, $livesearch){
+        if($livesearch == null || $livesearch == "%"){
+            return $query->where("id", "like", "%");
+        }else{
+            return $query->where("id", "=", $livesearch);
+        }
+    }
 
     public function numTemas($id){
         $contar = Music::where('album_id', '=', $id)->count();

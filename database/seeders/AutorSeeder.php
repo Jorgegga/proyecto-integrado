@@ -17,14 +17,14 @@ class AutorSeeder extends Seeder
         Autor::create([
             'nombre'=>'Desconocido',
             'descripcion'=>'Musica sin autor',
-            'id'=>'2',
-            'genero_id'=>'5',
+            'id'=>'0',
+            'genero_id'=>'0',
         ]);
         Autor::create([
             'nombre'=>'Zun',
             'descripcion'=>'Gran música',
-            'id'=>'3',
-            'genero_id'=>'4',
+            'id'=>'1',
+            'genero_id'=>'6',
         ]);
     }
 }
