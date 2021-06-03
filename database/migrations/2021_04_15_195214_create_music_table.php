@@ -14,21 +14,21 @@ class CreateMusicTable extends Migration
     public function up()
     {
         Schema::create('music', function (Blueprint $table) {
-            $table->id()->unique();
+            $table->id();
             $table->string('nombre');
             $table->string('descripcion')->default('No se ha proporcionado ninguna descripción');
-            $table->foreignId('album_id')->unsigned()->default(0);
+            $table->foreignId('album_id')->default(0)->nullable();
             $table->foreign('album_id')
             ->references('id')->on('albums')
             ->onDelete('set default')->onUpdate('cascade');
-            $table->foreignId('autor_id')->unsigned()->default(0);
+            $table->foreignId('autor_id')->default(2)->nullable();
             $table->foreign('autor_id')
             ->references('id')->on('autors')
             ->onDelete('set default')->onUpdate('cascade');
             $table->string('portada')->default('storage/img/musica/default.png');
             $table->string('ruta')->default('storage/music/default.ogg');
             $table->integer('numCancion')->default(0);
-            $table->foreignId('genero_id')->default(0);
+            $table->foreignId('genero_id')->default(2);
             $table->foreign('genero_id')
             ->references('id')->on('generos')
             ->onDelete('set default')->onUpdate('cascade');

@@ -91,7 +91,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form method="POST" action="{{route('formAdd')}}">
                         <div class="modal-body" style="background-color: #192229">
                             @csrf
                             <h5 style="color: #EFF3F5;">Tipo</h5>
@@ -108,17 +108,22 @@
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Título</h5>
                                 <input type="text" class="form-control border-0"
-                                    placeholder="Pon el nombre de la canción o el álbum"
+                                    placeholder="Pon el nombre de la canción o el álbum" name="titulo"
                                     style="background-color:#212E36; color: #C8CDD0;" title="" required>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Autor</h5>
-                                <input type="text" class="form-control border-0" placeholder="Pon el nombre del autor"
+                                <input type="text" class="form-control border-0" placeholder="Pon el nombre del autor" name="autor"
                                     style="background-color:#212E36; color: #C8CDD0;" required>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Tu correo</h5>
+                                <input type="text" class="form-control border-0" placeholder="Pon tu correo" name="correo"
+                                    style="background-color:#212E36; color: #C8CDD0;" @auth value={{Auth::user()->email}} @endauth required>
                             </div>
                         </div>
                         <div class="modal-footer border-primary" style="background-color: #0f2738;">
-                            <button type="button" class="btn btn-success">Enviar</button>
+                            <button type="submit" class="btn btn-success">Enviar</button>
                         </div>
                     </form>
                 </div>
@@ -136,7 +141,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form method="POST" action="{{route('formDelete')}}">
                         <div class="modal-body" style="background-color: #192229">
                             @csrf
                             <h5 style="color: #EFF3F5;">Tipo</h5>
@@ -154,11 +159,11 @@
                                 <h5 style="color: #EFF3F5;">Título</h5>
                                 <input type="text" class="form-control border-0"
                                     placeholder="Pon el nombre de la canción o el álbum"
-                                    style="background-color:#212E36; color: #C8CDD0;" title="" required>
+                                    style="background-color:#212E36; color: #C8CDD0;" title="" name="titulo" required>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Autor</h5>
-                                <input type="text" class="form-control border-0" placeholder="Pon el nombre del autor"
+                                <input type="text" class="form-control border-0" placeholder="Pon el nombre del autor" name="autor"
                                     style="background-color:#212E36; color: #C8CDD0;" required>
                             </div>
                             <div class="form-group">
@@ -166,11 +171,16 @@
                                 <textarea class="form-control border-0"
                                     placeholder="Si tienes algo más que comunicarnos"
                                     style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="4"
-                                    maxlength="200"></textarea>
+                                    maxlength="200" name="mensaje" required minlength="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Tu correo</h5>
+                                <input type="text" class="form-control border-0" placeholder="Pon tu correo" name="correo"
+                                    style="background-color:#212E36; color: #C8CDD0;" @auth value={{Auth::user()->email}} @endauth required>
                             </div>
                         </div>
                         <div class="modal-footer border-primary" style="background-color: #0f2738;">
-                            <button type="button" class="btn btn-success">Enviar</button>
+                            <button type="submit" class="btn btn-success">Enviar</button>
                         </div>
                     </form>
                 </div>
@@ -188,23 +198,28 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form method="POST" action="{{route('formNegocios')}}">
                         <div class="modal-body" style="background-color: #192229">
                             @csrf
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Nombre de la empresa</h5>
-                                <input type="text" class="form-control border-0" placeholder="Nombre de tu empresa"
+                                <input type="text" class="form-control border-0" placeholder="Nombre de tu empresa" name="titulo"
                                     style="background-color:#212E36; color: #C8CDD0;" title="" required>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Intereses</h5>
-                                <textarea class="form-control border-0" placeholder="¿Que oferta de negocios tiene?"
+                                <textarea class="form-control border-0" placeholder="¿Que oferta de negocios tiene?" name="mensaje"
                                     style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="8"
-                                    maxlength="400"></textarea>
+                                    maxlength="400" required minlength="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <h5 style="color: #EFF3F5;">Tu correo</h5>
+                                <input type="text" class="form-control border-0" placeholder="Pon tu correo" name="correo"
+                                    style="background-color:#212E36; color: #C8CDD0;" @auth value={{Auth::user()->email}} @endauth required>
                             </div>
                         </div>
                         <div class="modal-footer border-primary" style="background-color: #0f2738;">
-                            <button type="button" class="btn btn-success">Enviar</button>
+                            <button type="submit" class="btn btn-success">Enviar</button>
                         </div>
                     </form>
                 </div>
@@ -222,24 +237,29 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form>
+                        <form method="POST" action="{{route('formOtros')}}">
                             <div class="modal-body" style="background-color: #192229">
                                 @csrf
                                 <div class="form-group">
                                     <h5 style="color: #EFF3F5;">Titulo</h5>
                                     <input type="text" class="form-control border-0"
-                                        placeholder="Pon el nombre de la canción o el álbum"
-                                        style="background-color:#212E36; color: #C8CDD0;" title="" required>
+                                        placeholder="Breve descripción de lo que necesitas"
+                                        style="background-color:#212E36; color: #C8CDD0;" title="" name="titulo" required>
                                 </div>
                                 <div class="form-group">
                                     <h5 style="color: #EFF3F5;">Descripción</h5>
                                     <textarea class="form-control border-0" placeholder="¿Necesitas algo?"
                                         style="background-color:#212E36; color: #C8CDD0; resize:none;" rows="4"
-                                        maxlength="200"></textarea>
+                                        maxlength="200" name="mensaje" required minlength="5"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <h5 style="color: #EFF3F5;">Tu correo</h5>
+                                    <input type="text" class="form-control border-0" placeholder="Pon tu correo" name="correo"
+                                        style="background-color:#212E36; color: #C8CDD0;" @auth value={{Auth::user()->email}} @endauth required>
                                 </div>
                             </div>
                             <div class="modal-footer border-primary" style="background-color: #0f2738;">
-                                <button type="button" class="btn btn-success">Enviar</button>
+                                <button type="submit" class="btn btn-success">Enviar</button>
                             </div>
                         </form>
                     </div>
