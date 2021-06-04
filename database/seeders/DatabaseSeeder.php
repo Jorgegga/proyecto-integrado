@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AutorSeeder::class);
         \App\Models\Autor::factory(20)->create();
         $this->call(AlbumSeeder::class);
-        \App\Models\Album::factory(30)->create();
+        \App\Models\Album::factory(20)->create();
         //$this->call(MusicSeeder::class);
         \App\Models\Music::factory(100)->create();
         $this->call(UserSeeder::class);

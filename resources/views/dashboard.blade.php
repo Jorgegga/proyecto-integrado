@@ -67,7 +67,7 @@
                 <div class="resCarousel-inner">
                     @foreach ($autorNew as $item)
                     <a href="{{route('verAutor', ['autor' => $item, 'nombre'=> $item->nombre])}}">
-                    <div class="item">
+                    <div class="item" title="{{$item->nombre}}">
                         <div class="tile">
                             <img src="{{asset($item->foto)}}" style="height:300px; width:300px" class="img-responsive">
                         </div>

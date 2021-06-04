@@ -19,7 +19,7 @@
     </div>
     <!--</div>-->
 </section>
-<table class="table table-sm table-dark">
+<table class="table table-sm table-dark table-responsive-sm">
     <thead>
         <tr>
             <th scope="col">Nombre</th>

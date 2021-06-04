@@ -4,11 +4,12 @@
     <x-slot name="fonts">
     </x-slot>
     <x-slot name="styles">
-        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet" >
+        <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet">
         <style>
-            .green-audio-player{
+            .green-audio-player {
                 background-color: #0c171d;
             }
+
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
@@ -16,17 +17,20 @@
         <script src="{{ asset('js/green-audio-player.js') }}" defer></script>
     </x-slot>
     <x-slot name="header">
-        <h2 class="h4 font-semibold text-white">
-            {{$album->nombre}}
-        </h2>
-        <div style="display: flex; align-items:center;">
-        <img src='{{ asset($album->portada) }}' class="img-thumbnail img-fluid" alt="Responsive image" style="height: 200px;">
-        <p class="ml-3" style="color: #C8CDD0;">{{$album->descripcion}}</p>
-    </div>
+        <div class="pt-2 pl-3 pb-3 w-75 mx-auto rounded animate__animated animate__fadeIn" style="background-color:#212E36;">
+            <h2 class="h2 font-semibold text-white">
+                {{ $album->nombre }}
+            </h2>
+            <div style="display: flex; align-items:center;">
+                <img src='{{ asset($album->portada) }}' class="img-fluid rounded" alt="Responsive image"
+                    style="height: 250px;">
+                <p class="ml-3" style="color: #C8CDD0;font-size: 20px">{{ $album->descripcion }}</p>
+            </div>
+        </div>
     </x-slot>
 
     <x-slot name="cuerpo">
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark table-responsive-sm animate__animated animate__fadeInUp">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
@@ -35,7 +39,7 @@
                     <th scope="col">Pista</th>
                     <th scope="col">Play</th>
                     @auth
-                    <th scope="col">Añadir</th>
+                        <th scope="col">Añadir</th>
                     @endauth
                 </tr>
             </thead>
@@ -44,33 +48,37 @@
                     <tr>
                         <td>{{ $item->nombre }}</td>
                         <td>
-                            {{$album->nombre}}
+                            {{ $album->nombre }}
                         </td>
-                        <td><a href="{{route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre])}}">{{$item->autor->nombre}}</a></td>
+                        <td><a
+                                href="{{ route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre]) }}">{{ $item->autor->nombre }}</a>
+                        </td>
                         <td>{{ $item->numCancion }}</td>
-                        <td><div class="audioExample"><audio preload="auto" id='{{ $item->id }}' onplay="parar(this.id)"
-                            onended="siguiente(this.id)">
-                            <source src="{{ asset($item->ruta) }}" type="audio/ogg">
-                            <source src="{{ asset($item->ruta) }}" type="audio/mp3">
-                            No lo soporta
-                        </audio></div>
-                    </td>
-                    @auth
-                    <td>
-                        @if ($playMusic->musicExist(Auth::user(), $item->id) == 0)
-                            <form method="POST"
-                                action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
-                                id="anadirPlaylist{{ $item->id }}" onsubmit="submitForm(event, {{ $item->id }})">
-                                @csrf
-                                <button id="btn{{ $item->id }}" type="submit" title="Añadir a tu playlist"><i
-                                        class="fas fa-plus"></i></button>
-                            </form>
-                        @else
-                            <button type="submit" title="Ya esta en tu playlist" disabled><i
-                                    class="fas fa-plus"></i></button>
-                        @endif
-                    </td>
-                @endauth
+                        <td>
+                            <div class="audioExample"><audio preload="auto" id='{{ $item->id }}'
+                                    onplay="parar(this.id)" onended="siguiente(this.id)">
+                                    <source src="{{ asset($item->ruta) }}" type="audio/ogg">
+                                    <source src="{{ asset($item->ruta) }}" type="audio/mp3">
+                                    No lo soporta
+                                </audio></div>
+                        </td>
+                        @auth
+                            <td>
+                                @if ($playMusic->musicExist(Auth::user(), $item->id) == 0)
+                                    <form method="POST"
+                                        action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
+                                        id="anadirPlaylist{{ $item->id }}"
+                                        onsubmit="submitForm(event, {{ $item->id }})">
+                                        @csrf
+                                        <button id="btn{{ $item->id }}" type="submit" title="Añadir a tu playlist"><i
+                                                class="fas fa-plus"></i></button>
+                                    </form>
+                                @else
+                                    <button type="submit" title="Ya esta en tu playlist" disabled><i
+                                            class="fas fa-plus"></i></button>
+                                @endif
+                            </td>
+                        @endauth
                     </tr>
                 @endforeach
             </tbody>
@@ -80,14 +88,14 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var audios = document.getElementsByClassName("audioExample");
-                for (var i = 0; i<audios.length;i++){
+                for (var i = 0; i < audios.length; i++) {
                     new GreenAudioPlayer(audios[i], {
                         selector: '.player',
                         stopOthersOnPlay: true,
                     });
                 }
 
-                });
+            });
 
             function parar(idEl) {
                 var elementos = document.getElementsByTagName('audio');
@@ -96,9 +104,9 @@
                         if (elementos[i].id == idEl) {
                             var playPromise = elementos[i].play();
                             //Es necesario para que no salte error
-                            playPromise.then(_ =>{
+                            playPromise.then(_ => {
 
-                            }).catch(error =>{
+                            }).catch(error => {
 
                             });
 

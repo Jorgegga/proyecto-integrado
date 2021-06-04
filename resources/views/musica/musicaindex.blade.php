@@ -9,6 +9,9 @@
             .green-audio-player {
                 background-color: #0c171d;
             }
+            .dataTables_wrapper{
+                color:white;
+            }
 
         </style>
     </x-slot>
@@ -35,7 +38,7 @@
             class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn animate__slow">
             <!--<div class="col-10 pr-3">-->
 
-            <table class="table table-striped table-dark" id="tabla">
+            <table class="table table-striped table-dark table-responsive-sm" id="tabla">
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>

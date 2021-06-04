@@ -11,7 +11,7 @@
     data-target="#createForm" role="tab">
     Crear usuario
 </button>
-<table class="table table-striped table-dark  animate__animated animate__fadeIn" id="tabla">
+<table class="table table-striped table-dark table-responsive-sm animate__animated animate__fadeIn" id="tabla">
     <thead>
         <tr>
             <th scope="col">Foto</th>

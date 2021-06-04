@@ -114,7 +114,7 @@
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Autor</h5>
                                 <input type="text" class="form-control border-0" placeholder="Pon el nombre del autor" name="autor"
-                                    style="background-color:#212E36; color: #C8CDD0;" required>
+                                    style="background-color:#212E36; color: #C8CDD0;" title="" required>
                             </div>
                             <div class="form-group">
                                 <h5 style="color: #EFF3F5;">Tu correo</h5>

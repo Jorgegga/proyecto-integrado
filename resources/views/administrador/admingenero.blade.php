@@ -10,7 +10,7 @@
 <button class="btn btn-primary mb-2 rounded contact  animate__animated animate__fadeIn" data-toggle="modal" data-target="#createForm" role="tab">
     Crear género
 </button>
-<table class="table table-striped table-dark  animate__animated animate__fadeIn" id="tabla">
+<table class="table table-striped table-responsive-sm table-dark  animate__animated animate__fadeIn" id="tabla">
     <thead>
         <tr>
             <th scope="col">Portada</th>

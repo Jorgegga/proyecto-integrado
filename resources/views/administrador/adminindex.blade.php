@@ -48,6 +48,10 @@
                 display: none;
             }
 
+            .dataTables_wrapper{
+                color:white;
+            }
+
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
@@ -59,11 +63,11 @@
         </h2>
     </x-slot>
     <x-slot name="cuerpo">
-        <button class="btn btn-primary" onclick="cambio('Album')">Album</button>
-        <button class="btn btn-primary" onclick="cambio('Autor')">Autor</button>
-        <button class="btn btn-primary" onclick="cambio('Music')">Música</button>
-        <button class="btn btn-primary" onclick="cambio('Genero')">Género</button>
-        <button class="btn btn-primary" onclick="cambio('User')">Usuario</button>
+        <button class="btn btn-primary" onclick="cambio('album')">Album</button>
+        <button class="btn btn-primary" onclick="cambio('autor')">Autor</button>
+        <button class="btn btn-primary" onclick="cambio('music')">Música</button>
+        <button class="btn btn-primary" onclick="cambio('genero')">Género</button>
+        <button class="btn btn-primary" onclick="cambio('user')">Usuario</button>
         <x-mensajes-alertas></x-mensajes-alertas>
         <div class="w-100 " id="cuerpo">
         </div>
@@ -77,54 +81,14 @@
                 $('#cuerpo').load(`${tabla}`);
             };
 
+            //Botones de cambio de tabla
             function cambio(tabla) {
-                switch(tabla){
-                    case "Album":
-                    var link = "{{route('adminAlbum')}}";
-                    break;
-                    case "Autor":
-                    var link = "{{route('adminAutor')}}";
-                    break;
-                    case "Music":
-                    var link = "{{route('adminMusic')}}";
-                    break;
-                    case "Genero":
-                    var link = "{{route('adminGenero')}}";
-                    break;
-                    case "User":
-                    var link = "{{route('adminUser')}}";
-                    break;
-                    default:
-                    var link = "{{route('adminAlbum')}}";
-                    break;
-                }
+                var link = ruta(tabla);
+                console.log(link);
                 $('#cuerpo').load(`${link}`);
             }
 
-            function carga(id, nombre) {
-                switch(nombre){
-                    case "Album":
-                    var link = "{{route('adminAlbum')}}";
-                    break;
-                    case "Autor":
-                    var link = "{{route('adminAutor')}}";
-                    break;
-                    case "Music":
-                    var link = "{{route('adminMusic')}}";
-                    break;
-                    case "Genero":
-                    var link = "{{route('adminGenero')}}";
-                    break;
-                    case "User":
-                    var link = "{{route('adminUser')}}";
-                    break;
-                    default:
-                    var link = "{{route('adminAlbum')}}";
-                    break;
-                }
-                $('#cuerpo').load(link);
-            }
-
+            //Al realizar alguna acción del crud, regresar a la tabla en la que te encontrabas.
             function parametroTabla() {
                 var queryString = window.location.search;
                 var urlParams = new URLSearchParams(queryString);
@@ -132,7 +96,13 @@
                 if (tabla == null) {
                     tabla = "{{route('adminAlbum')}}";
                 }else{
-                    switch(tabla){
+                    return ruta(tabla);
+                }
+            }
+
+            //switch con las rutas donde tienes que ir
+            function ruta(tabla){
+                switch(tabla){
                     case "album":
                     return link = "{{route('adminAlbum')}}";
                     break;
@@ -151,7 +121,6 @@
                     default:
                     return link = "{{route('adminAlbum')}}";
                     break;
-                }
                 }
             }
 

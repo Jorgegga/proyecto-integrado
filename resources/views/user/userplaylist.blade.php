@@ -22,7 +22,7 @@
     </x-slot>
     <x-slot name="cuerpo">
         <x-mensajes-alertas></x-mensajes-alertas>
-        <div class="w-100 animate__animated animate__fadeIn " id="cuerpo">
+        <div class="w-100 animate__animated animate__fadeIn table-responsive-sm" id="cuerpo">
             <table class="table table-striped table-dark">
                 <thead>
                     <tr>

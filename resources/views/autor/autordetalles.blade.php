@@ -8,6 +8,43 @@
     <x-slot name="styles">
         <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet">
         <style>
+            .card {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .card-title {
+                font-weight: bold;
+            }
+
+            .card img {
+                width: 30%;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: calc(0.25rem - 1px);
+            }
+
+            .card-text{
+                color: #C8CDD0;
+            }
+
+            @media only screen and (max-width: 768px) {
+                a {
+                    display: none;
+                }
+
+                .card-body {
+                    padding: 0.5em 1.2em;
+                }
+
+                .card-body .card-text {
+                    margin: 0;
+                }
+
+                .card img {
+                    width: 50%;
+                }
+            }
+
             .green-audio-player {
                 background-color: #0c171d;
             }
@@ -19,15 +56,35 @@
         <script src="{{ asset('js/green-audio-player.js') }}" defer></script>
     </x-slot>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ $autor->nombre }}
-        </h2>
+        <section
+            class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn"
+            id="autores">
+            <!--<div class="col-10 pr-3">-->
+                <div class="card w-75" style="background-color:#212E36;">
+                    <img src='{{ asset($autor->foto) }}' class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size:1.75vw; text-align: left; color: #EFF3F5">
+                            {{ $autor->nombre }}</h5>
+                        <p class="card-text" style="font-size:0.9vw; color: #C8CDD0">
+                            {{ $autor->descripcion }}
+                        </p>
+                        <p class="card-text">
+                            <b>Álbums: </b>{{$autor->album->count('id')}}
+                        </p>
+                        <p class="card-text float-md-right" style="margin-top: -6%">
+                            <b>Temas: </b>{{$autor->music->count('id')}}
+                        </p>
+                    </div>
+                </div>
+            <!--</div>-->
+        </section>
+
     </x-slot>
     <x-slot name="cuerpo">
-        <h3 class="font-semibold text-xl text-white leading-tight text-center">
+        <h3 class="font-semibold text-xl text-white leading-tight text-center animate__animated animate__fadeInDown">
             Últimos albums de {{ $autor->nombre }}
         </h3>
-        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3" data-ride="carousel">
+        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeIn" data-ride="carousel">
             <ol class="carousel-indicators">
                 @foreach ($album as $item)
                     <li data-target="#ultimosAlbum" data-slide-to="{{ $loop->index }}"
@@ -54,7 +111,7 @@
             </a>
         </div>
 
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark table-responsive-sm animate__animated animate__fadeInUp mt-4">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
