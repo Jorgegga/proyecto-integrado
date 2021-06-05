@@ -14,14 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
+
     {{ $fonts }}
 
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-
-
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}" />
     {{ $styles }}
 
     <!-- Scripts -->
@@ -49,6 +49,24 @@
     </main>
 
     @include('layouts.footer')
+
+        <script>
+                //Posiciona el footer en la parte de abajo a pesar de que la pantalla sea pequeña
+
+$(document).ready(function(){
+    if($("body").height() < $(window).height()){
+        $("footer").css({"position":"absolute", "bottom":"0px"});
+    }
+});
+
+//En caso de cambiar el tamaño de la ventana, ya sea porque la pasamos a otro monitor u otro motivo
+//esto hara que permanezca abajo
+window.onresize = function(event){
+    if($("body").height() < $(window).height()){
+        $("footer").css({"position":"absolute", "bottom":"0px"});
+    }
+}
+        </script>
 
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>

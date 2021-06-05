@@ -6,6 +6,45 @@
     <x-slot name="styles">
         <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet">
         <style>
+            .card {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .card-title {
+                font-weight: bold;
+            }
+
+            .card img {
+                width: 30%;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: calc(0.25rem - 1px);
+            }
+
+            @media only screen and (max-width: 768px) {
+                a {
+                    display: none;
+                }
+
+                .card-body {
+                    padding: 0.5em 1.2em;
+                }
+
+                .card-body .card-text {
+                    margin: 0;
+                }
+
+                .card img {
+                    width: 50%;
+                }
+            }
+
+            @media only screen and (max-width: 1200px) {
+                .card img {
+                    width: 40%;
+                }
+            }
+
             .green-audio-player {
                 background-color: #0c171d;
             }
@@ -17,16 +56,26 @@
         <script src="{{ asset('js/green-audio-player.js') }}" defer></script>
     </x-slot>
     <x-slot name="header">
-        <div class="pt-2 pl-3 pb-3 w-75 mx-auto rounded animate__animated animate__fadeIn" style="background-color:#212E36;">
-            <h2 class="h2 font-semibold text-white">
-                {{ $album->nombre }}
-            </h2>
-            <div style="display: flex; align-items:center;">
-                <img src='{{ asset($album->portada) }}' class="img-fluid rounded" alt="Responsive image"
-                    style="height: 250px;">
-                <p class="ml-3" style="color: #C8CDD0;font-size: 20px">{{ $album->descripcion }}</p>
-            </div>
-        </div>
+
+        <section
+            class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn"
+            id="autores">
+            <!--<div class="col-10 pr-3">-->
+                <div class="card w-md-75 w-sm-100 fondo-gris">
+                    <img src='{{ asset($album->portada) }}' class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title titulo" style="font-size:1.75em; text-align: left;">
+                            {{ $album->nombre }}</h5>
+                        <p class="card-text parrafo" style="font-size:0.9em;">
+                            {{ $album->descripcion }}
+                        </p>
+                        <p class="card-text parrafo">
+                            <b>Temas: </b>{{$album->music->count('id')}}
+                        </p>
+                    </div>
+                </div>
+            <!--</div>-->
+        </section>
     </x-slot>
 
     <x-slot name="cuerpo">

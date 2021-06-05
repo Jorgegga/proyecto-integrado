@@ -4,7 +4,7 @@
     Modificación de autor
 </h3>
 <x-mensajes-alertas></x-mensajes-alertas>
-<button class="btn btn-primary mb-2 rounded contact  animate__animated animate__fadeIn" data-toggle="modal" data-target="#createFormaut" role="tab">
+<button class="btn btn-dark mb-2 rounded contact  animate__animated animate__fadeIn" data-toggle="modal" data-target="#createFormaut" role="tab">
     Crear autor
 </button>
 <table class="table table-striped table-responsive-sm table-dark  animate__animated animate__fadeIn" id="tabla">

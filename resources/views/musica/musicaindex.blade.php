@@ -9,8 +9,9 @@
             .green-audio-player {
                 background-color: #0c171d;
             }
-            .dataTables_wrapper{
-                color:white;
+
+            .dataTables_wrapper {
+                color: white;
             }
 
         </style>
@@ -37,62 +38,63 @@
         <section
             class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn animate__slow">
             <!--<div class="col-10 pr-3">-->
-
-            <table class="table table-striped table-dark table-responsive-sm" id="tabla">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Álbum</th>
-                        <th scope="col">Autor</th>
-                        <th scope="col">Género</th>
-                        <th scope="col">Play</th>
-                        @auth
-                        <th scope="col">Añadir</th>
-                        @endauth
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($musica as $item)
+            <div class="table-responsive">
+                <table class="table table-striped table-dark" id="tabla">
+                    <thead>
                         <tr>
-                            <td>{{ $item->nombre }}</td>
-                            <td>
-                                <a
-                                    href="{{ route('verAlbum', ['album' => $item->album->id, 'nombre' => $item->album->nombre]) }}">{{ $item->album->nombre }}</a>
-                            </td>
-                            <td><a
-                                    href="{{ route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre]) }}">{{ $item->autor->nombre }}</a>
-                            </td>
-                            <td>{{ ucfirst($item->genero->nombre) }}</td>
-                            <!-- Los audios cargan correctamente en apache y al usar php artisan serve en modo incognito -->
-                            <td>
-                                <div class="audioExample"><audio preload="none" id='{{ $item->id }}'
-                                        onplay="parar(this.id)" onended="siguiente(this.id)">
-                                        <source src="{{ asset($item->ruta) }}" type="audio/ogg">
-                                        <source src="{{ asset($item->ruta) }}" type="audio/mp3">
-                                        No lo soporta
-                                    </audio></div>
-                            </td>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Álbum</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Género</th>
+                            <th scope="col">Play</th>
                             @auth
-                            <td>
-                                @if($playMusic->musicExist(Auth::user(), $item->id) == 0)
-                                <form method="POST"
-                                    action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
-                                    id="anadirPlaylist{{ $item->id }}"
-                                    onsubmit="submitForm(event, {{ $item->id }})">
-                                    @csrf
-                                    <button id="btn{{$item->id}}" type="submit" title="Añadir a tu playlist"><i
-                                            class="fas fa-plus"></i></button>
-                                </form>
-                                @else
-                                <button type="submit" title="Ya esta en tu playlist" disabled><i
-                                    class="fas fa-plus"></i></button>
-                                @endif
-                            </td>
+                                <th scope="col">Añadir</th>
                             @endauth
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($musica as $item)
+                            <tr>
+                                <td>{{ $item->nombre }}</td>
+                                <td>
+                                    <a
+                                        href="{{ route('verAlbum', ['album' => $item->album->id, 'nombre' => $item->album->nombre]) }}">{{ $item->album->nombre }}</a>
+                                </td>
+                                <td><a
+                                        href="{{ route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre]) }}">{{ $item->autor->nombre }}</a>
+                                </td>
+                                <td>{{ ucfirst($item->genero->nombre) }}</td>
+                                <!-- Los audios cargan correctamente en apache y al usar php artisan serve en modo incognito -->
+                                <td>
+                                    <div class="audioExample"><audio preload="none" id='{{ $item->id }}'
+                                            onplay="parar(this.id)" onended="siguiente(this.id)">
+                                            <source src="{{ asset($item->ruta) }}" type="audio/ogg">
+                                            <source src="{{ asset($item->ruta) }}" type="audio/mp3">
+                                            No lo soporta
+                                        </audio></div>
+                                </td>
+                                @auth
+                                    <td>
+                                        @if ($playMusic->musicExist(Auth::user(), $item->id) == 0)
+                                            <form method="POST"
+                                                action="{{ route('playlists.store', ['user' => Auth::user()->id, 'music' => $item->id]) }}"
+                                                id="anadirPlaylist{{ $item->id }}"
+                                                onsubmit="submitForm(event, {{ $item->id }})">
+                                                @csrf
+                                                <button id="btn{{ $item->id }}" type="submit"
+                                                    title="Añadir a tu playlist"><i class="fas fa-plus"></i></button>
+                                            </form>
+                                        @else
+                                            <button type="submit" title="Ya esta en tu playlist" disabled><i
+                                                    class="fas fa-plus"></i></button>
+                                        @endif
+                                    </td>
+                                @endauth
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             <!--</div>-->
         </section>
@@ -100,7 +102,7 @@
     </x-slot>
     <x-slot name="script">
         <script>
-            $(document).ready(function(){
+            $(document).ready(function() {
                 $('#tabla').DataTable();
             });
 
@@ -109,7 +111,7 @@
                     "processing": true,
                     "serverSide": true,
                     "ajax":{
-                        url:"{{url('api/musics')}}",
+                        url:"{{ url('api/musics') }}",
 
                         dataType: 'json',
                         contentType: 'application/json; charset=utf-8',

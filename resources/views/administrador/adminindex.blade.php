@@ -63,15 +63,15 @@
         </h2>
     </x-slot>
     <x-slot name="cuerpo">
-        <button class="btn btn-primary" onclick="cambio('album')">Album</button>
-        <button class="btn btn-primary" onclick="cambio('autor')">Autor</button>
-        <button class="btn btn-primary" onclick="cambio('music')">Música</button>
-        <button class="btn btn-primary" onclick="cambio('genero')">Género</button>
-        <button class="btn btn-primary" onclick="cambio('user')">Usuario</button>
+        <button class="btn btn-dark" onclick="cambio('album')">Album</button>
+        <button class="btn btn-dark" onclick="cambio('autor')">Autor</button>
+        <button class="btn btn-dark" onclick="cambio('music')">Música</button>
+        <button class="btn btn-dark" onclick="cambio('genero')">Género</button>
+        <button class="btn btn-dark" onclick="cambio('user')">Usuario</button>
         <x-mensajes-alertas></x-mensajes-alertas>
         <div class="w-100 " id="cuerpo">
         </div>
-        <a href="{{ route('inicios.index') }}"><button class="btn btn-primary">Volver</button></a>
+        <a href="{{ route('inicios.index') }}"><button class="btn btn-dark">Volver</button></a>
     </x-slot>
     <x-slot name="script">
         <script>

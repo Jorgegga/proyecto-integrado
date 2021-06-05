@@ -6,68 +6,6 @@
         <link href="{{ asset('css/green-audio-player.css') }}" rel="stylesheet">
     </x-slot>
     <x-slot name="styles">
-        <style>
-            .modal-body .card {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .modal-body .card-title {
-                font-weight: bold;
-            }
-
-            .modal-body .card img {
-                width: 40%;
-                border-top-right-radius: 0;
-                border-bottom-left-radius: calc(0.25rem - 1px);
-            }
-
-            @media only screen and (max-width: 768px) {
-                .modal-body a {
-                    display: none;
-                }
-
-                .modal-body .card-body {
-                    padding: 0.5em 1.2em;
-                }
-
-                .modal-body .card-body .card-text {
-                    margin: 0;
-                }
-
-                .modal-body .card img {
-                    width: 50%;
-                }
-            }
-
-            @media only screen and (max-width: 1200px) {
-                .modal-body .card img {
-                    width: 40%;
-                }
-            }
-
-            .green-audio-player {
-                background-color: #0c171d;
-            }
-
-            .select2-container {
-                background-color: #212E36;
-                color: #C8CDD0;
-            }
-
-            .select2-container .select2-results__option {
-                background-color: #212E36;
-                color: #C8CDD0;
-            }
-
-            .select2-container .select2-results__option--highlighted[aria-selected] {
-                background-color: #C8CDD0;
-                color: #212E36;
-            }
-
-
-
-        </style>
     </x-slot>
     <x-slot name="scriptsCDN">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -86,10 +24,10 @@
     <x-slot name="cuerpo">
         <div class="py-12 animate__animated animate__fadeInDown">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
-                <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
+                <div class="overflow-hidden shadow-sm rounded pt-2 fondo-gris">
                     <div class="p-6 border-b border-gray-200 text-center">
-                        <h4 style="color: #EFF3F5">¡Álbums de todo tipo!</h4>
-                        <p style="color: #C8CDD0">Tenemos una gran selección de álbums que hemos ido añadiendo con el
+                        <h4 class="titulo">¡Álbums de todo tipo!</h4>
+                        <p class="parrafo">Tenemos una gran selección de álbums que hemos ido añadiendo con el
                             tiempo.<br> Si hay alguno que no está mandanos un correo, ¡y en la medida de lo posible
                             intetaremos añadirlo a nuestro repertorio! </p>
                     </div>
@@ -99,13 +37,14 @@
         <div class="row justify-content-center ">
             <div class="col-md-5 col-sm-10 animate__animated animate__fadeInLeft">
                 <form name="b" action={{ route('albums.index') }}>
-                    <select class="livesearch custom-select w-sm-30 w-md-50 mb-sm-5" name="livesearch" onchange="this.form.submit()"></select>
+                    <select class="livesearch custom-select w-sm-30 w-md-50 mb-sm-5" name="livesearch"
+                        onchange="this.form.submit()"></select>
                 </form>
             </div>
             <div class="animate__animated animate__fadeInRight col-md-5 col-sm-10 float-right">
                 <form name="b" action={{ route('albums.index') }}>
-                    <select class="custom-select" style="background-color:#212E36; color: #C8CDD0; border:none;"
-                        name="tematica" onchange="this.form.submit()">
+                    <select class="custom-select select-generos" name="tematica"
+                        onchange="this.form.submit()">
                         <option value="%">Todos</option>
                         @foreach ($genero as $item)
                             @if ($request->tematica == " $item->id")
@@ -124,24 +63,23 @@
             <!--<div class="col-10 pr-3">-->
             @foreach ($album as $item)
                 <a href="{{ route('verAlbum', ['album' => $item, 'nombre' => $item->nombre]) }}">
-                    <div class="card col-md-3 col-sm-3 mr-sm-5 mr-md-5 pt-3 mt-4"
-                        style="width: 18rem; background-color:#212E36; font-family: 'New Tegomin', serif; font-weight: bold;">
+                    <div class="card col-md-3 col-sm-7 mr-sm-5 mr-md-5 pt-3 mt-4 card-style">
                         <img class="card-img-top" src='{{ asset($item->portada) }}' alt="Card image cap"
                             style="height:300px;">
                         <div class="card-body align-items-center">
-                            <p class="card-title" style="font-size:1.2vw; text-align: center; color: #EFF3F5">
+                            <p class="card-title titulo-carta">
                                 {{ $item->nombre }}</p>
                         </div>
-                        <div class="card-footer text-center mt-auto" style="background-color:#212E36;">
+                        <div class="card-footer text-center mt-auto fondo-gris">
                             <p><a href="{{ route('verAlbum', ['album' => $item->id, 'nombre' => $item->nombre]) }}"
                                     class="btn btn-primary mb-1">Ir al álbum</a></p>
                             <p><button class="btn btn-success" data-toggle="modal" data-target="#albumRaw" role="tab"
                                     title="Raw" onclick="carga('{{ $item->id }}', '{{ $item->nombre }}')">Modo
                                     ventana</button></p>
                             <a href="{{ route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre]) }}"
-                                class="text-muted text-left" style="float:left;">
+                                class="text-muted text-left float-left">
                                 {{ $item->autor->nombre }}</a>
-                            <p class="text-muted text-right" style="float:right;">
+                            <p class="text-muted text-right float-right">
                                 {{ $item->music->count('id') }}
                                 temas</p>
                         </div>
@@ -151,28 +89,28 @@
             <!--</div>-->
 
         </section>
-        @if($request->livesearch != "")
-        <div class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 mr-4 animate__animated animate__fadeIn">
-        <a href="{{route('albums.index')}}" class="btn btn-primary w-25">Volver</a>
-        </div>
+        @if ($request->livesearch != '')
+            <div
+                class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 mr-4 animate__animated animate__fadeIn">
+                <a href="{{ route('albums.index') }}" class="btn btn-primary w-25">Volver</a>
+            </div>
         @endif
         <!--<p><button class="btn btn-primary" id='carga' onclick="carga()"></button></p>-->
         <div class="modal fade rounded" id="albumRaw" data-backdrop="static" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-header border-bottom border-primary"
-                        style="background-color: #0f2738; color: #EFF3F5;">
+                    <div class="modal-header border-bottom border-primary titulo modal-cabecera">
                         <h4 class="modal-title" id="modalHeader">Álbum</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                             onclick="pararTodo()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" id="modalBody" style="background-color: #192229">
+                    <div class="modal-body modal-cuerpo" id="modalBody">
 
                     </div>
-                    <div class="modal-footer border-primary" style="background-color: #0f2738;">
+                    <div class="modal-footer border-primary modal-cabecera">
                         <button type="submit" class="btn btn-success" data-dismiss="modal"
                             onclick="pararTodo()">Volver</button>
                     </div>
@@ -235,7 +173,7 @@
                 placeholder: 'Buscar álbum',
                 theme: "default",
                 ajax: {
-                    url: '{{ route('albumAuto') }}',
+                    url: "{{ route('albumAuto') }}",
                     dataType: 'json',
                     delay: 250,
                     processResults: function(data) {

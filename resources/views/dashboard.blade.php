@@ -11,7 +11,7 @@
     </x-slot>
     <x-slot name="header">
 
-        <h2 class="font-semibold text-xl text-white leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight titulo-align">
             {{ __('Inicio') }}
         </h2>
 
@@ -19,10 +19,10 @@
     <x-slot name="cuerpo">
         <div class="py-12 animate__animated animate__fadeInDown">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
-                <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
+                <div class="overflow-hidden shadow-sm rounded pt-2 fondo-gris">
                     <div class="p-6 border-b border-gray-200 text-center">
-                        <h4 style="color: #EFF3F5">¡Bienvenido a la página principal!</h4>
-                        <p style="color: #C8CDD0">Aquí encontraras los últimos álbums que hemos añadido a nuestro repertorio junto con alguna cosilla más, ¡disfrutalos!</p>
+                        <h4 class="titulo">¡Bienvenido a la página principal!</h4>
+                        <p class="parrafo">Aquí encontraras los últimos álbums que hemos añadido a nuestro repertorio junto con alguna cosilla más, ¡disfrutalos!</p>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         </h3>
         <!--A este paquete de animaciones al parecer no le gusta el carousel de bootstrap y si pones una animacion desde los lados
         la pagina recibe una embolia y todos los elementos de la pagina reciben animaciones raras-->
-        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeIn" data-ride="carousel">
+        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeIn"  data-ride="carousel">
             <ol class="carousel-indicators">
                 @foreach ($albumNew as $item)
                     <li data-target="#ultimosAlbum" data-slide-to="{{ $loop->index }}"
@@ -43,8 +43,7 @@
                 @foreach ($albumNew as $item)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}"  title="{{$item->nombre}}">
                         <a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}">
-                        <img class="d-block w-50 m-auto img-responsive"  src="{{ asset($item->portada) }}"
-                            style="height:500px; width:500px">
+                            <img src="{{asset($item->portada)}}" class="img-responsive d-block m-auto img-peque">
                         </a>
                     </div>
                 @endforeach
@@ -63,13 +62,13 @@
             <h3 class="font-semibold text-xl text-white leading-tight text-center">
                 Últimos autores añadidos
             </h3>
-            <div class="resCarousel" data-items="2-4-4-4" data-interval="2000" data-slide="1" data-animator="lazy">
+            <div class="resCarousel" data-items="2-4-4-4" data-interval="2000" data-slide="2" data-animator="lazy">
                 <div class="resCarousel-inner">
                     @foreach ($autorNew as $item)
                     <a href="{{route('verAutor', ['autor' => $item, 'nombre'=> $item->nombre])}}">
                     <div class="item" title="{{$item->nombre}}">
                         <div class="tile">
-                            <img src="{{asset($item->foto)}}" style="height:300px; width:300px" class="img-responsive">
+                            <img src="{{asset($item->foto)}}" class="carousel2img img-responsive ">
                         </div>
                     </div>
                 </a>
@@ -83,63 +82,7 @@
 
     </x-slot>
     <x-slot name="script">
-        <script>
-            //ResCarouselCustom();
-            var pageRefresh = true;
-
-            function ResCarouselCustom() {
-                var items = $("#dItems").val(),
-                    slide = $("#dSlide").val(),
-                    speed = $("#dSpeed").val(),
-                    interval = $("#dInterval").val()
-
-                var itemsD = "data-items=\"" + items + "\"",
-                    slideD = "data-slide=\"" + slide + "\"",
-                    speedD = "data-speed=\"" + speed + "\"",
-                    intervalD = "data-interval=\"" + interval + "\"";
-
-
-                var atts = "";
-                atts += items != "" ? itemsD + " " : "";
-                atts += slide != "" ? slideD + " " : "";
-                atts += speed != "" ? speedD + " " : "";
-                atts += interval != "" ? intervalD + " " : ""
-
-                //console.log(atts);
-
-                var dat = "";
-                dat += '<h4 >' + atts + '</h4>'
-                dat += '<div class=\"resCarousel\" ' + atts + '>'
-                dat += '<div class="resCarousel-inner">'
-                for (var i = 1; i <= 14; i++) {
-                    dat += '<div class=\"item\"><div><h1>' + i + '</h1></div></div>'
-                }
-                dat += '</div>'
-                dat += '<button class=\'btn btn-default leftRs\'><i class=\"fa fa-fw fa-angle-left\"></i></button>'
-                dat += '<button class=\'btn btn-default rightRs\'><i class=\"fa fa-fw fa-angle-right\"></i></button>    </div>'
-                console.log(dat);
-                $("#customRes").html(null).append(dat);
-
-                if (!pageRefresh) {
-                    ResCarouselSize();
-                } else {
-                    pageRefresh = false;
-                }
-                //ResCarouselSlide();
-            }
-
-            $("#eventLoad").on('ResCarouselLoad', function() {
-                //console.log("triggered");
-                var dat = "";
-                var lenghtI = $(this).find(".item").length;
-                if (lenghtI <= 30) {
-                    for (var i = lenghtI; i <= lenghtI + 10; i++) {
-                        dat += '<div class="item"><div class="tile"><div><h1>' + (i + 1) + '</h1></div><h3>Title</h3><p>content</p></div></div>'
-                    }
-                    $(this).append(dat);
-                }
-            });
-        </script>
+        <script src="{{asset('js/dashboard.js')}}"></script>
         <script src="{{asset('js/resCarousel.js')}}"></script>
     </x-slot>
 </x-app-layout>

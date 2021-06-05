@@ -28,10 +28,6 @@
             }
 
             @media only screen and (max-width: 768px) {
-                a {
-                    display: none;
-                }
-
                 .card-body {
                     padding: 0.5em 1.2em;
                 }
@@ -60,12 +56,12 @@
             class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4 animate__animated animate__fadeIn"
             id="autores">
             <!--<div class="col-10 pr-3">-->
-                <div class="card w-75" style="background-color:#212E36;">
+                <div class="card w-md-75 w-sm-100 fondo-gris">
                     <img src='{{ asset($autor->foto) }}' class="card-img-top" />
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size:1.75vw; text-align: left; color: #EFF3F5">
+                        <h5 class="card-title titulo" style="font-size:1.75em; text-align: left;">
                             {{ $autor->nombre }}</h5>
-                        <p class="card-text" style="font-size:0.9vw; color: #C8CDD0">
+                        <p class="card-text parrafo" style="font-size:0.9em;">
                             {{ $autor->descripcion }}
                         </p>
                         <p class="card-text">
@@ -84,7 +80,7 @@
         <h3 class="font-semibold text-xl text-white leading-tight text-center animate__animated animate__fadeInDown">
             Últimos albums de {{ $autor->nombre }}
         </h3>
-        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeIn" data-ride="carousel">
+        <div id="ultimosAlbum" class="carousel slide border-bottom border-secondary pb-3 animate__animated animate__fadeIn"  data-ride="carousel">
             <ol class="carousel-indicators">
                 @foreach ($album as $item)
                     <li data-target="#ultimosAlbum" data-slide-to="{{ $loop->index }}"
@@ -93,10 +89,9 @@
             </ol>
             <div class="carousel-inner">
                 @foreach ($album as $item)
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" title="{{ $item->nombre }}">
-                        <a href="{{ route('verAlbum', ['album' => $item->id, 'nombre' => $item->nombre]) }}">
-                            <img class="d-block w-40 m-auto img-responsive" src="{{ asset($item->portada) }}"
-                                style="height:400px; width:500px">
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}"  title="{{$item->nombre}}">
+                        <a href="{{route('verAlbum', ['album' => $item, 'nombre'=> $item->nombre])}}">
+                            <img src="{{asset($item->portada)}}" class="img-responsive d-block m-auto img-peque">
                         </a>
                     </div>
                 @endforeach

@@ -43,20 +43,6 @@
                 }
             }
 
-            .select2-container {
-                background-color: #212E36;
-                color: #C8CDD0;
-            }
-
-            .select2-container .select2-results__option {
-                background-color: #212E36;
-                color: #C8CDD0;
-            }
-
-            .select2-container .select2-results__option--highlighted[aria-selected] {
-                background-color: #C8CDD0;
-                color: #212E36;
-            }
 
         </style>
     </x-slot>
@@ -76,10 +62,10 @@
     <x-slot name="cuerpo">
         <div class="py-12 animate__animated animate__fadeInDown">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
-                <div class="overflow-hidden shadow-sm rounded pt-2" style="background-color:#212E36;">
+                <div class="overflow-hidden shadow-sm rounded pt-2 fondo-gris">
                     <div class="p-6 border-b border-gray-200 text-center">
-                        <h4 style="color: #EFF3F5">Si por el contrario buscas un artista en concreto...</h4>
-                        <p style="color: #C8CDD0">Entonces tenemos una gran base de datos de artistas, ¡quizas descubras
+                        <h4 class="titulo">Si por el contrario buscas un artista en concreto...</h4>
+                        <p class="parrafo">Entonces tenemos una gran base de datos de artistas, ¡quizas descubras
                             alguno nuevo!</p>
                     </div>
                 </div>
@@ -94,8 +80,8 @@
             </div>
             <div class="w-25 animate__animated animate__fadeInLeft">
                 <form name="b" action={{ route('autores.index') }}>
-                    <select class="custom-select"
-                        style="background-color:#212E36; color: #C8CDD0; border:none;float: right;" name="tematica"
+                    <select class="custom-select select-generos"
+                         name="tematica"
                         onchange="this.form.submit()">
                         <option value="%">Todos</option>
                         @foreach ($genero as $item)
@@ -114,12 +100,12 @@
             id="autores">
             <!--<div class="col-10 pr-3">-->
             @foreach ($autor as $item)
-                <div class="card mb-5 w-100" style="background-color:#212E36;">
+                <div class="card mb-5 w-100 fondo-gris">
                     <img src='{{ asset($item->foto) }}' class="card-img-top" />
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size:1.75vw; text-align: left; color: #EFF3F5">
+                        <h5 class="card-title titulo" style="font-size:1.75em; text-align: left;">
                             {{ $item->nombre }}</h5>
-                        <p class="card-text" style="font-size:0.9vw; color: #C8CDD0">
+                        <p class="card-text parrafo" style="font-size:0.9em;">
                             {{ $item->descripcion }}
                         </p>
                         <a href="{{ route('verAutor', ['autor' => $item, 'nombre' => $item->nombre]) }}"

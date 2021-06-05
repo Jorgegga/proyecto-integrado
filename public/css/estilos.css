@@ -1,0 +1,124 @@
+.modal-body .card {
+    flex-direction: row;
+    align-items: center;
+}
+
+.modal-body .card-title {
+    font-weight: bold;
+}
+
+.modal-body .card img {
+    width: 40%;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: calc(0.25rem - 1px);
+}
+
+@media only screen and (max-width: 768px) {
+    .modal-body a {
+        display: none;
+    }
+
+    .modal-body .card-body {
+        padding: 0.5em 1.2em;
+    }
+
+    .modal-body .card-body .card-text {
+        margin: 0;
+    }
+
+    .modal-body .card img {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .modal-body .card img {
+        width: 40%;
+    }
+}
+
+.green-audio-player {
+    background-color: #0c171d;
+}
+
+.select2-container {
+    background-color: #212E36;
+    color: #C8CDD0;
+}
+
+.select2-container .select2-results__option {
+    background-color: #212E36;
+    color: #C8CDD0;
+}
+
+.select2-container .select2-results__option--highlighted[aria-selected] {
+    background-color: #C8CDD0;
+    color: #212E36;
+}
+
+/*----------------------------------------------------------------------------------------*/
+
+@media only screen and (min-width: 0px) {
+    .img-peque{
+        height:300px;
+        width:300px;
+    }
+    .titulo-align{
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 700px) {
+    .img-peque{
+        height:500px;
+        width:500px;
+    }
+    .titulo-align{
+        text-align: left;
+    }
+}
+
+.carousel2img{
+    height:300px;
+    width:300px;
+}
+
+.titulo{
+    color: #EFF3F5;
+}
+
+.parrafo{
+    color: #C8CDD0;
+}
+
+.fondo-gris{
+    background-color:#212E36;
+}
+
+.select-generos{
+    background-color:#212E36;
+    color: #C8CDD0;
+    border:none;
+    float: right;
+}
+
+.modal-cabecera{
+    background-color: #0f2738;
+}
+
+.modal-cuerpo{
+    background-color: #192229;
+}
+
+.titulo-carta{
+    font-size:1.5em;
+    text-align: center;
+    color: #EFF3F5;
+}
+
+.card-style {
+    width: 18rem;
+    background-color: #212E36;
+    font-family: 'New Tegomin', serif;
+    font-weight: bold;
+}
+
