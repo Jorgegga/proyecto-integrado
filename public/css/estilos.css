@@ -56,6 +56,12 @@
     color: #212E36;
 }
 
+.select2-selection__rendered {
+    background-color: #212E36;
+    color: #C8CDD0;
+}
+
+
 /*----------------------------------------------------------------------------------------*/
 
 @media only screen and (min-width: 0px) {
@@ -121,4 +127,5 @@
     font-family: 'New Tegomin', serif;
     font-weight: bold;
 }
+
 

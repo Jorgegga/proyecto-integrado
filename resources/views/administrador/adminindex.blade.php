@@ -45,14 +45,29 @@
                 display: none;
             }
 
-            .dataTables_wrapper{
-                color:white;
+            .dataTables_wrapper {
+                color: white;
+            }
+
+
+            .select2-search input {
+                background-color: #212E36;
+                color: #C8CDD0;
+            }
+
+            .select2-search {
+                background-color: #212E36;
+            }
+
+            .select2-selection__rendered {
+                background-color: #ffffff;
+                color: #C8CDD0;
             }
 
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     </x-slot>
     <x-slot name="header">
@@ -73,7 +88,6 @@
     </x-slot>
     <x-slot name="script">
         <script>
-
             window.onload = function() {
                 var tabla = parametroTabla();
                 $('#cuerpo').load(`${tabla}`);
@@ -92,36 +106,35 @@
                 var urlParams = new URLSearchParams(queryString);
                 var tabla = urlParams.get('tabla');
                 if (tabla == null) {
-                    tabla = "{{route('adminAlbum')}}";
-                }else{
+                    tabla = "{{ route('adminAlbum') }}";
+                } else {
                     return ruta(tabla);
                 }
             }
 
             //switch con las rutas donde tienes que ir
-            function ruta(tabla){
-                switch(tabla){
+            function ruta(tabla) {
+                switch (tabla) {
                     case "album":
-                    return link = "{{route('adminAlbum')}}";
-                    break;
+                        return link = "{{ route('adminAlbum') }}";
+                        break;
                     case "autor":
-                    return link = "{{route('adminAutor')}}";
-                    break;
+                        return link = "{{ route('adminAutor') }}";
+                        break;
                     case "music":
-                    return link = "{{route('adminMusic')}}";
-                    break;
+                        return link = "{{ route('adminMusic') }}";
+                        break;
                     case "genero":
-                    return link = "{{route('adminGenero')}}";
-                    break;
+                        return link = "{{ route('adminGenero') }}";
+                        break;
                     case "user":
-                    return link = "{{route('adminUser')}}";
-                    break;
+                        return link = "{{ route('adminUser') }}";
+                        break;
                     default:
-                    return link = "{{route('adminAlbum')}}";
-                    break;
+                        return link = "{{ route('adminAlbum') }}";
+                        break;
                 }
             }
-
 
         </script>
     </x-slot>

@@ -85,20 +85,12 @@
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Autor</h5>
-                        <select class="custom-select"
-                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="autor" required>
-                            @foreach ($autor as $item)
-                                <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
-                            @endforeach
+                        <select class="ej-select mb-sm-5" id="autorCreateIndex" name="autor" style="width: 100%">
                         </select>
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Album</h5>
-                        <select class="custom-select"
-                            style="background-color:#212E36; color: #C8CDD0; border:none;" name="album" required>
-                            @foreach ($album as $item)
-                                <option value={{ $item->id }}>{{ ucfirst($item->nombre) }}</option>
-                            @endforeach
+                        <select class="livesearch custom-select mb-sm-5" id="albumCreateIndex" name="album" style="width: 100%">
                         </select>
                     </div>
                     <div class="form-group">
@@ -185,10 +177,10 @@
 <script>
     $('#tabla').DataTable();
 
-    $('#autorCreate').select2({
+    $('#autorCreateIndex').select2({
         placeholder: 'Buscar autor',
         dropdownParent: $("#createForm"),
-        theme: "default",
+
         ajax: {
             url: '{{ route('autorAuto') }}',
             dataType: 'json',
@@ -208,7 +200,7 @@
     });
 
 
-    $('#albumCreate').select2({
+    $('#albumCreateIndex').select2({
         placeholder: 'Buscar album',
         dropdownParent: $("#createForm"),
         theme: "default",

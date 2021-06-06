@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Autor</h5>
-                        <select class="livesearch custom-select mb-sm-5" name="autor" style="width: 100%"></select>
+                        <select class="livesearch custom-select mb-sm-5" name="autor" style="width: 100%;"></select>
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Género</h5>
@@ -144,18 +144,18 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     $('#tabla').DataTable();
 
     $('.livesearch').select2({
-                placeholder: 'Buscar álbum',
+                placeholder: 'Buscar autor',
                 dropdownParent: $("#createForm"),
-                theme: "default",
+
                 ajax: {
-                    url: "{{ route('albumAuto') }}",
+                    url: "{{ route('autorAuto') }}",
                     dataType: 'json',
                     delay: 250,
                     processResults: function(data) {
                         return {
                             results: $.map(data, function(item) {
                                 return {
-                                    text: item.nombre + "  |  " + item.autorNom,
+                                    text: item.nombre,
                                     id: item.id,
                                 }
                             })
@@ -173,7 +173,7 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             $('#autorUpdate').select2({
                 placeholder: 'Buscar autor',
                 dropdownParent: $("#updateForm"),
-                theme: "default",
+
                 ajax: {
                     url: '{{ route('autorAuto') }}',
                     dataType: 'json',
