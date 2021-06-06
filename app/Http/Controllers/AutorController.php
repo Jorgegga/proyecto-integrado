@@ -112,7 +112,7 @@ class AutorController extends Controller
         }
         try {
             $autor = $autore;
-            if($autor->id == 0){
+            if($autor->id == 1){
                 return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al actualizar el autor, el default no se puede borrar");
             }
             $request->validate([
@@ -169,16 +169,26 @@ class AutorController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         try {
-            if($autore->id == 0){
+            if($autore->id == 1){
                 return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al actualizar el autor, el default no se puede borrar");
             }
             if (basename($autore->foto) != "default.png") {
                 unlink($autore->foto);
             }
             $autore->delete();
+            $defaultMusic = Music::whereNull('autor_id')->get();
+            $defaultAlbum = Album::whereNull('autor_id')->get();
+            foreach($defaultMusic as $item){
+                $item->autor_id = "1";
+                $item->update();
+            }
+            foreach($defaultAlbum as $item){
+                $item->autor_id = "1";
+                $item->update();
+            }
             return redirect()->route('admins.index', 'tabla=autor')->with("mensaje", "Autor borrado correctamente");
         } catch (\Exception $ex) {
-            return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al borrar el autor" . $ex->getMessage());
+            return redirect()->route('admins.index', 'tabla=autor')->with("error", "Error al borrar el autor " . $ex->getMessage());
         }
     }
 

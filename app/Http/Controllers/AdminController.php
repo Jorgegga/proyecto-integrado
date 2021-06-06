@@ -188,7 +188,7 @@ class AdminController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         $genero = Genero::find($id);
-        return view('administrador.raw.generoupdate', compact('genero'));
+        return view('administrador.raw.generorawupdate', compact('genero'));
     }
 
     public function generoRawDetalles($id){

@@ -21,7 +21,7 @@ class AlbumFactory extends Factory
      */
     public function definition()
     {
-        $id_autor=random_int(0,21);
+        $id_autor=random_int(1,22);
         $gener = Autor::select('genero_id')->where('id',$id_autor)->get()->first()->genero_id;
         return [
             'nombre'=>ucwords($this->faker->unique()->sentence($nbWords = 3, $variableNBWords = true)),

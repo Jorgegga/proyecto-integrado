@@ -18,12 +18,12 @@ class CreateAlbumsTable extends Migration
             $table->string('nombre');
             $table->string('descripcion')->default('No se ha proporcionado ninguna descripción');
             $table->string('portada')->default('storage/img/album/default.png');
-            $table->foreignId('autor_id')->default(0);
-            $table->foreign('autor_id')->references('id')->on('autors')->onDelete('set default')->onUpdate('cascade');
-            $table->foreignId('genero_id')->default(0);
+            $table->foreignId('autor_id')->default(1)->nullable();
+            $table->foreign('autor_id')->references('id')->on('autors')->onDelete('set null')->onUpdate('cascade');
+            $table->foreignId('genero_id')->default(1)->nullable();
             $table->foreign('genero_id')
             ->references('id')->on('generos')
-            ->onDelete('set default')
+            ->onDelete('set null')
             ->onUpdate('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

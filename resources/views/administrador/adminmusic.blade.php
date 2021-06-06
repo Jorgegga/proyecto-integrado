@@ -270,7 +270,7 @@
             cache: true
         }
     });
-        }, 750);
+        }, 500);
     }
 
     function cargaDetalles(id) {

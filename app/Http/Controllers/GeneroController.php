@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Genero;
+use App\Models\{Genero, Album, Autor, Music};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -99,7 +99,7 @@ class GeneroController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         try {
-            if($genero->id == 0){
+            if($genero->id == 1){
                 return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al actualizar el genero, el default no es modificable");
             }
             $request->validate([
@@ -142,13 +142,28 @@ class GeneroController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         try {
-            if($genero->id == 0){
+            if($genero->id == 1){
                 return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al actualizar el genero, el default no es modificable");
             }
             if (basename($genero->portada) != "default.png") {
                 unlink($genero->portada);
             }
             $genero->delete();
+            $albumDefault = Album::whereNull('genero_id')->get();
+            $autorDefault = Autor::whereNull('genero_id')->get();
+            $musicDefault = Music::whereNull('genero_id')->get();
+            foreach($albumDefault as $item){
+                $item->genero_id = "1";
+                $item->update();
+            }
+            foreach($autorDefault as $item){
+                $item->genero_id = "1";
+                $item->update();
+            }
+            foreach($musicDefault as $item){
+                $item->genero_id = "1";
+                $item->update();
+            }
             return redirect()->route('admins.index', 'tabla=genero')->with("mensaje", "Genero borrado correctamente");
         } catch (\Exception $ex) {
             return redirect()->route('admins.index', 'tabla=genero')->with("error", "Error al borrar la canción" . $ex->getMessage());

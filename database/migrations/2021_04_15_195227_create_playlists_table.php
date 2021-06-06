@@ -17,10 +17,12 @@ class CreatePlaylistsTable extends Migration
             $table->id()->unique();
             $table->foreignId('user_id');
             $table->foreign('user_id')
-            ->references('id')->on('users');
+            ->references('id')->on('users')
+            ->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('music_id');
             $table->foreign('music_id')
-            ->references('id')->on('music');
+            ->references('id')->on('music')
+            ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

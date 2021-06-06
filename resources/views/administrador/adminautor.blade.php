@@ -143,13 +143,13 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
     $('#tabla').DataTable();
 
     function cargaUpdate(id) {
-        var url = "{{ route('generoRawUpdate', ':id') }}";
+        var url = "{{ route('autorRawUpdate', ':id') }}";
         url = url.replace(':id', id);
         $('#updateFormCuerpo').load(`${url}`);
     }
 
     function cargaDetalles(id) {
-        var url = "{{ route('generoRawDetalles', ':id') }}";
+        var url = "{{ route('autorRawDetalles', ':id') }}";
         url = url.replace(':id', id);
         $('#detallesFormCuerpo').load(`${url}`);
     }

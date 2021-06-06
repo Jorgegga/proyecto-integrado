@@ -18,10 +18,10 @@ class CreateAutorsTable extends Migration
             $table->string('nombre');
             $table->string('descripcion')->default("No se ha proporcionado ninguna descripción");
             $table->string('foto')->default('storage/img/autor/default.png');
-            $table->foreignId('genero_id')->default(0)->nullable();
+            $table->foreignId('genero_id')->default(1)->nullable();
             $table->foreign('genero_id')
             ->references('id')->on('generos')
-            ->onDelete('set default')->onUpdate('cascade');
+            ->onDelete('set null')->onUpdate('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

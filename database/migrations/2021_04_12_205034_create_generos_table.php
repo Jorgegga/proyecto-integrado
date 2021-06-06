@@ -16,7 +16,7 @@ class CreateGenerosTable extends Migration
         Schema::create('generos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
-            $table->string('portada')->default('storage/img/genero/default.png');;
+            $table->string('portada')->default('storage/img/genero/default.png');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -116,7 +116,7 @@ class AlbumController extends Controller
         }
 
         try {
-            if($album->id == 0){
+            if($album->id == 1){
             return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al actualizar el album, el default no se puede modificar");
             }
             $request->validate([
@@ -176,13 +176,19 @@ class AlbumController extends Controller
             return redirect()->action([InicioController::class, 'index']);
         }
         try {
-            if($album->id == 0){
+            if($album->id == 1){
                 return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al actualizar el album, el default no se puede modificar");
                 }
             if (basename($album->portada) != "default.png") {
                 unlink($album->portada);
             }
             $album->delete();
+            $musicDefault = Music::whereNull('album_id')->get();
+            foreach($musicDefault as $item){
+                $item->album_id = "1";
+                $item->update();
+            }
+
             return redirect()->route('admins.index', 'tabla=album')->with("mensaje", "Album borrado correctamente");
         } catch (\Exception $ex) {
             return redirect()->route('admins.index', 'tabla=album')->with("error", "Error al borrar el album " . $ex->getMessage());
