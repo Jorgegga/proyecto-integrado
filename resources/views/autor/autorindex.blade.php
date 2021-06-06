@@ -47,11 +47,6 @@
         </style>
     </x-slot>
     <x-slot name="scriptsCDN">
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
@@ -75,7 +70,9 @@
             <div class="col-md-5 col-sm-10 animate__animated animate__fadeInLeft">
                 <form name="b" action={{ route('autores.index') }}>
                     <select class="livesearch custom-select w-sm-30 w-md-50 mb-sm-5" name="livesearch"
-                        onchange="this.form.submit()"></select>
+                        onchange="this.form.submit()">
+
+                    </select>
                 </form>
             </div>
             <div class="w-25 animate__animated animate__fadeInLeft">

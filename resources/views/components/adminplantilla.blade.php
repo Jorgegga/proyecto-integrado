@@ -18,12 +18,14 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}" />
     {{ $styles }}
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     {{ $scriptsCDN }}
 
 
@@ -48,7 +50,7 @@
         //Posiciona el footer en la parte de abajo a pesar de que la pantalla sea pequeña
 
         $(document).ready(function() {
-            if ($("body").height() < $(window).height()) {
+            if ($("body").height() > $(window).height()) {
                 $("footer").css({
                     "position": "absolute",
                     "bottom": "0px"
@@ -67,11 +69,11 @@
             }
         }
 
-    </script>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.js" defer></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js" defer></script>
+    </script>
+            <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
     {{ $script }}
 
 </body>

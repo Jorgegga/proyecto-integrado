@@ -44,6 +44,18 @@ Route::get('/album/pagination', [AlbumController::class, 'pagination'])->name('p
 Route::get('/autor/pagination', [AutorController::class, 'pagination'])->name('paginAutor');
 
 Route::get('/album/{id}',[AlbumController::class, 'albumRaw'])->name('albumRaw');
+
+Route::get('/albumAdminUpdate/{id}',[AdminController::class, 'albumRawUpdate'])->name('albumRawUpdate');
+Route::get('/albumAdminDetalles/{id}',[AdminController::class, 'albumRawDetalles'])->name('albumRawDetalles');
+Route::get('/autorAdminUpdate/{id}',[AdminController::class, 'autorRawUpdate'])->name('autorRawUpdate');
+Route::get('/autorAdminDetalles/{id}',[AdminController::class, 'autorRawDetalles'])->name('autorRawDetalles');
+Route::get('/musicAdminUpdate/{id}',[AdminController::class, 'musicRawUpdate'])->name('musicRawUpdate');
+Route::get('/musicAdminDetalles/{id}',[AdminController::class, 'musicRawDetalles'])->name('musicRawDetalles');
+Route::get('/generoAdminUpdate/{id}',[AdminController::class, 'generoRawUpdate'])->name('generoRawUpdate');
+Route::get('/generoAdminDetalles/{id}',[AdminController::class, 'generoRawDetalles'])->name('generoRawDetalles');
+Route::get('/userAdminUpdate/{id}',[AdminController::class, 'userRawUpdate'])->name('userRawUpdate');
+Route::get('/userAdminDetalles/{id}',[AdminController::class, 'userRawDetalles'])->name('userRawDetalles');
+
 Route::get('/autocompleteAlbum', [AlbumController::class, 'selectSearch'])->name('albumAuto');
 Route::get('/autocompleteAutor', [AutorController::class, 'selectSearch'])->name('autorAuto');
 

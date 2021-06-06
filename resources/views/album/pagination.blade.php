@@ -13,7 +13,7 @@
                         class="btn btn-primary mb-1">Ir al álbum</a></p>
                 <p><button class="btn btn-success" data-toggle="modal" data-target="#albumRaw" role="tab" title="Raw"
                         onclick="carga('{{ $item->id }}', '{{ $item->nombre }}')">Modo
-                        ventana</button></p>s
+                        ventana</button></p>
                 <a href="{{ route('verAutor', ['autor' => $item->autor->id, 'nombre' => $item->autor->nombre]) }}"
                     class="text-muted text-left" style="float:left;">
                     {{ $item->autor->nombre }}</a>

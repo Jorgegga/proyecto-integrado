@@ -8,9 +8,6 @@
     <x-slot name="styles">
     </x-slot>
     <x-slot name="scriptsCDN">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <script src="{{ asset('js/green-audio-player.js') }}" defer></script>
 
@@ -38,7 +35,8 @@
             <div class="col-md-5 col-sm-10 animate__animated animate__fadeInLeft">
                 <form name="b" action={{ route('albums.index') }}>
                     <select class="livesearch custom-select w-sm-30 w-md-50 mb-sm-5" name="livesearch"
-                        onchange="this.form.submit()"></select>
+                        onchange="this.form.submit()">
+                    </select>
                 </form>
             </div>
             <div class="animate__animated animate__fadeInRight col-md-5 col-sm-10 float-right">

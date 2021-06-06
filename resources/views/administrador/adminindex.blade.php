@@ -1,6 +1,3 @@
-@inject('albumMet', 'App\Models\Album')
-@inject('generoNom', 'App\Models\Genero')
-@inject('nomAutor', 'App\Models\Autor')
 <x-adminplantilla>
     <x-slot name="fonts">
 
@@ -56,6 +53,7 @@
     </x-slot>
     <x-slot name="scriptsCDN">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
