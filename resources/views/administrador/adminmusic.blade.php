@@ -48,10 +48,6 @@
                     </div>
                 </td>
             </tr>
-
-
-
-
         @endforeach
     </tbody>
 </table>
@@ -86,11 +82,13 @@
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Autor</h5>
                         <select class="ej-select mb-sm-5" id="autorCreateIndex" name="autor" style="width: 100%">
+                            <option value="1" selected="selected">Desconocido</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <h5 style="color: #EFF3F5;">Album</h5>
                         <select class="livesearch custom-select mb-sm-5" id="albumCreateIndex" name="album" style="width: 100%">
+                            <option value="1" selected="selected">Otros</option>
                         </select>
                     </div>
                     <div class="form-group">
