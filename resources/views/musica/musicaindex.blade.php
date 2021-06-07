@@ -106,7 +106,8 @@
                 $('#tabla').DataTable();
             });
 
-            /*$(document).ready(function(){
+/*
+            $(document).ready(function(){
                 $('#tabla').DataTable({
                     "processing": true,
                     "serverSide": true,
@@ -117,11 +118,12 @@
                         contentType: 'application/json; charset=utf-8',
                     },
                     "columns": [
-                        {data: 'nombre', name:'nombre',},
-                        {data: 'album_id', name:'album_id',},
-                        {data: 'autor_id', name:'autor_id',},
-                        {data: 'genero_id', name:'genero_id',},
-                        {data: 'ruta', name:'ruta',},
+                        {data: 'nombre', },
+                        {data: 'album_id', },
+                        {data: 'autor_id', },
+                        {data: 'genero_id', },
+                        {data: 'ruta',},
+                        {data: 'añadir'}
                     ]
                 });
             });*/
