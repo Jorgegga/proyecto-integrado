@@ -15,7 +15,7 @@ use App\Http\Controllers\{AboutusController, AdminController, AlbumController, A
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('inicios.index');
 });
 
 Route::get('/dashboard', function () {
