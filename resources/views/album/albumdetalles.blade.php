@@ -22,10 +22,6 @@
             }
 
             @media only screen and (max-width: 768px) {
-                a {
-                    display: none;
-                }
-
                 .card-body {
                     padding: 0.5em 1.2em;
                 }
