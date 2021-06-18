@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <x-label for="email" :value="__('Email')" class="texto"/>
 
-                    <x-input id="email" type="email" name="email" class="form-control inputOscuro" :value="old('email')"  required autofocus />
+                    <x-input id="email" type="email" name="email" class="form-control inputOscuro" style="background-color:#212E36; color: #C8CDD0;" :value="old('email')"  required autofocus />
                 </div>
 
                 <!-- Password -->
@@ -29,7 +29,7 @@
 
                     <x-input id="password" type="password"
                              name="password"
-                             required autocomplete="current-password" class="form-control inputOscuro" />
+                             required autocomplete="current-password" class="form-control inputOscuro" style="background-color:#212E36; color: #C8CDD0;" />
                 </div>
 
                 <!-- Remember Me -->

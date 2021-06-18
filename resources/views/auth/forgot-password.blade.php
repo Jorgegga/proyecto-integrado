@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <x-label for="email" :value="__('Email')" class="texto"/>
 
-                        <x-input id="email" type="email" name="email" :value="old('email')" class="form-control inputOscuro" required autofocus />
+                        <x-input id="email" type="email" name="email" :value="old('email')" class="form-control inputOscuro " style="background-color:#212E36; color: #C8CDD0;" required autofocus />
                     </div>
 
                     <div class="d-flex justify-content-end mt-4">

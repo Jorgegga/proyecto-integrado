@@ -17,14 +17,14 @@
                 <div class="form-group">
                     <x-label for="name" :value="__('Name')" class="texto"/>
 
-                    <x-input id="name" class="form-control inputOscuro" type="text" name="name" :value="old('name')" required autofocus />
+                    <x-input id="name" class="form-control inputOscuro" type="text" name="name" :value="old('name')" style="background-color:#212E36; color: #C8CDD0;" required autofocus />
                 </div>
 
                 <!-- Email Address -->
                 <div class="form-group">
                     <x-label for="email" :value="__('Email')" class="texto"/>
 
-                    <x-input id="email" class="form-control inputOscuro" type="email" name="email" :value="old('email')" required />
+                    <x-input id="email" class="form-control inputOscuro" type="email" name="email" :value="old('email')" style="background-color:#212E36; color: #C8CDD0;" required />
                 </div>
 
                 <!-- Password -->
@@ -33,7 +33,7 @@
 
                     <x-input id="password" type="password"
                                     name="password" class="form-control inputOscuro"
-                                    required autocomplete="new-password" />
+                                    required autocomplete="new-password" style="background-color:#212E36; color: #C8CDD0;" />
                 </div>
 
                 <!-- Confirm Password -->
@@ -41,7 +41,7 @@
                     <x-label for="password_confirmation" :value="__('Confirmar contraseña')" class="texto"/>
 
                     <x-input id="password_confirmation" type="password" class="form-control inputOscuro"
-                                    name="password_confirmation" required />
+                                    name="password_confirmation" style="background-color:#212E36; color: #C8CDD0;" required />
                 </div>
 
                 <div class="mb-0">

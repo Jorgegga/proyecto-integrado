@@ -21,14 +21,14 @@
                 <div class="form-group">
                     <x-label for="email" :value="__('Email')" style="color: #EFF3F5;"/>
 
-                    <x-input id="email" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                    <x-input id="email" type="email" name="email" :value="old('email', $request->email)" style="background-color:#212E36; color: #C8CDD0;" required autofocus />
                 </div>
 
                 <!-- Password -->
                 <div class="form-group">
                     <x-label for="password" :value="__('Nueva contraseña')" style="color: #EFF3F5;"/>
 
-                    <x-input id="password" type="password" name="password" required />
+                    <x-input id="password" type="password" name="password" style="background-color:#212E36; color: #C8CDD0;" required />
                 </div>
 
                 <!-- Confirm Password -->
@@ -36,7 +36,7 @@
                     <x-label for="password_confirmation" :value="__('Confirmar contraseña')" style="color: #EFF3F5;"/>
 
                     <x-input id="password_confirmation" type="password"
-                                        name="password_confirmation" required />
+                                        name="password_confirmation" style="background-color:#212E36; color: #C8CDD0;" required />
                 </div>
 
                 <div class="mb-0">

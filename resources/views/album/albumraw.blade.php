@@ -1,12 +1,12 @@
 @inject('playMusic', 'App\Models\Playlist')
 <section class="row justify-content-center mt-md-4 mb-md-4 mt-sm-4 mb-sm-4">
     <!--<div class="col-10 pr-3">-->
-    <div class="card mb-2" style="background-color:#212E36; width:90%;">
+    <div class="card mb-2" style="background-color:#212E36; width:90%;overflow-x: scroll;">
         <img src='{{ asset($album->portada) }}' class="card-img-top" />
         <div class="card-body">
-            <h5 class="card-title" style="font-size:1.75vw; text-align: left; color: #EFF3F5" id="cabeceraCard">
+            <h5 class="card-title" style="font-size:1.5em; text-align: left; color: #EFF3F5;" id="cabeceraCard">
                 Selecciona una canción</h5>
-            <p class="card-text" style="font-size:0.9vw; color: #C8CDD0" id="cuerpoCard"></p>
+            <p class="card-text" style="font-size:0.9em; color: #C8CDD0" id="cuerpoCard"></p>
             <div class="audioExample">
                 <audio preload="auto" name="audio" onplay="parar(this.id)" onended="siguiente(this.id)"
                     style="color: black" crossorigin>

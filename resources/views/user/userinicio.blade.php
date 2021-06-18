@@ -79,24 +79,24 @@
             <div class="card mb-5 w-100" style="background-color:#212E36;">
                 <img src='{{ asset($user->foto) }}' class="card-img-top pl-4" />
                 <div class="card-body">
-                    <div clas="row">
+                    <div class="form-group">
                         <form name="a" action="" method="POST" enctype="multipart/form-data">
                         <h3 class="cabeceraOscura">Usuario</h3>
-                        <input id="inputNombre" name="inputNombre" class="inputOscuro" type="text"
-                            value="{{ $user->name }}"><br><br>
+                        <input id="inputNombre" name="inputNombre" class="inputOscuro form-control" type="text" style="background-color:#212E36; color: #C8CDD0;"
+                            value="{{ $user->name }}">
                     </div>
-                    <div clas="row">
+                    <div class="form-group">
                         <h3 class="cabeceraOscura">Contraseña</h3>
-                        <input type="password" id="inputPass" name="inputPass" class="inputOscuro" type="text" value=""><br><br>
+                        <input type="password" id="inputPass" name="inputPass" class="inputOscuro form-control" type="text" value="" style="background-color:#212E36; color: #C8CDD0;">
                     </div>
-                    <div clas="row">
+                    <div class="form-group">
                         <h3 class="cabeceraOscura">Correo</h3>
-                        <input id="inputEmail" name="inputEmail" class="inputOscuro" type="text"
-                            value="{{ $user->email }}"><br><br>
+                        <input id="inputEmail" name="inputEmail" class="inputOscuro form-control" type="text" style="background-color:#212E36; color: #C8CDD0;"
+                            value="{{ $user->email }}">
                     </div>
-                    <div class="row">
-                        <h3 class="cabeceraOscura ml-3">Subir foto de perfil</h3>
-                        <input class="form-control-file ml-3" type="file" accept="image/png, image/jpeg" name="foto" style="color:white">
+                    <div class="form-group">
+                        <h3 class="cabeceraOscura">Subir foto de perfil</h3>
+                        <input class="form-control-file" type="file" accept="image/png, image/jpeg" name="foto" style="color:white">
                     </div>
                     <button id="boton" type="submit" class="btn btn-primary float-right"  >Guardar cambios</button>
                 </div>
