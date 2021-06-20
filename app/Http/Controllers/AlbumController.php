@@ -16,7 +16,7 @@ class AlbumController extends Controller
      */
     public function index(Request $request)
     {
-        $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->Livesearch($request->livesearch)->paginate(9);
+        $album = Album::orderBy('nombre', 'asc')->Genero($request->tematica)->Livesearch($request->livesearch)->paginate(9);
         $music = Music::orderBy('album_id');
         $genero = Genero::orderBy('id', 'desc')->get();
         //Mandar scope al pagination
@@ -209,7 +209,7 @@ class AlbumController extends Controller
 
     public function pagination(Request $request)
     {
-        $album = Album::orderBy('id', 'DESC')->Genero($request->tematica)->paginate(9);
+        $album = Album::orderBy('nombre', 'asc')->Genero($request->tematica)->paginate(9);
         return view('album.pagination', compact('album'));
     }
 
